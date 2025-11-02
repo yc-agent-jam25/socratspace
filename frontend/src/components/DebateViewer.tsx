@@ -117,6 +117,7 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
 
   // ==========================================
   // OAUTH FEATURE: Handle authentication requests during analysis
+  // Backend sends explicit OAuth requests via SSE when needed
   // ==========================================
   useEffect(() => {
     if (oauthRequest) {
@@ -125,30 +126,6 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
       setShowOAuthDialog(true);
     }
   }, [oauthRequest]);
-
-  // Check for OAuth errors in messages or error state
-  useEffect(() => {
-    // Check error message for OAuth requirements
-    if (error && (error.includes('OAuth') || error.includes('authentication') || error.includes('GitHub'))) {
-      // Check if GitHub is mentioned
-      if (error.toLowerCase().includes('github')) {
-        setOauthMcpName('github');
-        setShowOAuthDialog(true);
-      }
-    }
-
-    // Also check recent messages for OAuth errors
-    const recentMessages = messages.slice(-5);
-    for (const msg of recentMessages) {
-      if (msg.message && (msg.message.includes('OAuth') || msg.message.includes('authentication required'))) {
-        if (msg.message.toLowerCase().includes('github')) {
-          setOauthMcpName('github');
-          setShowOAuthDialog(true);
-          break;
-        }
-      }
-    }
-  }, [error, messages]);
 
   const handleOAuthComplete = (_sessionId: string) => {
     setShowOAuthDialog(false);

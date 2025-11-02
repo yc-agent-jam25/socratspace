@@ -328,10 +328,10 @@ const LiveActivityFeed: React.FC<LiveActivityFeedProps> = ({
             flex: 1,
             overflowY: 'auto',
             overflowX: 'hidden', // Prevent horizontal scroll
-            p: 2,
+            p: 1.5,
             display: 'flex',
             flexDirection: 'column',
-            gap: 2,
+            gap: 1,
             position: 'relative', // For absolute positioned auto-scroll indicator
           }}
         >
@@ -386,8 +386,8 @@ const LiveActivityFeed: React.FC<LiveActivityFeedProps> = ({
                   key={`${message.agent}-${message.timestamp}-${index}`}
                   sx={{
                     display: 'flex',
-                    gap: 2,
-                    mb: 2,
+                    gap: 1.5,
+                    mb: 1,
                     animation: `${slideIn} 0.3s ease-out`,
                     '&:hover': {
                       '& .message-card': {

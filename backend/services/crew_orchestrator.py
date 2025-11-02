@@ -443,38 +443,39 @@ class VCCouncilOrchestrator:
             await sse_manager.send_decision(session_id, decision)
 
             # ==========================================
-            # FREELANCER JOB POSTING FOR MAYBE DECISIONS
-            # Generate job posting if decision is MAYBE and shows uncertainty
+            # SEND COMPLETION SIGNAL FIRST
+            # User sees completion immediately, optional features run after
             # ==========================================
+            await sse_manager.send_phase_change(session_id, "completed")
+            logger.info(f"Analysis completed: {decision.get('decision', 'UNKNOWN')}")
+
+            # ==========================================
+            # OPTIONAL FEATURES (RUN AFTER COMPLETION)
+            # These don't block the completion signal
+            # ==========================================
+
+            # Freelancer job posting for MAYBE decisions
+            # MAYBE = needs validation, always offer external research option
             if decision.get("decision") == "MAYBE":
                 reasoning = decision.get("reasoning", "")
 
-                # Check for uncertainty keywords that suggest external research needed
-                uncertainty_keywords = [
-                    "uncertain", "split", "unclear", "validate",
-                    "need more", "external", "assumptions", "divided",
-                    "conflicting", "inconclusive", "verify", "investigate"
-                ]
-                should_hire = any(kw in reasoning.lower() for kw in uncertainty_keywords)
+                logger.info(f"🎯 MAYBE decision detected - generating Freelancer job posting for {company_data.get('company_name')}")
 
-                if should_hire:
-                    logger.info("🎯 Generating Freelancer job posting for external researcher")
+                await sse_manager.send_agent_message(
+                    session_id,
+                    "lead_partner",
+                    "Given the uncertainty in our analysis, I recommend commissioning an independent researcher. I've drafted a Freelancer job posting.",
+                    "reasoning"
+                )
 
-                    await sse_manager.send_agent_message(
-                        session_id,
-                        "lead_partner",
-                        "Given the uncertainty in our analysis, I recommend commissioning an independent researcher. I've drafted a Freelancer job posting.",
-                        "reasoning"
+                try:
+                    # Import and generate job content
+                    from services.freelancer_job_service import generate_freelancer_job_content
+
+                    job_content = await generate_freelancer_job_content(
+                        company_data.get("company_name", "this company"),
+                        reasoning[:500]  # First 500 chars of reasoning
                     )
-
-                    try:
-                        # Import and generate job content
-                        from services.freelancer_job_service import generate_freelancer_job_content
-
-                        job_content = await generate_freelancer_job_content(
-                            company_data.get("company_name", "this company"),
-                            reasoning[:500]  # First 500 chars of reasoning
-                        )
 
                         # Send as notification via SSE
                         await sse_manager.broadcast(session_id, "freelancer_job_notification", {
@@ -483,18 +484,17 @@ class VCCouncilOrchestrator:
                             "timestamp": datetime.now().isoformat()
                         })
 
-                        logger.info(f"✅ Freelancer job notification sent for {company_data.get('company_name')}")
+                        logger.info(f"Freelancer job notification sent for {company_data.get('company_name')}")
 
+                    except ImportError as import_err:
+                        logger.warning(f"Freelancer job service not available: {import_err}")
+                        # Service doesn't exist, skip gracefully
                     except Exception as e:
                         logger.error(f"Failed to generate Freelancer job content: {e}", exc_info=True)
 
-            # ==========================================
-            # GOOGLE CALENDAR EVENT CREATION
-            # Create calendar events if present in decision (for all decision types)
-            # ==========================================
+            # Calendar event creation (with configuration check inside)
             if decision and "calendar_events" in decision and decision["calendar_events"]:
                 await self._create_calendar_events(session_id, decision["calendar_events"])
-            await sse_manager.send_phase_change(session_id, "completed")
 
             # Cleanup task tracking state
             if session_id in self.task_to_agent_map:
@@ -502,8 +502,6 @@ class VCCouncilOrchestrator:
             if session_id in self.current_task_index:
                 del self.current_task_index[session_id]
             logger.info(f"[CLEANUP] Removed task tracking for completed session {session_id}")
-
-            logger.info(f"Analysis completed: {decision.get('decision', 'UNKNOWN')}")
 
         except Exception as e:
             logger.error(f"Analysis failed: {str(e)}", exc_info=True)
@@ -607,6 +605,17 @@ class VCCouncilOrchestrator:
             calendar_events: List of calendar event dicts with title, start_time, end_time, attendees, description
         """
         try:
+            # Check if Google Calendar MCP is configured
+            if not settings.mcp_gcalendar_id:
+                logger.info(f"Google Calendar MCP not configured (mcp_gcalendar_id missing). Skipping {len(calendar_events)} calendar events.")
+                await sse_manager.send_agent_message(
+                    session_id,
+                    "Lead Investment Partner",
+                    "📅 Calendar integration not configured. Events not created.",
+                    "info"
+                )
+                return
+
             from tools.gcalendar_tool import GoogleCalendarTool
             from datetime import datetime, timedelta
             import dateutil.parser
