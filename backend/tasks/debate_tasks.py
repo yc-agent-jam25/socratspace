@@ -20,7 +20,8 @@ def create_bull_case_task(research_tasks: list) -> Task:
     description = """
     Build the STRONGEST case FOR investing in this startup.
     
-    You have access to all research findings from:
+    CRITICAL: You have access to all research findings from the 5 research agents via context.
+    Read and synthesize ALL of their outputs including:
     - Market Research: TAM, growth rate, competitors, sentiment
     - Founder Evaluation: Team quality, execution ability, red flags
     - Product Analysis: Moat strength, defensibility, differentiators
@@ -30,12 +31,14 @@ def create_bull_case_task(research_tasks: list) -> Task:
     Your mission: Champion this investment and find every reason it will succeed.
     
     Instructions:
-    1. Synthesize all research findings to identify strengths
-    2. Construct investment thesis (3-5 paragraphs) highlighting the core opportunity
-    3. Identify top 3 reasons to invest with supporting evidence and numbers
-    4. Model upside potential: revenue projection, exit scenarios, ROI estimate
-    5. Counter any concerns with data or mitigating factors
+    1. FIRST, thoroughly read all research outputs from context to understand the full picture
+    2. Synthesize all research findings to identify the strongest arguments for investing
+    3. Construct investment thesis (3-5 paragraphs) highlighting the core opportunity
+    4. Identify top 3 reasons to invest with supporting evidence and numbers from the research
+    5. Model upside potential: revenue projection, exit scenarios, ROI estimate
+    6. Counter any concerns with data or mitigating factors from the research
     
+    IMPORTANT: Reference specific findings from the research agents. Don't repeat generic analysis.
     You can delegate to research agents if you need more supportive data.
     Be evidence-based but persuasive—use numbers and facts.
     """
@@ -70,25 +73,28 @@ def create_bear_case_task(research_tasks: list, bull_task: Task) -> Task:
     description = """
     Build the STRONGEST case AGAINST investing in this startup.
     
-    You have access to all research findings from:
+    CRITICAL: You have access to all research findings from the 5 research agents AND the Bull agent's arguments via context.
+    Read and analyze ALL of these outputs including:
     - Market Research: TAM, growth rate, competitors, sentiment
     - Founder Evaluation: Team quality, execution ability, red flags
     - Product Analysis: Moat strength, defensibility, differentiators
     - Financial Analysis: LTV:CAC, burn rate, runway, financial health
     - Risk Assessment: Top risks, failure scenarios, monitoring plan
-    
-    You also have access to the Bull agent's argument for investing.
+    - Bull Case: Investment thesis, reasons to invest, upside potential
     
     Your mission: Prevent bad investments by finding every reason this will fail.
     
     Instructions:
-    1. Synthesize all research to identify fundamental flaws and weaknesses
-    2. Review Bull's arguments and identify weaknesses in their logic
-    3. Construct counter-thesis (2-4 paragraphs) articulating why this fails
-    4. Identify top 3 reasons NOT to invest with supporting evidence and numbers
-    5. Model downside/risk scenario with realistic failure modes and potential losses
-    6. Provide point-by-point rebuttals to Bull's arguments with evidence
+    1. FIRST, thoroughly read all research outputs and Bull's arguments from context
+    2. Synthesize all research to identify fundamental flaws and weaknesses
+    3. Carefully review Bull's arguments and identify weaknesses in their logic and evidence
+    4. Construct counter-thesis (2-4 paragraphs) articulating why this investment fails
+    5. Identify top 3 reasons NOT to invest with supporting evidence and numbers from research
+    6. Model downside/risk scenario with realistic failure modes and potential losses
+    7. Provide point-by-point rebuttals to Bull's arguments with evidence
     
+    IMPORTANT: Reference specific findings from the research agents and point out flaws in Bull's reasoning.
+    Don't just repeat generic concerns - use the actual data to build a rigorous counter-argument.
     You can delegate to research agents if you need more evidence of risks.
     Be rigorous—challenge every assumption and demand evidence.
     """

@@ -6,12 +6,20 @@ Handles analysis requests and status polling
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
-from backend.services.crew_orchestrator import orchestrator
 import logging
+
+# Note: Import will work when running from backend/ directory or with proper PYTHONPATH
+try:
+    from services.crew_orchestrator import VCCouncilOrchestrator
+except ImportError:
+    from backend.services.crew_orchestrator import VCCouncilOrchestrator
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+# Global orchestrator instance
+orchestrator = VCCouncilOrchestrator()
 
 # Request/Response models
 class AnalysisRequest(BaseModel):
@@ -37,6 +45,7 @@ async def start_analysis(request: AnalysisRequest):
 
     Returns:
         AnalysisResponse with session_id for tracking
+        Frontend should connect to SSE endpoint /api/sse/{session_id} for real-time updates
 
     Raises:
         HTTPException: If analysis fails to start
@@ -47,6 +56,8 @@ async def start_analysis(request: AnalysisRequest):
         # Start analysis via orchestrator
         session_id = await orchestrator.start_analysis(request.dict())
 
+        logger.info(f"Analysis started with session: {session_id}")
+
         return AnalysisResponse(
             status="started",
             session_id=session_id,
@@ -56,7 +67,6 @@ async def start_analysis(request: AnalysisRequest):
     except Exception as e:
         logger.error(f"Failed to start analysis: {e}", exc_info=True)
         raise HTTPException(status_code=500, detail=f"Failed to start analysis: {str(e)}")
-
 
 @router.get("/analysis/{session_id}")
 async def get_analysis_status(session_id: str):
@@ -72,14 +82,21 @@ async def get_analysis_status(session_id: str):
     Raises:
         HTTPException: If session not found
     """
-    logger.info(f"Fetching analysis status for {session_id}")
+    try:
+        logger.info(f"Fetching analysis status for {session_id}")
 
-    result = await orchestrator.get_result(session_id)
+        result = await orchestrator.get_result(session_id)
 
-    if result is None:
-        raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
+        if result is None:
+            raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
 
-    return result
+        return result
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting analysis status: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @router.get("/health")
