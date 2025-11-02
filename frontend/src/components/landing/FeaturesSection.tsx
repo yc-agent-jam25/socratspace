@@ -5,7 +5,6 @@
 
 import React from 'react';
 import { Box, Container, Typography, Grid, Stack } from '@mui/material';
-import { keyframes } from '@mui/system';
 
 // Icons
 import PsychologyIcon from '@mui/icons-material/Psychology';
@@ -14,11 +13,6 @@ import BalanceIcon from '@mui/icons-material/Balance';
 import InsightsIcon from '@mui/icons-material/Insights';
 import GroupsIcon from '@mui/icons-material/Groups';
 import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-
-const pulse = keyframes`
-  0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.05); }
-`;
 
 interface Feature {
   icon: React.ReactElement;

@@ -109,7 +109,7 @@ const ConnectionLine: React.FC<ConnectionLineProps> = ({
           fill="none"
           opacity="0.2"
           strokeLinecap="round"
-          sx={{
+          style={{
             ...(animated && {
               animation: `${pulseGlow} 2s ease-in-out infinite`,
             }),
@@ -125,7 +125,7 @@ const ConnectionLine: React.FC<ConnectionLineProps> = ({
           strokeDasharray={dashed ? '10 5' : undefined}
           strokeDashoffset={animated ? pathLength : 0}
           strokeLinecap="round"
-          sx={{
+          style={{
             ...(animated && {
               animation: `${dashAnimation} 3s linear infinite`,
             }),

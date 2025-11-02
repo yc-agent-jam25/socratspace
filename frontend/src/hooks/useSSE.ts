@@ -108,7 +108,11 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
                     m.timestamp === agentMessage.timestamp
                 );
                 if (exists) return prev;
-                return [...prev, agentMessage].sort((a, b) => a.timestamp - b.timestamp);
+                return [...prev, agentMessage].sort((a, b) => {
+                  const aTime = typeof a.timestamp === 'number' ? a.timestamp : 0;
+                  const bTime = typeof b.timestamp === 'number' ? b.timestamp : 0;
+                  return aTime - bTime;
+                });
               });
               break;
             

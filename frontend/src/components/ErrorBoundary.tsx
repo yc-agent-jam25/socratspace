@@ -3,7 +3,8 @@
  * Catches React errors and displays fallback UI
  */
 
-import React, { Component, ErrorInfo, ReactNode } from 'react';
+import { Component } from 'react';
+import type { ErrorInfo, ReactNode } from 'react';
 import { Box, Paper, Typography, Button, Alert } from '@mui/material';
 import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
@@ -91,7 +92,7 @@ class ErrorBoundary extends Component<Props, State> {
               </Alert>
             )}
 
-            {process.env.NODE_ENV === 'development' && this.state.errorInfo && (
+            {import.meta.env.DEV && this.state.errorInfo && (
               <Box
                 sx={{
                   mt: 2,

@@ -47,12 +47,12 @@ const InputForm: React.FC<InputFormProps> = ({ onAnalysisStart }) => {
     setError(null);
 
     // Validation
-    if (!formData.company_name.trim()) {
+    if (!formData.company_name?.trim()) {
       setError('Company name is required');
       return;
     }
 
-    if (!formData.website.trim()) {
+    if (!formData.website?.trim()) {
       setError('Website URL is required');
       return;
     }

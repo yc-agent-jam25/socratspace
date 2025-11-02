@@ -18,11 +18,6 @@ const float = keyframes`
   50% { transform: translateY(-20px); }
 `;
 
-const glow = keyframes`
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
-`;
-
 const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
   return (
     <Box

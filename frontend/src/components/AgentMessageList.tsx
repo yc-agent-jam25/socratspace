@@ -30,8 +30,8 @@ interface AgentMessageListProps {
 const AgentMessageList: React.FC<AgentMessageListProps> = ({ agent, messages, open, onClose }) => {
   if (!agent) return null;
 
-  const formatTimestamp = (timestamp: number): string => {
-    const date = new Date(timestamp);
+  const formatTimestamp = (timestamp: number | string): string => {
+    const date = typeof timestamp === 'string' ? new Date(timestamp) : new Date(timestamp);
     return date.toLocaleTimeString('en-US', {
       hour: '2-digit',
       minute: '2-digit',

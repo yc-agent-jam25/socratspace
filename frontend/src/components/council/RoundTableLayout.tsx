@@ -62,7 +62,7 @@ const RoundTableLayout: React.FC<RoundTableLayoutProps> = ({
     if (!isActive && agentMessages.length > 0) return 'done';
     if (isActive) {
       const lastMessage = agentMessages[agentMessages.length - 1];
-      const timeSinceLastMessage = Date.now() - (lastMessage?.timestamp || 0);
+      const timeSinceLastMessage = Date.now() - (typeof lastMessage?.timestamp === 'number' ? lastMessage.timestamp : 0);
       return timeSinceLastMessage < 2000 ? 'speaking' : 'thinking';
     }
     return 'idle';
@@ -109,7 +109,7 @@ const RoundTableLayout: React.FC<RoundTableLayoutProps> = ({
 
       {/* Connection lines between active agents */}
       {positions.map((fromPos, i) => 
-        positions.slice(i + 1).map((toPos, j) => {
+        positions.slice(i + 1).map((toPos) => {
           const fromActive = activeAgents.includes(fromPos.agent.id);
           const toActive = activeAgents.includes(toPos.agent.id);
           

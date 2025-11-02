@@ -53,7 +53,10 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
 
   // Calculate form completion
   const requiredFields = ['company_name', 'website', 'industry', 'product_description'];
-  const completedFields = requiredFields.filter(field => formData[field as keyof CompanyData]?.trim()).length;
+  const completedFields = requiredFields.filter(field => {
+    const value = formData[field as keyof CompanyData];
+    return typeof value === 'string' && value.trim().length > 0;
+  }).length;
   const progress = (completedFields / requiredFields.length) * 100;
 
   const handleSubmit = async (e: React.FormEvent) => {

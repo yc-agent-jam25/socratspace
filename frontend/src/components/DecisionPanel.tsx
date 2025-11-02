@@ -49,7 +49,7 @@ const DecisionPanel: React.FC<DecisionPanelProps> = ({ decision }) => {
       case 'PASS':
         return <CancelIcon />;
       default:
-        return null;
+        return <CheckCircleIcon />; // Default icon
     }
   };
 
@@ -73,7 +73,7 @@ const DecisionPanel: React.FC<DecisionPanelProps> = ({ decision }) => {
           icon={getDecisionIcon()}
           label={decision.decision}
           color={getDecisionColor()}
-          size="large"
+          size="medium"
           sx={{ 
             fontWeight: 700,
             fontSize: '1.1rem',

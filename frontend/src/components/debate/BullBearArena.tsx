@@ -4,12 +4,10 @@
  * all agents contribute arguments supporting one side or the other
  */
 
-import React, { useEffect, useState, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Box, Typography, Avatar, Tooltip, Chip, Stack } from '@mui/material';
 import { keyframes } from '@mui/system';
 import type { Agent, AgentMessage } from '../../lib/types';
-import TrendingUpIcon from '@mui/icons-material/TrendingUp';
-import TrendingDownIcon from '@mui/icons-material/TrendingDown';
 
 interface BullBearArenaProps {
   agents: Agent[];
@@ -99,7 +97,7 @@ const BullBearArena: React.FC<BullBearArenaProps> = ({
   activeAgents,
 }) => {
   // Analyze all messages and categorize arguments
-  const { bullArguments, bearArguments, neutralArguments } = useMemo(() => {
+  const { bullArguments, bearArguments } = useMemo(() => {
     const bull: AgentMessage[] = [];
     const bear: AgentMessage[] = [];
     const neutral: AgentMessage[] = [];
@@ -134,11 +132,6 @@ const BullBearArena: React.FC<BullBearArenaProps> = ({
     const agentIds = new Set(bearArguments.map(m => m.agent));
     return agents.filter(a => agentIds.has(a.id));
   }, [bearArguments, agents]);
-
-  const neutralContributors = useMemo(() => {
-    const agentIds = new Set(neutralArguments.map(m => m.agent));
-    return agents.filter(a => agentIds.has(a.id));
-  }, [neutralArguments, agents]);
 
   // Get message counts per agent per side
   const getAgentBullCount = (agentId: string) => {

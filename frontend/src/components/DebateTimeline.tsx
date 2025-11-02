@@ -4,17 +4,11 @@
  */
 
 import React from 'react';
-import {
-  Timeline,
-  TimelineItem,
-  TimelineSeparator,
-  TimelineConnector,
-  TimelineContent,
-  TimelineDot,
-  TimelineOppositeContent
-} from '@mui/lab';
 import { Paper, Typography, Box } from '@mui/material';
 import type { AgentMessage } from '../lib/types';
+
+// Timeline components (simplified - @mui/lab Timeline is optional)
+// Using custom timeline instead
 
 interface DebateTimelineProps {
   messages: AgentMessage[];
@@ -51,46 +45,63 @@ const DebateTimeline: React.FC<DebateTimelineProps> = ({ messages, agentColors }
         Debate Timeline
       </Typography>
 
-      <Timeline position="right">
+      <Box>
         {messages.map((message, index) => (
-          <TimelineItem key={index}>
-            <TimelineOppositeContent
-              sx={{ m: 'auto 0' }}
-              variant="body2"
-              color="text.secondary"
-            >
-              {formatTime(message.timestamp)}
-            </TimelineOppositeContent>
-
-            <TimelineSeparator>
-              <TimelineDot
-                sx={{
-                  bgcolor: agentColors[message.agent] || 'grey.500'
-                }}
-              />
-              {index < messages.length - 1 && <TimelineConnector />}
-            </TimelineSeparator>
-
-            <TimelineContent sx={{ py: '12px', px: 2 }}>
-              <Box>
-                <Typography 
-                  variant="subtitle2" 
-                  sx={{ 
+          <Box
+            key={index}
+            sx={{
+              display: 'flex',
+              gap: 2,
+              mb: 3,
+              position: 'relative',
+              pl: 4,
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                left: 8,
+                top: 0,
+                bottom: index === messages.length - 1 ? '50%' : '-24px',
+                width: 2,
+                bgcolor: agentColors[message.agent] || 'grey.500',
+                opacity: 0.5,
+              },
+              '&::after': {
+                content: '""',
+                position: 'absolute',
+                left: 6,
+                top: 8,
+                width: 12,
+                height: 12,
+                borderRadius: '50%',
+                bgcolor: agentColors[message.agent] || 'grey.500',
+                border: '2px solid',
+                borderColor: 'background.paper',
+              },
+            }}
+          >
+            <Box sx={{ flex: 1, minWidth: 0 }}>
+              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 1 }}>
+                <Typography
+                  variant="subtitle2"
+                  sx={{
                     fontWeight: 600,
-                    color: agentColors[message.agent] || 'text.primary'
+                    color: agentColors[message.agent] || 'text.primary',
                   }}
                 >
                   {getAgentName(message.agent)}
                 </Typography>
-                <Typography variant="body2" color="text.secondary">
-                  {message.message.substring(0, 100)}
-                  {message.message.length > 100 && '...'}
+                <Typography variant="body2" color="text.secondary" sx={{ fontSize: '0.75rem' }}>
+                  {formatTime(message.timestamp)}
                 </Typography>
               </Box>
-            </TimelineContent>
-          </TimelineItem>
+              <Typography variant="body2" color="text.secondary">
+                {message.message.substring(0, 100)}
+                {message.message.length > 100 && '...'}
+              </Typography>
+            </Box>
+          </Box>
         ))}
-      </Timeline>
+      </Box>
 
       {messages.length === 0 && (
         <Box sx={{ textAlign: 'center', py: 4 }}>

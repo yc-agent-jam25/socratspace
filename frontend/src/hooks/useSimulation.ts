@@ -79,13 +79,13 @@ export const useSimulation = (options: UseSimulationOptions = {}): UseSimulation
 
     // Start mock simulation
     simulationService.start({
-      onPhaseChange: (newPhase) => {
+      onPhaseChange: (newPhase: Phase) => {
         setPhase(newPhase);
       },
-      onMessage: (message) => {
+      onMessage: (message: AgentMessage) => {
         setMessages((prev) => [...prev, message]);
       },
-      onDecision: (dec) => {
+      onDecision: (dec: Decision) => {
         setDecision(dec);
       },
       onComplete: () => {
