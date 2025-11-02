@@ -3,7 +3,7 @@ CrewAI Agent Definitions for the VC Council investment analysis system.
 """
 
 from crewai import Agent
-from agents.prompts import (
+from backend.agents.prompts import (
     MARKET_RESEARCHER_PROMPT,
     FOUNDER_EVALUATOR_PROMPT,
     PRODUCT_CRITIC_PROMPT,
@@ -13,10 +13,7 @@ from agents.prompts import (
     BEAR_AGENT_PROMPT,
     LEAD_PARTNER_PROMPT
 )
-from tools.github_tool import GitHubAnalyzerTool
-from tools.hackernews_tool import HackerNewsSearchTool
-from tools.exa_tool import ExaSearchTool
-from tools.gcalendar_tool import GoogleCalendarTool
+from backend.tools._stubs import DummyTool
 
 # ========== RESEARCH AGENTS (Phase 1) ==========
 
@@ -28,13 +25,13 @@ def create_market_researcher() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: HackerNewsSearchTool
+    - tools: DummyTool (stub until MCP tools ready)
     """
     return Agent(
         role='Market Research Specialist',
         goal='Research and analyze market size, growth, competitive landscape, and sentiment',
         backstory=MARKET_RESEARCHER_PROMPT,
-        tools=[HackerNewsSearchTool()],
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -49,13 +46,13 @@ def create_founder_evaluator() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: GitHubAnalyzerTool
+    - tools: DummyTool (stub until GitHub/Apify tools ready)
     """
     return Agent(
         role='Founder Evaluator',
         goal='Assess founder background, technical skills, and execution ability',
         backstory=FOUNDER_EVALUATOR_PROMPT,
-        tools=[GitHubAnalyzerTool()],
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -70,13 +67,13 @@ def create_product_critic() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: [] (works primarily with provided data)
+    - tools: DummyTool (stub until Apify tool ready)
     """
     return Agent(
         role='Product Critic',
         goal='Evaluate product defensibility, moat strength, and competitive threats',
         backstory=PRODUCT_CRITIC_PROMPT,
-        tools=[],
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -91,13 +88,13 @@ def create_financial_analyst() -> Agent:
     - allow_delegation=False: Focus on own analysis
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: [] (works primarily with provided data)
+    - tools: DummyTool (stub, works primarily with provided data)
     """
     return Agent(
         role='Financial Analyst',
         goal='Calculate LTV:CAC, burn rate, runway, and financial health metrics',
         backstory=FINANCIAL_ANALYST_PROMPT,
-        tools=[],
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -112,13 +109,13 @@ def create_risk_assessor() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: HackerNewsSearchTool
+    - tools: DummyTool (stub until Apify/HN tools ready)
     """
     return Agent(
         role='Risk Assessor',
         goal='Identify catastrophic failure modes, regulatory risks, and red flags',
         backstory=RISK_ASSESSOR_PROMPT,
-        tools=[HackerNewsSearchTool()],
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -132,18 +129,14 @@ def create_bull_agent() -> Agent:
 
     Configuration:
     - allow_delegation=True: Can ask research agents for more evidence
-    - tools: ALL tools (can verify claims and gather supporting evidence)
+    - tools=[]: No direct tools, uses research findings
     - max_iter=4: Slightly fewer iterations
     """
     return Agent(
         role='Bull Advocate',
         goal='Build the strongest case FOR investing with compelling evidence',
         backstory=BULL_AGENT_PROMPT,
-        tools=[
-            HackerNewsSearchTool(),
-            GitHubAnalyzerTool(),
-            ExaSearchTool()
-        ],
+        tools=[],
         verbose=True,
         allow_delegation=True,
         max_iter=4
@@ -156,18 +149,14 @@ def create_bear_agent() -> Agent:
 
     Configuration:
     - allow_delegation=True: Can ask research agents for more evidence
-    - tools: ALL tools (can find counter-evidence and verify claims)
+    - tools=[]: No direct tools, uses research findings
     - max_iter=4: Slightly fewer iterations
     """
     return Agent(
         role='Bear Advocate',
         goal='Build the strongest case AGAINST investing with rigorous evidence',
         backstory=BEAR_AGENT_PROMPT,
-        tools=[
-            HackerNewsSearchTool(),
-            GitHubAnalyzerTool(),
-            ExaSearchTool()
-        ],
+        tools=[],
         verbose=True,
         allow_delegation=True,
         max_iter=4
@@ -182,18 +171,14 @@ def create_lead_partner() -> Agent:
 
     Configuration:
     - allow_delegation=False: Makes decision independently
-    - tools: Google Calendar (optional - can create events after decision)
+    - tools=[]: No tools needed, calendar events in JSON output
     - max_iter=3: Quick decision making
-
-    Note: Primary output is structured JSON (InvestmentDecision Pydantic model).
-    GCalendarTool is available for optionally creating calendar events in Google Calendar
-    after making the decision, but calendar_events should still be in JSON output.
     """
     return Agent(
         role='Lead Investment Partner',
         goal='Make final investment decision (PASS/MAYBE/INVEST) based on all evidence',
         backstory=LEAD_PARTNER_PROMPT,
-        tools=[GoogleCalendarTool()],
+        tools=[],
         verbose=True,
         allow_delegation=False,
         max_iter=3

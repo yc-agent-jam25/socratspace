@@ -6,7 +6,10 @@ Searches HackerNews for discussions and sentiment via Metorial HN MCP
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type
-from tools.mcp_client import mcp_client
+try:
+    from backend.tools.mcp_client import mcp_client
+except ImportError:
+    from tools.mcp_client import mcp_client
 import logging
 import asyncio
 
