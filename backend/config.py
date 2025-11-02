@@ -24,11 +24,12 @@ class Settings(BaseSettings):
     metorial_base_url: str = "https://api.metorial.com/v1"
 
     # MCP Deployment IDs
-    mcp_apify_id: Optional[str] = "placeholder"
-    mcp_github_id: Optional[str] = "placeholder"
-    mcp_hackernews_id: Optional[str] = "placeholder"
-    mcp_gdrive_id: Optional[str] = "placeholder"
-    mcp_gcalendar_id: Optional[str] = "placeholder"
+    mcp_apify_id: str
+    mcp_github_id: str
+    mcp_hackernews_id: str
+    mcp_exa_id: Optional[str] = None  # Bonus: Exa search engine
+    mcp_gdrive_id: Optional[str] = None
+    mcp_gcalendar_id: Optional[str] = None
 
     # Backend Configuration
     backend_host: str = "0.0.0.0"
