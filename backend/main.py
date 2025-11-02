@@ -1,13 +1,15 @@
 """
-FastAPI Backend for VC Council
+FastAPI Backend for Socrat Space
 Main application entry point
 """
 
-from fastapi import FastAPI, WebSocket, WebSocketDisconnect
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import StreamingResponse
 from config import settings
 from api.routes import router
-from api.websockets import websocket_manager
+from api.sse import sse_manager
+from api.sse_test import create_test_sse_endpoint, generate_mock_events
 import logging
 
 # Configure logging
@@ -20,8 +22,8 @@ logger = logging.getLogger(__name__)
 
 # Create FastAPI app
 app = FastAPI(
-    title="VC Council API",
-    description="8-Agent AI Investment Committee",
+    title="Socrat Space API",
+    description="AI Investment Intelligence - 8-Agent Investment Committee",
     version="1.0.0"
 )
 
@@ -37,25 +39,79 @@ app.add_middleware(
 # Include REST routes
 app.include_router(router, prefix="/api")
 
-# WebSocket endpoint for real-time updates
-@app.websocket("/ws")
-async def websocket_endpoint(websocket: WebSocket):
-    """WebSocket connection for real-time debate updates"""
-    await websocket_manager.connect(websocket)
-    try:
-        while True:
-            # Keep connection alive
-            data = await websocket.receive_text()
-            # Echo back for heartbeat
-            await websocket.send_text(f"pong: {data}")
-    except WebSocketDisconnect:
-        websocket_manager.disconnect(websocket)
-        logger.info("WebSocket client disconnected")
+# CORS preflight for SSE
+@app.options("/api/sse/{session_id}")
+async def sse_options(session_id: str, request: Request):
+    """Handle CORS preflight for SSE endpoint"""
+    from fastapi.responses import Response
+    origin = request.headers.get("origin", "*")
+    return Response(
+        status_code=200,
+        headers={
+            "Access-Control-Allow-Origin": origin if origin else "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Methods": "GET, OPTIONS",
+            "Access-Control-Allow-Headers": "Cache-Control",
+        }
+    )
+
+# SSE endpoint for real-time updates (production)
+@app.get("/api/sse/{session_id}")
+async def sse_endpoint(session_id: str, request: Request):
+    """
+    Server-Side Events endpoint for real-time debate updates
+    
+    Args:
+        session_id: Session ID to stream events for
+        request: FastAPI request object (used to detect disconnection)
+    
+    Returns:
+        StreamingResponse with SSE format
+    
+    Note: When backend orchestrator is ready, this will use sse_manager.
+    Currently uses test endpoint for mock events.
+    """
+    logger.info(f"SSE connection requested for session: {session_id}")
+    
+    # Use test endpoint for now (generates mock events)
+    # TODO: Replace with real orchestrator when ready:
+    # event_generator = sse_manager.stream_events(session_id, request)
+    
+    # Get origin from request
+    origin = request.headers.get("origin", "*")
+    
+    event_generator = generate_mock_events(session_id, request)
+    
+    response = StreamingResponse(
+        event_generator,
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "Connection": "keep-alive",
+            "X-Accel-Buffering": "no",
+            "Access-Control-Allow-Origin": origin if origin else "*",
+            "Access-Control-Allow-Credentials": "true",
+            "Access-Control-Allow-Headers": "Cache-Control, Last-Event-ID",
+        }
+    )
+    
+    return response
+
+
+# Test SSE endpoint (explicit test route - can be removed later)
+@app.get("/api/sse/test/{session_id}")
+async def sse_test_endpoint(session_id: str, request: Request):
+    """
+    Test SSE endpoint that generates mock events
+    Use this for testing frontend SSE integration without full backend
+    """
+    logger.info(f"Test SSE connection requested for session: {session_id}")
+    return create_test_sse_endpoint(session_id, request)
 
 # Health check
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "service": "vc-council"}
+    return {"status": "healthy", "service": "socrat-space"}
 
 if __name__ == "__main__":
     import uvicorn
