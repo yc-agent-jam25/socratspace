@@ -74,6 +74,7 @@ const LiveActivityFeed: React.FC<LiveActivityFeedProps> = ({
   };
 
   const getAgent = (agentId: string): Agent | undefined => {
+    // Agent names are already normalized in useSSE hook
     return agents.find(a => a.id === agentId);
   };
 
