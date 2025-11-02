@@ -39,9 +39,9 @@ def create_market_researcher_task(
     - Product: {product_desc}
 
     Research instructions:
-    1. Scrape the company website using Apify to understand their value proposition
+    1. Research the company website to understand their value proposition
     2. Search HackerNews for discussions and sentiment about the product/category
-    3. Identify 3-5 direct competitors using web search
+    3. Identify 3-5 direct competitors using available research tools
     4. Estimate TAM using bottom-up or top-down methodology (show calculation)
     5. Determine market growth rate from industry sources
     6. Extract 3-5 key market trends and tailwinds

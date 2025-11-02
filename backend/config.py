@@ -28,7 +28,6 @@ class Settings(BaseSettings):
     metorial_base_url: str = "https://api.metorial.com/v1"
 
     # MCP Deployment IDs
-    mcp_apify_id: Optional[str] = None
     mcp_github_id: Optional[str] = None
     mcp_hackernews_id: Optional[str] = None
     mcp_exa_id: Optional[str] = None  # Bonus: Exa search engine
