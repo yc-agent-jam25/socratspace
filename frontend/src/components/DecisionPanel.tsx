@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Decision } from '../lib/types';
+import type { Decision } from '../lib/types';
 
 interface DecisionPanelProps {
   decision: Decision;
