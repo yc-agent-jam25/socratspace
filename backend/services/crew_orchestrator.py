@@ -477,20 +477,20 @@ class VCCouncilOrchestrator:
                         reasoning[:500]  # First 500 chars of reasoning
                     )
 
-                        # Send as notification via SSE
-                        await sse_manager.broadcast(session_id, "freelancer_job_notification", {
-                            "content": job_content,
-                            "company": company_data.get("company_name", "Unknown Company"),
-                            "timestamp": datetime.now().isoformat()
-                        })
+                    # Send as notification via SSE
+                    await sse_manager.broadcast(session_id, "freelancer_job_notification", {
+                        "content": job_content,
+                        "company": company_data.get("company_name", "Unknown Company"),
+                        "timestamp": datetime.now().isoformat()
+                    })
 
-                        logger.info(f"Freelancer job notification sent for {company_data.get('company_name')}")
+                    logger.info(f"Freelancer job notification sent for {company_data.get('company_name')}")
 
-                    except ImportError as import_err:
-                        logger.warning(f"Freelancer job service not available: {import_err}")
-                        # Service doesn't exist, skip gracefully
-                    except Exception as e:
-                        logger.error(f"Failed to generate Freelancer job content: {e}", exc_info=True)
+                except ImportError as import_err:
+                    logger.warning(f"Freelancer job service not available: {import_err}")
+                    # Service doesn't exist, skip gracefully
+                except Exception as e:
+                    logger.error(f"Failed to generate Freelancer job content: {e}", exc_info=True)
 
             # Calendar event creation (with configuration check inside)
             if decision and "calendar_events" in decision and decision["calendar_events"]:
