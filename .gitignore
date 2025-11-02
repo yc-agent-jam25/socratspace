@@ -136,3 +136,4 @@ docker-compose.override.yml
 # Session storage
 sessions/
 *.session
+backend/.env
