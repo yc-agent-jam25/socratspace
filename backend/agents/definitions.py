@@ -13,7 +13,9 @@ from backend.agents.prompts import (
     BEAR_AGENT_PROMPT,
     LEAD_PARTNER_PROMPT
 )
-from backend.tools._stubs import DummyTool
+from backend.tools.apify_tool import ApifyScraperTool
+from backend.tools.github_tool import GitHubAnalyzerTool
+from backend.tools.hackernews_tool import HackerNewsSearchTool
 
 # ========== RESEARCH AGENTS (Phase 1) ==========
 
@@ -25,13 +27,13 @@ def create_market_researcher() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: DummyTool (stub until MCP tools ready)
+    - tools: ApifyScraperTool, HackerNewsSearchTool
     """
     return Agent(
         role='Market Research Specialist',
         goal='Research and analyze market size, growth, competitive landscape, and sentiment',
         backstory=MARKET_RESEARCHER_PROMPT,
-        tools=[DummyTool()],
+        tools=[ApifyScraperTool(), HackerNewsSearchTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -46,13 +48,13 @@ def create_founder_evaluator() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: DummyTool (stub until GitHub/Apify tools ready)
+    - tools: GitHubAnalyzerTool, ApifyScraperTool
     """
     return Agent(
         role='Founder Evaluator',
         goal='Assess founder background, technical skills, and execution ability',
         backstory=FOUNDER_EVALUATOR_PROMPT,
-        tools=[DummyTool()],
+        tools=[GitHubAnalyzerTool(), ApifyScraperTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -67,13 +69,13 @@ def create_product_critic() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: DummyTool (stub until Apify tool ready)
+    - tools: ApifyScraperTool
     """
     return Agent(
         role='Product Critic',
         goal='Evaluate product defensibility, moat strength, and competitive threats',
         backstory=PRODUCT_CRITIC_PROMPT,
-        tools=[DummyTool()],
+        tools=[ApifyScraperTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -88,13 +90,13 @@ def create_financial_analyst() -> Agent:
     - allow_delegation=False: Focus on own analysis
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: DummyTool (stub, works primarily with provided data)
+    - tools: [] (works primarily with provided data)
     """
     return Agent(
         role='Financial Analyst',
         goal='Calculate LTV:CAC, burn rate, runway, and financial health metrics',
         backstory=FINANCIAL_ANALYST_PROMPT,
-        tools=[DummyTool()],
+        tools=[],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -109,13 +111,13 @@ def create_risk_assessor() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: DummyTool (stub until Apify/HN tools ready)
+    - tools: HackerNewsSearchTool, ApifyScraperTool
     """
     return Agent(
         role='Risk Assessor',
         goal='Identify catastrophic failure modes, regulatory risks, and red flags',
         backstory=RISK_ASSESSOR_PROMPT,
-        tools=[DummyTool()],
+        tools=[HackerNewsSearchTool(), ApifyScraperTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5

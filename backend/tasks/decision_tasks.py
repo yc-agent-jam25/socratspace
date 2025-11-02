@@ -62,7 +62,7 @@ def create_decision_task(all_previous_tasks: list, company_data: dict) -> Task:
     description = f"""
     Make the final investment decision for {company_name}.
     
-    You have access to ALL previous analysis:
+    CRITICAL: You have access to ALL previous analysis via context, including:
     - Market Research: TAM, growth, competitors, sentiment
     - Founder Evaluation: Team quality, execution, red flags
     - Product Analysis: Moat, defensibility, competitive threats
@@ -79,11 +79,14 @@ def create_decision_task(all_previous_tasks: list, company_data: dict) -> Task:
     - **INVEST:** Strong opportunity with compelling team, market, product, and economics
     
     Process:
-    1. Weigh all research findings objectively
-    2. Consider Bull's arguments for investing and Bear's arguments against
-    3. Balance both sides rigorously—neither follow hype nor paralyze with fear
-    4. Make decisive decision (PASS/MAYBE/INVEST) with clear reasoning
-    5. Generate investment memo and calendar events based on decision
+    1. FIRST, thoroughly read ALL research findings, Bull case, and Bear case from context
+    2. Weigh all research findings objectively, looking for patterns and contradictions
+    3. Carefully analyze Bull's arguments for investing and Bear's rebuttals
+    4. Balance both sides rigorously—neither follow hype nor paralyze with fear
+    5. Make decisive decision (PASS/MAYBE/INVEST) with clear reasoning that references specific findings
+    6. Generate investment memo summarizing key data points and calendar events based on decision
+    
+    IMPORTANT: Your reasoning must cite specific findings from the research and debate phases.
     
     Calendar Event Rules:
     - **PASS:** calendar_events = [] (empty array, no events)

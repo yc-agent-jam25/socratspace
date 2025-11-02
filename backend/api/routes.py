@@ -6,13 +6,20 @@ TODO: Implement API endpoints
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
-# TODO: Import when ready
-# from backend.services.crew_orchestrator import VCCouncilOrchestrator
 import logging
+
+# Note: Import will work when running from backend/ directory or with proper PYTHONPATH
+try:
+    from services.crew_orchestrator import VCCouncilOrchestrator
+except ImportError:
+    from backend.services.crew_orchestrator import VCCouncilOrchestrator
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter()
+
+# Global orchestrator instance
+orchestrator = VCCouncilOrchestrator()
 
 # Request/Response models
 class AnalysisRequest(BaseModel):
@@ -33,26 +40,39 @@ async def start_analysis(request: AnalysisRequest):
     """
     Start a new investment analysis
 
-    TODO: Implement to:
-    1. Create VCCouncilOrchestrator()
-    2. Call orchestrator.start_analysis(request.dict())
-    3. Return session_id
+    Returns session_id that frontend can use for SSE connection
     """
-    # TODO: Implement
-    logger.info(f"TODO: Start analysis for {request.company_name}")
-    return AnalysisResponse(
-        status="TODO",
-        session_id="TODO",
-        message=f"TODO: Analysis for {request.company_name}"
-    )
+    try:
+        logger.info(f"Starting analysis for {request.company_name}")
+        
+        # Call orchestrator to start analysis
+        session_id = await orchestrator.start_analysis(request.dict())
+        
+        logger.info(f"Analysis started with session: {session_id}")
+        
+        return AnalysisResponse(
+            status="started",
+            session_id=session_id,
+            message=f"Analysis started for {request.company_name}"
+        )
+    except Exception as e:
+        logger.error(f"Error starting analysis: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
 
 @router.get("/analysis/{session_id}")
 async def get_analysis_status(session_id: str):
     """
     Get analysis status and results
-
-    TODO: Implement to call orchestrator.get_result(session_id)
     """
-    # TODO: Implement
-    logger.info(f"TODO: Get analysis {session_id}")
-    return {"status": "TODO", "session_id": session_id}
+    try:
+        result = await orchestrator.get_result(session_id)
+        
+        if result is None:
+            raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
+        
+        return result
+    except HTTPException:
+        raise
+    except Exception as e:
+        logger.error(f"Error getting analysis status: {str(e)}", exc_info=True)
+        raise HTTPException(status_code=500, detail=str(e))
