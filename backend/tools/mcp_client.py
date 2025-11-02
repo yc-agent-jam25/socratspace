@@ -7,7 +7,7 @@ Supports OAuth authentication for services that require it (Apify, Google Calend
 from metorial import Metorial
 from openai import AsyncOpenAI
 from typing import Dict, Any, Optional
-from backend.config import settings
+from config import settings
 import logging
 import json
 
