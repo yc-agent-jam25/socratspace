@@ -6,7 +6,7 @@ Handles all communication with Metorial MCP platform using the Metorial SDK
 from metorial import Metorial
 from openai import AsyncOpenAI
 from typing import Dict, Any
-from config import settings
+from backend.config import settings
 import logging
 import json
 
@@ -79,5 +79,24 @@ class MetorialClient:
         # Return RunResult object (has .text and .steps attributes)
         return result
 
-# Global client instance
-mcp_client = MetorialClient()
+# Global client instance (lazy initialization)
+_mcp_client_instance = None
+
+class _MCPClientProxy:
+    """Proxy for lazy mcp_client initialization."""
+    def __init__(self):
+        self._instance = None
+    
+    def _ensure_instance(self):
+        if self._instance is None:
+            self._instance = MetorialClient()
+        return self._instance
+    
+    def call_mcp(self, *args, **kwargs):
+        return self._ensure_instance().call_mcp(*args, **kwargs)
+    
+    def __getattr__(self, name):
+        return getattr(self._ensure_instance(), name)
+
+# Global client proxy
+mcp_client = _MCPClientProxy()
