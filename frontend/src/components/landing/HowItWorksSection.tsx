@@ -26,7 +26,7 @@ const steps: Step[] = [
   {
     number: '02',
     title: 'Research Phase',
-    description: '5 specialized agents analyze market, founders, product, financials, and risks simultaneously.',
+    description: 'Specialized agents analyze market, founders, product, financials, and risks simultaneously.',
     icon: '🔍',
     color: '#10b981',
   },

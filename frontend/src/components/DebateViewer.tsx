@@ -12,17 +12,16 @@ import {
   LinearProgress,
   Chip,
   Stack,
-  Grid,
   Tabs,
-  Tab
+  Tab,
+  Avatar,
+  Tooltip
 } from '@mui/material';
 import type { CompanyData, Agent } from '../lib/types';
 import { useSimulation } from '../hooks/useSimulation';
 import PhaseIndicator from './PhaseIndicator';
 import DecisionPanelEnhanced from './DecisionPanelEnhanced';
 import LiveActivityFeed from './debate/LiveActivityFeed';
-import CouncilProgress from './debate/CouncilProgress';
-import CouncilAvatarBar from './debate/CouncilAvatarBar';
 import BullBearArena from './debate/BullBearArena';
 
 // Icons
@@ -41,7 +40,8 @@ interface DebateViewerProps {
   onReset: () => void;
 }
 
-const agents: Agent[] = [
+// Filter out system and unknown agents from display (they show in feed but not in header)
+const allAgents: Agent[] = [
   { id: 'system', name: 'System', color: '#6b7280' }, // System messages from orchestrator
   { id: 'unknown', name: '⚠️ Unknown Agent', color: '#dc2626' }, // Debug: backend failed to extract agent
   { id: 'market_researcher', name: 'Market Researcher', color: '#3b82f6' },
@@ -53,6 +53,9 @@ const agents: Agent[] = [
   { id: 'bear_agent', name: 'Bear Agent', color: '#ef4444' },
   { id: 'lead_partner', name: 'Lead Partner', color: '#3b82f6' }
 ];
+
+// Agents to display in header (exclude system/unknown)
+const agents = allAgents.filter(a => a.id !== 'system' && a.id !== 'unknown');
 
 const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onReset }) => {
   // Check if we should use SSE (when backend is ready, set VITE_USE_SSE=true)
@@ -116,57 +119,52 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
         animation: 'fadeInUp 0.6s ease-out',
       }}
     >
-      {/* Header Section */}
+      {/* Compact Header with Integrated Council Chamber */}
       <Paper 
         elevation={3}
         sx={{ 
-          p: 3, 
-          mb: 3,
+          p: 2, 
+          mb: 2,
           background: 'rgba(255, 255, 255, 0.05)',
           backdropFilter: 'blur(20px)',
           border: '1px solid rgba(255, 255, 255, 0.1)',
         }}
       >
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap', gap: 2 }}>
-          <Box sx={{ flex: 1 }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
-              <BusinessIcon sx={{ color: 'primary.main' }} />
-              <Typography variant="h4" sx={{ fontWeight: 700, letterSpacing: '-0.02em' }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
+          {/* Left: Company Info & Status */}
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: '0 0 auto', flexWrap: 'wrap' }}>
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <BusinessIcon sx={{ color: 'primary.main', fontSize: '1.25rem' }} />
+              <Typography variant="h6" sx={{ fontWeight: 700, letterSpacing: '-0.02em', fontSize: { xs: '1rem', sm: '1.25rem' } }}>
                 {companyData.company_name}
               </Typography>
             </Box>
-            <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+            <Typography variant="body2" color="text.secondary" sx={{ display: { xs: 'none', sm: 'block' }, fontSize: '0.8rem' }}>
               {companyData.industry} • {companyData.website}
             </Typography>
-            
-            <Stack direction="row" spacing={1} flexWrap="wrap" useFlexGap>
+            <Stack direction="row" spacing={0.5} flexWrap="wrap" useFlexGap>
               <Chip
                 label={getPhaseLabel()}
                 color="primary"
                 size="small"
-                sx={{ fontWeight: 600 }}
+                sx={{ fontWeight: 600, fontSize: '0.7rem', height: 24 }}
               />
               <Chip
-                icon={<AccessTimeIcon />}
+                icon={<AccessTimeIcon sx={{ fontSize: '0.9rem !important' }} />}
                 label={formatElapsedTime(elapsedTime)}
                 variant="outlined"
                 size="small"
+                sx={{ fontSize: '0.7rem', height: 24 }}
               />
-              <Chip
-                label={`Session: ${String(sessionId).slice(0, 8)}...`}
-                variant="outlined"
-                size="small"
-              />
-              {/* SSE Connection Status */}
               {connectionStatus && (
                 <Chip
                   icon={
                     connectionStatus === 'connected' ? (
-                      <CloudDoneIcon />
+                      <CloudDoneIcon sx={{ fontSize: '0.9rem !important' }} />
                     ) : connectionStatus === 'error' ? (
-                      <ErrorOutlineIcon />
+                      <ErrorOutlineIcon sx={{ fontSize: '0.9rem !important' }} />
                     ) : (
-                      <CloudOffIcon />
+                      <CloudOffIcon sx={{ fontSize: '0.9rem !important' }} />
                     )
                   }
                   label={
@@ -190,23 +188,167 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
                   onClick={connectionStatus === 'error' && reconnect ? reconnect : undefined}
                   sx={{
                     cursor: connectionStatus === 'error' && reconnect ? 'pointer' : 'default',
+                    fontSize: '0.7rem',
+                    height: 24,
                   }}
                 />
               )}
             </Stack>
           </Box>
-          
-          <Button 
-            variant="outlined" 
-            onClick={onReset}
-            disabled={isRunning}
-            sx={{ 
-              fontWeight: 600,
-              minWidth: 140,
-            }}
-          >
-            New Analysis
-          </Button>
+
+          {/* Middle: Council Chamber Avatars (Single Row) */}
+          <Box sx={{ 
+            flex: 1, 
+            display: 'flex', 
+            alignItems: 'center', 
+            justifyContent: { xs: 'flex-start', md: 'center' },
+            gap: 1, 
+            minWidth: 0,
+            overflowX: 'auto',
+            scrollbarWidth: 'none',
+            '&::-webkit-scrollbar': { display: 'none' },
+          }}>
+            <Chip
+              label="🏛️ Council"
+              size="small"
+              sx={{
+                background: 'rgba(139, 92, 246, 0.2)',
+                color: '#a78bfa',
+                fontWeight: 600,
+                fontSize: '0.7rem',
+                height: 24,
+                flexShrink: 0,
+              }}
+            />
+            <Box
+              sx={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: 0.75,
+                overflowX: 'auto',
+                scrollbarWidth: 'none',
+                '&::-webkit-scrollbar': { display: 'none' },
+                flex: 1,
+                justifyContent: { xs: 'flex-start', md: 'center' },
+              }}
+            >
+              {agents.map((agent) => {
+                const status = (() => {
+                  const hasMessages = messages.some(m => m.agent === agent.id);
+                  const isActive = getActiveAgents().includes(agent.id);
+                  if (hasMessages && !isActive) return 'complete';
+                  if (isActive) return 'active';
+                  return 'pending';
+                })();
+                const messageCount = messages.filter(m => m.agent === agent.id).length;
+                const isActive = status === 'active';
+                const isComplete = status === 'complete';
+
+                return (
+                  <Tooltip
+                    key={agent.id}
+                    title={
+                      <Box>
+                        <Typography variant="body2" sx={{ fontWeight: 700 }}>
+                          {agent.name}
+                        </Typography>
+                        <Typography variant="caption" sx={{ display: 'block', mt: 0.5 }}>
+                          {isActive && '🟢 Currently analyzing'}
+                          {isComplete && `✅ Complete (${messageCount} insights)`}
+                          {status === 'pending' && '⏳ Waiting'}
+                        </Typography>
+                      </Box>
+                    }
+                    arrow
+                  >
+                    <Box sx={{ position: 'relative', flexShrink: 0 }}>
+                      <Avatar
+                        sx={{
+                          width: 36,
+                          height: 36,
+                          bgcolor: agent.color,
+                          fontWeight: 700,
+                          fontSize: '0.75rem',
+                          opacity: status === 'pending' ? 0.4 : 1,
+                          border: isActive ? `2px solid ${agent.color}` : `1px solid ${agent.color}40`,
+                          transition: 'all 0.3s ease',
+                          cursor: 'pointer',
+                          boxShadow: isActive ? `0 0 12px ${agent.color}60` : 'none',
+                          '&:hover': {
+                            transform: 'scale(1.15)',
+                            boxShadow: `0 0 15px ${agent.color}80`,
+                          },
+                        }}
+                      >
+                        {agent.name.split(' ').map(w => w[0]).join('').slice(0, 2)}
+                      </Avatar>
+                      {/* Status indicator */}
+                      <Box
+                        sx={{
+                          position: 'absolute',
+                          bottom: -2,
+                          right: -2,
+                          width: 12,
+                          height: 12,
+                          borderRadius: '50%',
+                          background: isActive ? '#10b981' : isComplete ? '#3b82f6' : '#6b7280',
+                          border: '2px solid #141420',
+                          display: 'flex',
+                          alignItems: 'center',
+                          justifyContent: 'center',
+                          fontSize: '0.5rem',
+                        }}
+                      >
+                        {isActive && '●'}
+                        {isComplete && '✓'}
+                        {status === 'pending' && '○'}
+                      </Box>
+                      {/* Message count badge */}
+                      {messageCount > 0 && (
+                        <Box
+                          sx={{
+                            position: 'absolute',
+                            top: -6,
+                            right: -6,
+                            minWidth: 16,
+                            height: 16,
+                            borderRadius: '8px',
+                            background: agent.color,
+                            color: 'white',
+                            fontSize: '0.6rem',
+                            fontWeight: 700,
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            px: 0.5,
+                            boxShadow: '0 2px 6px rgba(0,0,0,0.3)',
+                          }}
+                        >
+                          {messageCount}
+                        </Box>
+                      )}
+                    </Box>
+                  </Tooltip>
+                );
+              })}
+            </Box>
+          </Box>
+
+          {/* Right: New Analysis Button */}
+          <Box sx={{ flex: '0 0 auto' }}>
+            <Button 
+              variant="outlined" 
+              onClick={onReset}
+              disabled={isRunning}
+              size="small"
+              sx={{ 
+                fontWeight: 600,
+                minWidth: 120,
+              }}
+            >
+              New Analysis
+            </Button>
+          </Box>
         </Box>
       </Paper>
 
@@ -234,16 +376,16 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
       {isRunning && !decision && (
         <LinearProgress 
           sx={{ 
-            mb: 3,
-            height: 6,
-            borderRadius: 3,
+            mb: 2,
+            height: 4,
+            borderRadius: 2,
           }} 
         />
       )}
 
       {/* Tabs Navigation (shown when decision is available) */}
       {decision && (
-        <Box sx={{ mb: 3 }}>
+        <Box sx={{ mb: 2 }}>
           <Tabs
             value={activeTab}
             onChange={(_, newValue) => setActiveTab(newValue)}
@@ -280,125 +422,40 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
         </Box>
       )}
 
-      {/* Main Content - Council Progress + Live Activity Feed */}
-      {activeTab === 'chamber' && !decision && (
+      {/* Main Content - Full Screen Live Activity Feed */}
+      {activeTab === 'chamber' && (
         <Box>
-          {/* Show Bull vs Bear Arena during debate phase, otherwise show Council Avatar Bar */}
-          {phase === 'debate' ? (
-            <BullBearArena
-              agents={agents}
-              messages={messages}
-              activeAgents={getActiveAgents()}
-            />
-          ) : (
-            <CouncilAvatarBar
-              agents={agents}
-              messages={messages}
-              activeAgents={getActiveAgents()}
-            />
+          {/* Show Bull vs Bear Arena during debate phase (compact, above feed) */}
+          {phase === 'debate' && (
+            <Box sx={{ mb: 2 }}>
+              <BullBearArena
+                agents={allAgents.filter(a => a.id !== 'system' && a.id !== 'unknown')}
+                messages={messages}
+                activeAgents={getActiveAgents()}
+              />
+            </Box>
           )}
 
-          <Grid container spacing={3} sx={{ mb: 3 }}>
-            {/* Council Progress */}
-            <Grid item xs={12} lg={5}>
-            <Box
-              sx={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: 3,
-                p: 3,
-              }}
-            >
-              <CouncilProgress
-                phase={phase}
-                agents={agents}
-                messages={messages}
-                activeAgents={getActiveAgents()}
-              />
-            </Box>
-          </Grid>
-
-          {/* Live Activity Feed */}
-          <Grid item xs={12} lg={7}>
-            <Box
-              sx={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: 3,
-                height: 700,
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <LiveActivityFeed
-                messages={messages}
-                agents={agents}
-                activeAgents={getActiveAgents()}
-              />
-            </Box>
-          </Grid>
-          </Grid>
-        </Box>
-      )}
-
-      {/* Council Progress + Live Activity Feed (when decision is available) */}
-      {activeTab === 'chamber' && decision && (
-        <Box>
-          {/* Show final Bull vs Bear Arena after debate completes */}
-          <BullBearArena
-            agents={agents}
-            messages={messages}
-            activeAgents={[]}
-          />
-
-          <Grid container spacing={3} sx={{ mb: 3 }}>
-            {/* Council Progress (completed state) */}
-            <Grid item xs={12} lg={5}>
-            <Box
-              sx={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: 3,
-                p: 3,
-              }}
-            >
-              <CouncilProgress
-                phase="completed"
-                agents={agents}
-                messages={messages}
-                activeAgents={[]}
-              />
-            </Box>
-          </Grid>
-
-          {/* Live Activity Feed (all messages) */}
-          <Grid item xs={12} lg={7}>
-            <Box
-              sx={{
-                background: 'rgba(255, 255, 255, 0.02)',
-                backdropFilter: 'blur(20px)',
-                WebkitBackdropFilter: 'blur(20px)',
-                border: '1px solid rgba(255, 255, 255, 0.08)',
-                borderRadius: 3,
-                height: 700,
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <LiveActivityFeed
-                messages={messages}
-                agents={agents}
-                activeAgents={[]}
-              />
-            </Box>
-          </Grid>
-          </Grid>
+          {/* Full Screen Live Activity Feed */}
+          <Box
+            sx={{
+              background: 'rgba(255, 255, 255, 0.02)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+              border: '1px solid rgba(255, 255, 255, 0.08)',
+              borderRadius: 3,
+              height: { xs: 'calc(100vh - 320px)', sm: 'calc(100vh - 280px)', md: 'calc(100vh - 260px)' },
+              minHeight: 600,
+              overflow: 'hidden',
+              position: 'relative',
+            }}
+          >
+            <LiveActivityFeed
+              messages={messages}
+              agents={allAgents}
+              activeAgents={decision ? [] : getActiveAgents()}
+            />
+          </Box>
         </Box>
       )}
 

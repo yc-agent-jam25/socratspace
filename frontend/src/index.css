@@ -28,6 +28,8 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
+  /* Force white text for dark theme */
+  color: rgba(255, 255, 255, 0.95) !important;
   /* Rich gradient background for glassmorphism to show */
   background: 
     radial-gradient(circle at 20% 20%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
@@ -238,6 +240,36 @@ h1, h2, h3, h4, h5, h6 {
   100% {
     width: 100%;
   }
+}
+
+/* Force white text in Material-UI input fields - prevent inheritance from body */
+.MuiOutlinedInput-root,
+.MuiOutlinedInput-root input,
+.MuiOutlinedInput-root textarea,
+.MuiOutlinedInput-root .MuiInputBase-input,
+.MuiInputBase-root input,
+.MuiInputBase-root textarea {
+  color: rgba(255, 255, 255, 0.9) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Override any Material-UI default input color */
+input[type="text"],
+input[type="url"],
+input[type="email"],
+textarea {
+  color: rgba(255, 255, 255, 0.9) !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.MuiOutlinedInput-root input::placeholder,
+.MuiOutlinedInput-root textarea::placeholder,
+.MuiOutlinedInput-root .MuiInputBase-input::placeholder,
+input::placeholder,
+textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5) !important;
+  opacity: 1 !important;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.5) !important;
 }
 
 /* Utility animation classes */

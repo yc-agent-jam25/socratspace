@@ -25,7 +25,7 @@ const features: Feature[] = [
   {
     icon: <PsychologyIcon sx={{ fontSize: 40 }} />,
     title: 'Multi-Agent Deliberation',
-    description: '8 specialized AI agents analyze every angle: market fit, founder quality, financial viability, and risk assessment.',
+    description: 'Specialized AI agents analyze every angle: market fit, founder quality, financial viability, and risk assessment.',
     color: '#3b82f6',
   },
   {
@@ -64,7 +64,7 @@ const FeaturesSection: React.FC = () => {
   return (
     <Box
       sx={{
-        py: { xs: 10, md: 15 },
+        py: { xs: 6, md: 8 },
         position: 'relative',
       }}
     >
