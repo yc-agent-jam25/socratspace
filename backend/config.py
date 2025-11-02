@@ -18,41 +18,28 @@ class Settings(BaseSettings):
     anthropic_api_key: Optional[str] = None
     llm_provider: str = "openai"
     llm_model: str = "gpt-4-turbo-preview"
-    model: Optional[str] = None  # Alias/shortcut for llm_model (deprecated, use llm_model)
-
-    # Mock Mode (for testing)
-    mock_mode: bool = False
 
     # Metorial Configuration
     metorial_api_key: Optional[str] = "placeholder"
     metorial_base_url: str = "https://api.metorial.com/v1"
 
     # MCP Deployment IDs
-    mcp_github_id: Optional[str] = None
-    mcp_hackernews_id: Optional[str] = None
-    mcp_exa_id: Optional[str] = None  # Bonus: Exa search engine
-    mcp_gdrive_id: Optional[str] = None
-    mcp_gcalendar_id: Optional[str] = None
+    mcp_apify_id: Optional[str] = "placeholder"
+    mcp_github_id: Optional[str] = "placeholder"
+    mcp_hackernews_id: Optional[str] = "placeholder"
+    mcp_gdrive_id: Optional[str] = "placeholder"
+    mcp_gcalendar_id: Optional[str] = "placeholder"
 
     # Backend Configuration
     backend_host: str = "0.0.0.0"
     backend_port: int = 8000
 
-    # Demo Mode
-    mock_mode: bool = False
-
     # CORS
-    cors_origins: list[str] = ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"]
-
-    # Output Truncation Limits (set high to prevent data loss)
-    max_task_output_chars: int = 50000  # Increased from 2000 to prevent truncation
-    max_conclusion_chars: int = 10000   # Increased from 800 to prevent truncation
-    max_thought_chars: int = 5000       # Increased from 500 to prevent truncation
+    cors_origins: list[str] = ["http://localhost:5173", "http://localhost:3000"]
 
     model_config = ConfigDict(
         env_file=".env",  # Load from backend/.env
-        case_sensitive=False,
-        extra='ignore'  # Ignore extra fields from environment (like MODEL, MOCK_MODE)
+        case_sensitive=False
     )
 
     def validate_llm_config(self):
