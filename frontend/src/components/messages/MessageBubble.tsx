@@ -6,6 +6,8 @@
 import React from 'react';
 import { Box, Typography, Paper } from '@mui/material';
 import { keyframes } from '@mui/system';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { AgentMessage } from '../../lib/types';
 
 interface MessageBubbleProps {
@@ -102,16 +104,30 @@ const MessageBubble: React.FC<MessageBubbleProps> = ({
       </Box>
 
       {/* Message content */}
-      <Typography
-        variant="body2"
+      <Box
         sx={{
           color: 'text.primary',
-          lineHeight: 1.6,
-          wordWrap: 'break-word',
+          '& p': { margin: '0.5rem 0', lineHeight: 1.6, fontSize: '0.875rem' },
+          '& p:first-of-type': { marginTop: 0 },
+          '& p:last-of-type': { marginBottom: 0 },
+          '& ul, & ol': { margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem' },
+          '& li': { marginBottom: '0.25rem', lineHeight: 1.6 },
+          '& strong': { fontWeight: 600 },
+          '& code': {
+            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+            padding: '2px 4px',
+            borderRadius: 0.5,
+            fontSize: '0.8125rem'
+          },
+          '& h1, & h2, & h3': {
+            fontSize: '0.9rem',
+            fontWeight: 600,
+            margin: '0.5rem 0',
+          }
         }}
       >
-        {message.message}
-      </Typography>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.message}</ReactMarkdown>
+      </Box>
 
       {/* Type indicator */}
       {message.message_type && (

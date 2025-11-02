@@ -16,6 +16,7 @@ import {
   ListItemIcon
 } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { Decision } from '../lib/types';
 import EventIcon from '@mui/icons-material/Event';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
@@ -106,15 +107,34 @@ const DecisionPanel: React.FC<DecisionPanelProps> = ({ decision }) => {
           '& ul': { pl: 3, mb: 2 },
           '& li': { mb: 1 },
           '& strong': { fontWeight: 600 },
-          '& code': { 
+          '& code': {
             backgroundColor: 'grey.100',
             padding: '2px 6px',
             borderRadius: 1,
             fontSize: '0.875rem'
+          },
+          '& table': {
+            borderCollapse: 'collapse',
+            width: '100%',
+            margin: '1rem 0',
+            fontSize: '0.875rem',
+          },
+          '& th, & td': {
+            border: '1px solid',
+            borderColor: 'divider',
+            padding: '0.75rem',
+            textAlign: 'left',
+          },
+          '& th': {
+            backgroundColor: 'action.hover',
+            fontWeight: 600,
+          },
+          '& tr:hover': {
+            backgroundColor: 'action.hover',
           }
         }}
       >
-        <ReactMarkdown>{decision.investment_memo}</ReactMarkdown>
+        <ReactMarkdown remarkPlugins={[remarkGfm]}>{decision.investment_memo}</ReactMarkdown>
       </Box>
 
       {decision.calendar_events.length > 0 && (

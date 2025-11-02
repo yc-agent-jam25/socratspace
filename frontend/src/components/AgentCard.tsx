@@ -5,6 +5,8 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, Typography, Box, Chip, Tooltip } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { Agent, AgentMessage } from '../lib/types';
 
 interface AgentCardProps {
@@ -78,18 +80,31 @@ const AgentCard: React.FC<AgentCardProps> = ({ agent, messages, active, onClick 
         </Box>
 
         {latestMessage ? (
-          <Typography 
-            variant="body2" 
-            color="text.secondary"
-            sx={{ 
+          <Box
+            sx={{
               flexGrow: 1,
               overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              lineHeight: 1.5
+              color: 'text.secondary',
+              '& p': { margin: 0, lineHeight: 1.5, fontSize: '0.875rem' },
+              '& ul, & ol': { margin: 0, paddingLeft: '1.5rem', fontSize: '0.875rem' },
+              '& li': { marginBottom: '0.25rem' },
+              '& strong': { fontWeight: 600 },
+              '& code': {
+                backgroundColor: 'grey.100',
+                padding: '2px 4px',
+                borderRadius: 0.5,
+                fontSize: '0.8125rem'
+              },
+              '& h1, & h2, & h3': {
+                fontSize: '0.875rem',
+                fontWeight: 600,
+                margin: '0.5rem 0',
+                color: 'text.primary'
+              }
             }}
           >
-            {truncateMessage(latestMessage.message)}
-          </Typography>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{truncateMessage(latestMessage.message)}</ReactMarkdown>
+          </Box>
         ) : (
           <Typography 
             variant="body2" 

@@ -45,6 +45,11 @@ class Settings(BaseSettings):
     # CORS
     cors_origins: list[str] = ["http://localhost:5173", "http://localhost:5174", "http://localhost:3000"]
 
+    # Output Truncation Limits (set high to prevent data loss)
+    max_task_output_chars: int = 50000  # Increased from 2000 to prevent truncation
+    max_conclusion_chars: int = 10000   # Increased from 800 to prevent truncation
+    max_thought_chars: int = 5000       # Increased from 500 to prevent truncation
+
     model_config = ConfigDict(
         env_file=".env",  # Load from backend/.env
         case_sensitive=False,

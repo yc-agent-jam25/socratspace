@@ -13,6 +13,7 @@ Architecture: Independent Round Contexts
 from crewai import Crew, Process, Task
 from backend.agents.definitions import create_all_agents
 from backend.api.sse import sse_manager
+from backend.config import settings
 
 # Task imports - your friend is working on these
 # Will be available once task functions are created
@@ -315,7 +316,7 @@ class VCCouncilOrchestrator:
                         "task_number": i + 1,
                         "task_label": task_labels[i],
                         "agent": task.agent.role if hasattr(task, 'agent') else "Unknown",
-                        "output": output[:2000]  # Limit to first 2000 chars
+                        "output": output[:settings.max_task_output_chars]  # Configurable limit (default: 50000 chars)
                     })
                 except Exception as e:
                     logger.error(f"Error capturing task {i+1} output: {e}")
@@ -407,7 +408,7 @@ class VCCouncilOrchestrator:
                     output_text = str(step_output.output)
                     # Only show substantial conclusions (not empty/error messages)
                     if len(output_text) > 100:
-                        message = f"✅ {output_text[:800]}"  # Longer for conclusions
+                        message = f"✅ {output_text[:settings.max_conclusion_chars]}"  # Configurable limit (default: 10000 chars)
                         message_type = "conclusion"
                         logger.info(f"[STEP CALLBACK] Broadcasting conclusion ({len(output_text)} chars)")
 
@@ -416,7 +417,7 @@ class VCCouncilOrchestrator:
                 thought_text = str(step_output.thought)
                 # Filter out noisy/repetitive thoughts
                 if len(thought_text) > 20 and not thought_text.startswith("I tried reusing"):
-                    message = f"💭 {thought_text[:500]}"
+                    message = f"💭 {thought_text[:settings.max_thought_chars]}"  # Configurable limit (default: 5000 chars)
                     message_type = "thought"
                     logger.info(f"[STEP CALLBACK] Broadcasting thought ({len(thought_text)} chars)")
 
