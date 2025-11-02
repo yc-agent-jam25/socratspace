@@ -8,10 +8,17 @@ import type { Phase, AgentMessage, Decision } from '../lib/types';
 import { simulationService } from '../lib/simulation';
 import { useSSE as useSSEHook } from './useSSE';
 
+interface FreelancerJobData {
+  content: string;
+  company: string;
+  timestamp: string;
+}
+
 interface UseSimulationReturn {
   phase: Phase;
   messages: AgentMessage[];
   decision: Decision | null;
+  freelancerJob?: FreelancerJobData | null;
   isRunning: boolean;
   elapsedTime: number;
   connectionStatus?: 'connecting' | 'connected' | 'disconnected' | 'error';
@@ -108,6 +115,7 @@ export const useSimulation = (options: UseSimulationOptions = {}): UseSimulation
     phase,
     messages,
     decision,
+    freelancerJob: shouldUseSSE ? sse.freelancerJob : undefined,
     isRunning,
     elapsedTime,
     connectionStatus: shouldUseSSE ? sse.connectionStatus : undefined,

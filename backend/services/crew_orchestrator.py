@@ -344,6 +344,53 @@ class VCCouncilOrchestrator:
 
             # Broadcast final decision via SSE
             await sse_manager.send_decision(session_id, decision)
+
+            # ==========================================
+            # FREELANCER JOB POSTING FOR MAYBE DECISIONS
+            # Generate job posting if decision is MAYBE and shows uncertainty
+            # ==========================================
+            if decision.get("decision") == "MAYBE":
+                reasoning = decision.get("reasoning", "")
+
+                # Check for uncertainty keywords that suggest external research needed
+                uncertainty_keywords = [
+                    "uncertain", "split", "unclear", "validate",
+                    "need more", "external", "assumptions", "divided",
+                    "conflicting", "inconclusive", "verify", "investigate"
+                ]
+                should_hire = any(kw in reasoning.lower() for kw in uncertainty_keywords)
+
+                if should_hire:
+                    logger.info("🎯 Generating Freelancer job posting for external researcher")
+
+                    await sse_manager.send_agent_message(
+                        session_id,
+                        "lead_partner",
+                        "Given the uncertainty in our analysis, I recommend commissioning an independent researcher. I've drafted a Freelancer job posting.",
+                        "reasoning"
+                    )
+
+                    try:
+                        # Import and generate job content
+                        from services.freelancer_job_service import generate_freelancer_job_content
+
+                        job_content = await generate_freelancer_job_content(
+                            company_data.get("company_name", "this company"),
+                            reasoning[:500]  # First 500 chars of reasoning
+                        )
+
+                        # Send as notification via SSE
+                        await sse_manager.broadcast(session_id, "freelancer_job_notification", {
+                            "content": job_content,
+                            "company": company_data.get("company_name", "Unknown Company"),
+                            "timestamp": datetime.now().isoformat()
+                        })
+
+                        logger.info(f"✅ Freelancer job notification sent for {company_data.get('company_name')}")
+
+                    except Exception as e:
+                        logger.error(f"Failed to generate Freelancer job content: {e}", exc_info=True)
+
             await sse_manager.send_phase_change(session_id, "completed")
 
             # Cleanup task tracking state

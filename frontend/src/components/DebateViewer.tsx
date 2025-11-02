@@ -23,6 +23,7 @@ import PhaseIndicator from './PhaseIndicator';
 import DecisionPanelEnhanced from './DecisionPanelEnhanced';
 import LiveActivityFeed from './debate/LiveActivityFeed';
 import BullBearArena from './debate/BullBearArena';
+import FreelancerJobNotification from './FreelancerJobNotification';
 
 // Icons
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -65,6 +66,7 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
     phase,
     messages,
     decision,
+    freelancerJob,
     isRunning,
     elapsedTime,
     connectionStatus,
@@ -73,6 +75,7 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
     reconnect,
   } = useSimulation({ sessionId, useSSE });
   const [activeTab, setActiveTab] = useState<'chamber' | 'decision'>('chamber');
+  const [showFreelancerJob, setShowFreelancerJob] = useState(false);
 
   // Start simulation when component mounts
   useEffect(() => {
@@ -85,6 +88,13 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
       setActiveTab('decision');
     }
   }, [decision]);
+
+  // Show Freelancer job notification when it's received
+  useEffect(() => {
+    if (freelancerJob) {
+      setShowFreelancerJob(true);
+    }
+  }, [freelancerJob]);
 
   // Determine which agents are active based on current phase
   const getActiveAgents = (): string[] => {
@@ -474,6 +484,15 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
             Preparing agents for analysis
           </Typography>
         </Box>
+      )}
+
+      {/* Freelancer Job Notification */}
+      {showFreelancerJob && freelancerJob && (
+        <FreelancerJobNotification
+          content={freelancerJob.content}
+          company={freelancerJob.company}
+          onClose={() => setShowFreelancerJob(false)}
+        />
       )}
 
     </Box>
