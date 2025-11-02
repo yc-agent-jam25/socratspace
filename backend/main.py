@@ -5,9 +5,9 @@ Main application entry point
 
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from fastapi.middleware.cors import CORSMiddleware
-from backend.config import settings
-from backend.api.routes import router
-from backend.api.websockets import websocket_manager
+from config import settings
+from api.routes import router
+from api.websockets import websocket_manager
 import logging
 
 # Configure logging
