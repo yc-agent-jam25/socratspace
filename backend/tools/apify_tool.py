@@ -6,7 +6,7 @@ Scrapes websites for competitor and market data via Metorial Apify MCP
 from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type
-from backend.tools.mcp_client import mcp_client
+from tools.mcp_client import mcp_client
 import logging
 import asyncio
 
