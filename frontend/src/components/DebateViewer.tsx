@@ -23,7 +23,9 @@ import PhaseIndicator from './PhaseIndicator';
 import DecisionPanelEnhanced from './DecisionPanelEnhanced';
 import LiveActivityFeed from './debate/LiveActivityFeed';
 import BullBearArena from './debate/BullBearArena';
-import FreelancerJobNotification from './FreelancerJobNotification';
+// Notification components for different features
+import FreelancerJobNotification from './FreelancerJobNotification';  // External research jobs
+import OAuthDialog from './OAuthDialog';  // OAuth authentication flow
 
 // Icons
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -41,10 +43,9 @@ interface DebateViewerProps {
   onReset: () => void;
 }
 
-// Filter out system and unknown agents from display (they show in feed but not in header)
+// All agents (system messages use a default fallback)
 const allAgents: Agent[] = [
-  { id: 'system', name: 'System', color: '#6b7280' }, // System messages from orchestrator
-  { id: 'unknown', name: '⚠️ Unknown Agent', color: '#dc2626' }, // Debug: backend failed to extract agent
+  { id: 'system', name: 'System', color: '#6b7280' }, // System messages from orchestrator (only for feed)
   { id: 'market_researcher', name: 'Market Researcher', color: '#3b82f6' },
   { id: 'founder_evaluator', name: 'Founder Evaluator', color: '#10b981' },
   { id: 'product_critic', name: 'Product Critic', color: '#f59e0b' },
@@ -55,8 +56,8 @@ const allAgents: Agent[] = [
   { id: 'lead_partner', name: 'Lead Partner', color: '#3b82f6' }
 ];
 
-// Agents to display in header (exclude system/unknown)
-const agents = allAgents.filter(a => a.id !== 'system' && a.id !== 'unknown');
+// Agents to display in header (exclude system)
+const agents = allAgents.filter(a => a.id !== 'system');
 
 const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onReset }) => {
   // Check if we should use SSE (when backend is ready, set VITE_USE_SSE=true)
@@ -71,16 +72,32 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
     elapsedTime,
     connectionStatus,
     error,
+    oauthRequest,
     startSimulation,
     reconnect,
   } = useSimulation({ sessionId, useSSE });
   const [activeTab, setActiveTab] = useState<'chamber' | 'decision'>('chamber');
+
+  // Freelancer job notification state (for MAYBE decisions with uncertainty)
   const [showFreelancerJob, setShowFreelancerJob] = useState(false);
+
+  // OAuth authentication state (for GitHub/Calendar integrations)
+  const [showOAuthDialog, setShowOAuthDialog] = useState(false);
+  const [oauthMcpName, setOauthMcpName] = useState<string>('github');
 
   // Start simulation when component mounts
   useEffect(() => {
     startSimulation();
   }, [startSimulation]);
+
+  // Handle OAuth requests from SSE (e.g., during calendar creation)
+  useEffect(() => {
+    if (oauthRequest) {
+      console.log('[DebateViewer] OAuth request received:', oauthRequest);
+      setOauthMcpName(oauthRequest.mcp_name);
+      setShowOAuthDialog(true);
+    }
+  }, [oauthRequest]);
 
   // Switch to decision tab when decision is ready
   useEffect(() => {
@@ -89,12 +106,58 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
     }
   }, [decision]);
 
-  // Show Freelancer job notification when it's received
+  // ==========================================
+  // FREELANCER FEATURE: Show job notification for MAYBE decisions
+  // ==========================================
   useEffect(() => {
     if (freelancerJob) {
       setShowFreelancerJob(true);
     }
   }, [freelancerJob]);
+
+  // ==========================================
+  // OAUTH FEATURE: Handle authentication requests during analysis
+  // ==========================================
+  useEffect(() => {
+    if (oauthRequest) {
+      console.log('[DebateViewer] OAuth request received:', oauthRequest);
+      setOauthMcpName(oauthRequest.mcp_name);
+      setShowOAuthDialog(true);
+    }
+  }, [oauthRequest]);
+
+  // Check for OAuth errors in messages or error state
+  useEffect(() => {
+    // Check error message for OAuth requirements
+    if (error && (error.includes('OAuth') || error.includes('authentication') || error.includes('GitHub'))) {
+      // Check if GitHub is mentioned
+      if (error.toLowerCase().includes('github')) {
+        setOauthMcpName('github');
+        setShowOAuthDialog(true);
+      }
+    }
+
+    // Also check recent messages for OAuth errors
+    const recentMessages = messages.slice(-5);
+    for (const msg of recentMessages) {
+      if (msg.message && (msg.message.includes('OAuth') || msg.message.includes('authentication required'))) {
+        if (msg.message.toLowerCase().includes('github')) {
+          setOauthMcpName('github');
+          setShowOAuthDialog(true);
+          break;
+        }
+      }
+    }
+  }, [error, messages]);
+
+  const handleOAuthComplete = (_sessionId: string) => {
+    setShowOAuthDialog(false);
+    // After OAuth completes, backend will continue calendar creation automatically
+  };
+
+  const handleOAuthCancel = () => {
+    setShowOAuthDialog(false);
+  };
 
   // Determine which agents are active based on current phase
   const getActiveAgents = (): string[] => {
@@ -129,17 +192,18 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
         animation: 'fadeInUp 0.6s ease-out',
       }}
     >
-      {/* Compact Header with Integrated Council Chamber */}
-      <Paper 
-        elevation={3}
-        sx={{ 
-          p: 2, 
-          mb: 2,
-          background: 'rgba(255, 255, 255, 0.05)',
-          backdropFilter: 'blur(20px)',
-          border: '1px solid rgba(255, 255, 255, 0.1)',
-        }}
-      >
+              {/* Compact Header with Integrated Council Chamber */}
+              <Paper 
+                elevation={3}
+                sx={{ 
+                  p: 2, 
+                  mb: 2,
+                  background: 'rgba(255, 255, 255, 0.05)',
+                  backdropFilter: 'blur(20px)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  overflow: 'visible', // Allow status indicators to show outside paper
+                }}
+              >
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 2, flexWrap: { xs: 'wrap', md: 'nowrap' } }}>
           {/* Left: Company Info & Status */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, flex: '0 0 auto', flexWrap: 'wrap' }}>
@@ -215,8 +279,10 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
             gap: 1, 
             minWidth: 0,
             overflowX: 'auto',
+            overflowY: 'visible', // Allow status indicators to show
             scrollbarWidth: 'none',
             '&::-webkit-scrollbar': { display: 'none' },
+            py: 0.5, // Add vertical padding to prevent clipping
           }}>
             <Chip
               label="🏛️ Council"
@@ -236,10 +302,12 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
                 alignItems: 'center',
                 gap: 0.75,
                 overflowX: 'auto',
+                overflowY: 'visible', // Allow status indicators to show
                 scrollbarWidth: 'none',
                 '&::-webkit-scrollbar': { display: 'none' },
                 flex: 1,
                 justifyContent: { xs: 'flex-start', md: 'center' },
+                py: 1, // Add padding to prevent clipping
               }}
             >
               {agents.map((agent) => {
@@ -271,7 +339,12 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
                     }
                     arrow
                   >
-                    <Box sx={{ position: 'relative', flexShrink: 0 }}>
+                    <Box sx={{ 
+                      position: 'relative', 
+                      flexShrink: 0,
+                      overflow: 'visible', // Ensure status indicator isn't clipped
+                      pb: 1, // Add padding bottom to give space for status indicator
+                    }}>
                       <Avatar
                         sx={{
                           width: 36,
@@ -296,17 +369,18 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
                       <Box
                         sx={{
                           position: 'absolute',
-                          bottom: -2,
-                          right: -2,
-                          width: 12,
-                          height: 12,
+                          bottom: -4, // Position slightly outside for badge effect
+                          right: -4,
+                          width: 14, // Slightly larger to be more visible
+                          height: 14,
                           borderRadius: '50%',
                           background: isActive ? '#10b981' : isComplete ? '#3b82f6' : '#6b7280',
                           border: '2px solid #141420',
                           display: 'flex',
                           alignItems: 'center',
                           justifyContent: 'center',
-                          fontSize: '0.5rem',
+                          fontSize: '0.6rem',
+                          zIndex: 10, // Ensure it's above other elements
                         }}
                       >
                         {isActive && '●'}
@@ -439,7 +513,7 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
           {phase === 'debate' && (
             <Box sx={{ mb: 2 }}>
               <BullBearArena
-                agents={allAgents.filter(a => a.id !== 'system' && a.id !== 'unknown')}
+                agents={allAgents.filter(a => a.id !== 'system')}
                 messages={messages}
                 activeAgents={getActiveAgents()}
               />
@@ -486,7 +560,10 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
         </Box>
       )}
 
-      {/* Freelancer Job Notification */}
+      {/* ==========================================
+          FREELANCER JOB NOTIFICATION
+          Shown when MAYBE decision requires external research
+          ========================================== */}
       {showFreelancerJob && freelancerJob && (
         <FreelancerJobNotification
           content={freelancerJob.content}
@@ -495,6 +572,19 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
         />
       )}
 
+      {/* ==========================================
+          OAUTH AUTHENTICATION DIALOG
+          Shown when GitHub/Calendar access is needed
+          ========================================== */}
+      <OAuthDialog
+        open={showOAuthDialog}
+        mcpName={oauthMcpName}
+        mcpDisplayName={oauthMcpName === 'github' ? 'GitHub' : oauthMcpName === 'gcalendar' ? 'Google Calendar' : 'Service'}
+        onComplete={handleOAuthComplete}
+        onCancel={handleOAuthCancel}
+        initialSessionId={oauthRequest?.oauth_session_id || null}
+        initialAuthUrl={oauthRequest?.auth_url || null}
+      />
     </Box>
   );
 };
