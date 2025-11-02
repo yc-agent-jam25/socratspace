@@ -1,6 +1,6 @@
 /**
  * RoundTableLayout Component
- * Circular arrangement for research phase (5 agents)
+ * Circular arrangement for research phase
  */
 
 import React from 'react';

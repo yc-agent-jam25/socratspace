@@ -116,6 +116,7 @@ const darkThemeOptions = {
         body: {
           scrollbarWidth: 'thin',
           scrollbarColor: 'rgba(255,255,255,0.2) rgba(0,0,0,0.1)',
+          color: 'rgba(255, 255, 255, 0.95) !important',
           '&::-webkit-scrollbar': {
             width: '8px',
             height: '8px',
@@ -223,12 +224,30 @@ const darkThemeOptions = {
         root: {
           '& .MuiOutlinedInput-root': {
             backgroundColor: 'rgba(255, 255, 255, 0.03)',
+            color: 'rgba(255, 255, 255, 0.9) !important',
+            '& .MuiInputBase-input': {
+              color: 'rgba(255, 255, 255, 0.9) !important',
+              WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+            },
+            '& input': {
+              color: 'rgba(255, 255, 255, 0.9) !important',
+              WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+            },
+            '& textarea': {
+              color: 'rgba(255, 255, 255, 0.9) !important',
+              WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+            },
             '&:hover': {
               backgroundColor: 'rgba(255, 255, 255, 0.05)',
             },
             '&.Mui-focused': {
               backgroundColor: 'rgba(255, 255, 255, 0.05)',
             },
+          },
+          '& .MuiInputBase-input::placeholder': {
+            color: 'rgba(255, 255, 255, 0.5) !important',
+            opacity: 1,
+            WebkitTextFillColor: 'rgba(255, 255, 255, 0.5) !important',
           },
         },
       },

@@ -23,11 +23,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
     <Box
       sx={{
         position: 'relative',
-        minHeight: '90vh',
-        display: 'flex',
-        alignItems: 'center',
+        py: { xs: 4, md: 5 },
         overflow: 'hidden',
-        pt: { xs: 8, md: 0 },
       }}
     >
       {/* Animated background orbs */}
@@ -82,7 +79,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
           <Box
             sx={{
               display: 'inline-flex',
-              mb: 3,
+              mb: 2,
               animation: 'fadeInUp 0.6s ease-out',
             }}
           >
@@ -107,7 +104,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
               fontWeight: 900,
               lineHeight: 1,
-              mb: 1,
+              mb: 0.5,
               background: 'linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #ffffff 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -126,7 +123,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
               fontWeight: 600,
               lineHeight: 1.2,
-              mb: 3,
+              mb: 2,
               color: 'rgba(255, 255, 255, 0.9)',
               letterSpacing: '-0.02em',
               animation: 'fadeInUp 0.8s ease-out',
@@ -134,7 +131,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               animationFillMode: 'backwards',
             }}
           >
-            8 AI Agents Debate Your Investment Decisions
+            AI Agents Debate Your Investment Decisions
           </Typography>
 
           {/* Subheadline */}
@@ -144,7 +141,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               fontSize: { xs: '1.125rem', md: '1.5rem' },
               fontWeight: 400,
               color: 'rgba(255, 255, 255, 0.75)',
-              mb: 5,
+              mb: 3,
               lineHeight: 1.6,
               maxWidth: 700,
               mx: 'auto',
@@ -153,8 +150,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               animationFillMode: 'backwards',
             }}
           >
-            From pitch deck to calendar invite in 5 minutes. Watch as Market Researchers, 
-            Financial Analysts, and Bull vs Bear agents deliberate in real-time.
+            From pitch deck to calendar invite in minutes. Watch specialized AI agents analyze markets, 
+            evaluate founders, assess finances, and debate investment decisions in real-time.
           </Typography>
 
           {/* CTA Buttons */}
@@ -163,7 +160,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
             spacing={2}
             justifyContent="center"
             sx={{
-              mb: 6,
+              mb: 3,
               animation: 'fadeInUp 1.2s ease-out',
               animationDelay: '0.3s',
               animationFillMode: 'backwards',
@@ -221,17 +218,18 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
           {/* Stats */}
           <Stack
             direction={{ xs: 'column', sm: 'row' }}
-            spacing={{ xs: 3, sm: 6 }}
+            spacing={{ xs: 2, sm: 4 }}
             justifyContent="center"
             sx={{
+              mb: 0,
               animation: 'fadeInUp 1.4s ease-out',
               animationDelay: '0.4s',
               animationFillMode: 'backwards',
             }}
           >
             {[
-              { value: '8', label: 'AI Agents' },
-              { value: '5min', label: 'Average Time' },
+              { value: '<5min', label: 'Analysis Time' },
+              { value: '100%', label: 'Transparent' },
               { value: '3', label: 'Decision Phases' },
             ].map((stat, index) => (
               <Box
@@ -275,17 +273,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
             ))}
           </Stack>
 
-          {/* Floating council icon */}
-          <Box
-            sx={{
-              mt: 8,
-              fontSize: '4rem',
-              animation: `${float} 4s ease-in-out infinite`,
-              opacity: 0.6,
-            }}
-          >
-            🏛️
-          </Box>
         </Box>
       </Container>
     </Box>

@@ -13,12 +13,8 @@ import {
   Alert,
   CircularProgress,
   LinearProgress,
-  Chip,
   Grid,
-  Card,
-  CardContent,
 } from '@mui/material';
-import { keyframes } from '@mui/system';
 import type { CompanyData } from '../lib/types';
 import { api } from '../lib/api';
 
@@ -33,11 +29,6 @@ import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 interface InputFormEnhancedProps {
   onAnalysisStart: (sessionId: string, companyData: CompanyData) => void;
 }
-
-const pulse = keyframes`
-  0%, 100% { transform: scale(1); opacity: 1; }
-  50% { transform: scale(1.05); opacity: 0.8; }
-`;
 
 const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }) => {
   const [formData, setFormData] = useState<CompanyData>({
@@ -88,64 +79,21 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
     setError(null);
   };
 
-  const fields = [
-    {
-      key: 'company_name' as const,
-      label: 'Company Name',
-      icon: <BusinessIcon />,
-      placeholder: 'e.g., Stripe, Notion, Figma',
-      required: true,
-      multiline: false,
-    },
-    {
-      key: 'website' as const,
-      label: 'Website',
-      icon: <PublicIcon />,
-      placeholder: 'https://example.com',
-      required: true,
-      multiline: false,
-    },
-    {
-      key: 'founder_github' as const,
-      label: 'Founder GitHub (Optional)',
-      icon: <CheckCircleIcon />,
-      placeholder: 'https://github.com/username',
-      required: false,
-      multiline: false,
-    },
-    {
-      key: 'industry' as const,
-      label: 'Industry',
-      icon: <CategoryIcon />,
-      placeholder: 'e.g., FinTech, SaaS, Healthcare',
-      required: true,
-      multiline: false,
-    },
-    {
-      key: 'product_description' as const,
-      label: 'Product Description',
-      icon: <DescriptionIcon />,
-      placeholder: 'Describe what your company does, the problem it solves, and your target market...',
-      required: true,
-      multiline: true,
-    },
-  ];
-
   return (
     <Box
       sx={{
-        maxWidth: 1000,
+        maxWidth: 1200,
         mx: 'auto',
         animation: 'fadeInUp 0.6s ease-out',
       }}
     >
-      {/* Header */}
-      <Box sx={{ textAlign: 'center', mb: 5 }}>
+      {/* Compact Header */}
+      <Box sx={{ textAlign: 'center', mb: 3 }}>
         <Typography
-          variant="h3"
+          variant="h4"
           sx={{
             fontWeight: 800,
-            mb: 2,
+            mb: 1,
             background: 'linear-gradient(135deg, #ffffff 0%, #a78bfa 100%)',
             backgroundClip: 'text',
             WebkitBackgroundClip: 'text',
@@ -155,49 +103,39 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
         >
           Tell Us About Your Startup
         </Typography>
-        <Typography
-          variant="h6"
-          sx={{
-            color: 'rgba(255, 255, 255, 0.7)',
-            fontWeight: 400,
-            mb: 3,
-          }}
-        >
-          Our 8 AI agents will analyze every aspect in 5 minutes
-        </Typography>
-
-        {/* Progress bar */}
-        <Box sx={{ maxWidth: 600, mx: 'auto' }}>
-          <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 1 }}>
-            <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 600 }}>
-              Completion
-            </Typography>
-            <Typography variant="caption" sx={{ color: '#8b5cf6', fontWeight: 700 }}>
-              {Math.round(progress)}%
-            </Typography>
-          </Box>
+        
+        {/* Progress bar - inline with header */}
+        <Box sx={{ maxWidth: 500, mx: 'auto', mb: 2 }}>
           <LinearProgress
             variant="determinate"
             value={progress}
             sx={{
-              height: 8,
-              borderRadius: 4,
+              height: 6,
+              borderRadius: 3,
               backgroundColor: 'rgba(255, 255, 255, 0.1)',
               '& .MuiLinearProgress-bar': {
                 background: 'linear-gradient(90deg, #8b5cf6 0%, #3b82f6 100%)',
-                borderRadius: 4,
+                borderRadius: 3,
               },
             }}
           />
+          <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 0.5 }}>
+            <Typography variant="caption" sx={{ color: 'text.secondary', fontSize: '0.7rem' }}>
+              {completedFields} of {requiredFields.length} complete
+            </Typography>
+            <Typography variant="caption" sx={{ color: '#8b5cf6', fontWeight: 700, fontSize: '0.7rem' }}>
+              {Math.round(progress)}%
+            </Typography>
+          </Box>
         </Box>
       </Box>
 
-      {/* Form */}
+      {/* Form - 2 Column Layout */}
       <Box
         component="form"
         onSubmit={handleSubmit}
         sx={{
-          p: 4,
+          p: 3,
           background: 'rgba(255, 255, 255, 0.04)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
@@ -206,126 +144,333 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
           boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
         }}
       >
-        <Grid container spacing={3}>
-          {fields.map((field, index) => (
-            <Grid item xs={12} key={field.key}>
-              <Card
-                sx={{
-                  background: 'rgba(255, 255, 255, 0.02)',
-                  backdropFilter: 'blur(10px)',
-                  border: formData[field.key] 
-                    ? '1px solid rgba(139, 92, 246, 0.3)' 
-                    : '1px solid rgba(255, 255, 255, 0.05)',
-                  transition: 'all 0.3s ease',
-                  '&:hover': {
-                    borderColor: 'rgba(139, 92, 246, 0.5)',
-                    transform: 'translateY(-2px)',
+        <Grid container spacing={2}>
+          {/* Row 1: Company Name & Website */}
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                position: 'relative',
+                '&::after': formData.company_name ? {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 3,
+                  height: '100%',
+                  background: '#10b981',
+                  borderRadius: '0 8px 8px 0',
+                } : {},
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <BusinessIcon sx={{ fontSize: 20, color: formData.company_name ? '#8b5cf6' : 'rgba(255, 255, 255, 0.4)' }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.875rem' }}>
+                  Company Name *
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                value={formData.company_name}
+                onChange={(e) => handleFieldChange('company_name', e)}
+                placeholder="e.g., Stripe, Notion, Figma"
+                variant="outlined"
+                size="small"
+                inputProps={{
+                  style: { 
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
                   },
-                  animation: 'fadeInUp 0.5s ease-out',
-                  animationDelay: `${index * 0.1}s`,
-                  animationFillMode: 'backwards',
                 }}
-              >
-                <CardContent>
-                  <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1.5 }}>
-                    <Box
-                      sx={{
-                        width: 40,
-                        height: 40,
-                        borderRadius: 2,
-                        background: formData[field.key]
-                          ? 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)'
-                          : 'rgba(255, 255, 255, 0.05)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        color: formData[field.key] ? 'white' : 'rgba(255, 255, 255, 0.4)',
-                        transition: 'all 0.3s ease',
-                      }}
-                    >
-                      {field.icon}
-                    </Box>
-                    <Box sx={{ flex: 1 }}>
-                      <Typography
-                        variant="subtitle1"
-                        sx={{
-                          fontWeight: 600,
-                          color: 'text.primary',
-                        }}
-                      >
-                        {field.label}
-                      </Typography>
-                      {field.required && (
-                        <Chip
-                          label="Required"
-                          size="small"
-                          sx={{
-                            height: 20,
-                            fontSize: '0.65rem',
-                            background: 'rgba(239, 68, 68, 0.15)',
-                            color: '#f87171',
-                            fontWeight: 600,
-                            border: '1px solid rgba(239, 68, 68, 0.3)',
-                          }}
-                        />
-                      )}
-                    </Box>
-                    {formData[field.key] && (
-                      <CheckCircleIcon
-                        sx={{
-                          color: '#10b981',
-                          animation: `${pulse} 1s ease-in-out`,
-                        }}
-                      />
-                    )}
-                  </Box>
-                  <TextField
-                    fullWidth
-                    multiline={field.multiline}
-                    rows={field.multiline ? 4 : 1}
-                    value={formData[field.key]}
-                    onChange={(e) => handleFieldChange(field.key, e)}
-                    placeholder={field.placeholder}
-                    variant="outlined"
-                    sx={{
-                      '& .MuiOutlinedInput-root': {
-                        backgroundColor: 'rgba(0, 0, 0, 0.2)',
-                        '& fieldset': {
-                          borderColor: 'transparent',
-                        },
-                        '&:hover fieldset': {
-                          borderColor: 'rgba(139, 92, 246, 0.3)',
-                        },
-                        '&.Mui-focused fieldset': {
-                          borderColor: '#8b5cf6',
-                          borderWidth: 2,
-                        },
-                      },
-                    }}
-                  />
-                </CardContent>
-              </Card>
-            </Grid>
-          ))}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    '& .MuiInputBase-input': {
+                      color: 'rgba(255, 255, 255, 0.9) !important',
+                      WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                    },
+                    '& input': {
+                      color: 'rgba(255, 255, 255, 0.9) !important',
+                      WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                    },
+                    '& fieldset': {
+                      borderColor: formData.company_name ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#8b5cf6',
+                    },
+                  },
+                  '& .MuiInputBase-input::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5) !important',
+                    opacity: 1,
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.5) !important',
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
+          
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                position: 'relative',
+                '&::after': formData.website ? {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 3,
+                  height: '100%',
+                  background: '#10b981',
+                  borderRadius: '0 8px 8px 0',
+                } : {},
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <PublicIcon sx={{ fontSize: 20, color: formData.website ? '#8b5cf6' : 'rgba(255, 255, 255, 0.4)' }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.875rem' }}>
+                  Website *
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                value={formData.website}
+                onChange={(e) => handleFieldChange('website', e)}
+                placeholder="https://example.com"
+                variant="outlined"
+                size="small"
+                inputProps={{
+                  style: { 
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                  },
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    '& input': {
+                      color: 'rgba(255, 255, 255, 0.9)',
+                    },
+                    '& fieldset': {
+                      borderColor: formData.website ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#8b5cf6',
+                    },
+                  },
+                  '& .MuiInputBase-input::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    opacity: 1,
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
+
+          {/* Row 2: Industry & Founder GitHub */}
+          <Grid item xs={12} md={6}>
+            <Box
+              sx={{
+                position: 'relative',
+                '&::after': formData.industry ? {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 3,
+                  height: '100%',
+                  background: '#10b981',
+                  borderRadius: '0 8px 8px 0',
+                } : {},
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <CategoryIcon sx={{ fontSize: 20, color: formData.industry ? '#8b5cf6' : 'rgba(255, 255, 255, 0.4)' }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.875rem' }}>
+                  Industry *
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                value={formData.industry}
+                onChange={(e) => handleFieldChange('industry', e)}
+                placeholder="e.g., FinTech, SaaS, Healthcare"
+                variant="outlined"
+                size="small"
+                inputProps={{
+                  style: { 
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                  },
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    '& input': {
+                      color: 'rgba(255, 255, 255, 0.9)',
+                    },
+                    '& fieldset': {
+                      borderColor: formData.industry ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#8b5cf6',
+                    },
+                  },
+                  '& .MuiInputBase-input::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    opacity: 1,
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
+
+          <Grid item xs={12} md={6}>
+            <Box>
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <CheckCircleIcon sx={{ fontSize: 20, color: 'rgba(255, 255, 255, 0.4)' }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.875rem', color: 'rgba(255, 255, 255, 0.6)' }}>
+                  Founder GitHub (Optional)
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                value={formData.founder_github}
+                onChange={(e) => handleFieldChange('founder_github', e)}
+                placeholder="https://github.com/username"
+                variant="outlined"
+                size="small"
+                inputProps={{
+                  style: { 
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                  },
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.9)',
+                    '& input': {
+                      color: 'rgba(255, 255, 255, 0.9)',
+                    },
+                    '& fieldset': {
+                      borderColor: 'rgba(255, 255, 255, 0.1)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(139, 92, 246, 0.3)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#8b5cf6',
+                    },
+                  },
+                  '& .MuiInputBase-input::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5)',
+                    opacity: 1,
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
+
+          {/* Row 3: Product Description - Full Width */}
+          <Grid item xs={12}>
+            <Box
+              sx={{
+                position: 'relative',
+                '&::after': formData.product_description ? {
+                  content: '""',
+                  position: 'absolute',
+                  top: 0,
+                  right: 0,
+                  width: 3,
+                  height: '100%',
+                  background: '#10b981',
+                  borderRadius: '0 8px 8px 0',
+                } : {},
+              }}
+            >
+              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mb: 1 }}>
+                <DescriptionIcon sx={{ fontSize: 20, color: formData.product_description ? '#8b5cf6' : 'rgba(255, 255, 255, 0.4)' }} />
+                <Typography variant="subtitle2" sx={{ fontWeight: 600, fontSize: '0.875rem' }}>
+                  Product Description *
+                </Typography>
+              </Box>
+              <TextField
+                fullWidth
+                multiline
+                rows={4}
+                value={formData.product_description}
+                onChange={(e) => handleFieldChange('product_description', e)}
+                placeholder="Describe what your company does, the problem it solves, and your target market..."
+                variant="outlined"
+                inputProps={{
+                  style: { 
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                  },
+                }}
+                sx={{
+                  '& .MuiOutlinedInput-root': {
+                    backgroundColor: 'rgba(0, 0, 0, 0.2)',
+                    color: 'rgba(255, 255, 255, 0.9) !important',
+                    '& .MuiInputBase-input': {
+                      color: 'rgba(255, 255, 255, 0.9) !important',
+                      WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                    },
+                    '& textarea': {
+                      color: 'rgba(255, 255, 255, 0.9) !important',
+                      WebkitTextFillColor: 'rgba(255, 255, 255, 0.9) !important',
+                    },
+                    '& fieldset': {
+                      borderColor: formData.product_description ? 'rgba(139, 92, 246, 0.3)' : 'rgba(255, 255, 255, 0.1)',
+                    },
+                    '&:hover fieldset': {
+                      borderColor: 'rgba(139, 92, 246, 0.4)',
+                    },
+                    '&.Mui-focused fieldset': {
+                      borderColor: '#8b5cf6',
+                    },
+                  },
+                  '& .MuiInputBase-input::placeholder': {
+                    color: 'rgba(255, 255, 255, 0.5) !important',
+                    opacity: 1,
+                    WebkitTextFillColor: 'rgba(255, 255, 255, 0.5) !important',
+                  },
+                }}
+              />
+            </Box>
+          </Grid>
         </Grid>
 
         {error && (
-          <Alert severity="error" sx={{ mt: 3 }}>
+          <Alert severity="error" sx={{ mt: 2 }}>
             {error}
           </Alert>
         )}
 
-        {/* Submit Button */}
-        <Stack spacing={2} sx={{ mt: 4 }}>
+        {/* Submit Button - Compact */}
+        <Stack spacing={1} sx={{ mt: 3 }}>
           <Button
             type="submit"
             variant="contained"
             size="large"
             disabled={loading || progress < 100}
             startIcon={loading ? <CircularProgress size={20} /> : <RocketLaunchIcon />}
+            fullWidth
             sx={{
-              py: 2,
-              fontSize: '1.125rem',
+              py: 1.5,
+              fontSize: '1rem',
               fontWeight: 700,
               borderRadius: 2,
               background: 'linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%)',
@@ -342,7 +487,7 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
               },
             }}
           >
-            {loading ? 'Launching Analysis...' : 'Start 8-Agent Analysis'}
+            {loading ? 'Launching Analysis...' : 'Start Analysis'}
           </Button>
           
           <Typography
@@ -350,7 +495,7 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
             sx={{
               textAlign: 'center',
               color: 'rgba(255, 255, 255, 0.5)',
-              fontSize: '0.875rem',
+              fontSize: '0.75rem',
             }}
           >
             {progress < 100 
