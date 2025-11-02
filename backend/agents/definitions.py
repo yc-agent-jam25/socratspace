@@ -16,6 +16,8 @@ from backend.agents.prompts import (
 from backend.tools.apify_tool import ApifyScraperTool
 from backend.tools.github_tool import GitHubAnalyzerTool
 from backend.tools.hackernews_tool import HackerNewsSearchTool
+from backend.tools.exa_tool import ExaSearchTool
+from backend.tools.gcalendar_tool import GoogleCalendarTool
 
 # ========== RESEARCH AGENTS (Phase 1) ==========
 
@@ -131,14 +133,19 @@ def create_bull_agent() -> Agent:
 
     Configuration:
     - allow_delegation=True: Can ask research agents for more evidence
-    - tools=[]: No direct tools, uses research findings
+    - tools: ALL tools (can verify claims and gather supporting evidence)
     - max_iter=4: Slightly fewer iterations
     """
     return Agent(
         role='Bull Advocate',
         goal='Build the strongest case FOR investing with compelling evidence',
         backstory=BULL_AGENT_PROMPT,
-        tools=[],
+        tools=[
+            ApifyScraperTool(),
+            HackerNewsSearchTool(),
+            GitHubAnalyzerTool(),
+            ExaSearchTool()
+        ],
         verbose=True,
         allow_delegation=True,
         max_iter=4
@@ -151,14 +158,19 @@ def create_bear_agent() -> Agent:
 
     Configuration:
     - allow_delegation=True: Can ask research agents for more evidence
-    - tools=[]: No direct tools, uses research findings
+    - tools: ALL tools (can find counter-evidence and verify claims)
     - max_iter=4: Slightly fewer iterations
     """
     return Agent(
         role='Bear Advocate',
         goal='Build the strongest case AGAINST investing with rigorous evidence',
         backstory=BEAR_AGENT_PROMPT,
-        tools=[],
+        tools=[
+            ApifyScraperTool(),
+            HackerNewsSearchTool(),
+            GitHubAnalyzerTool(),
+            ExaSearchTool()
+        ],
         verbose=True,
         allow_delegation=True,
         max_iter=4
@@ -173,14 +185,18 @@ def create_lead_partner() -> Agent:
 
     Configuration:
     - allow_delegation=False: Makes decision independently
-    - tools=[]: No tools needed, calendar events in JSON output
+    - tools: Google Calendar (optional - can create events after decision)
     - max_iter=3: Quick decision making
+
+    Note: Primary output is structured JSON (InvestmentDecision Pydantic model).
+    GCalendarTool is available for optionally creating calendar events in Google Calendar
+    after making the decision, but calendar_events should still be in JSON output.
     """
     return Agent(
         role='Lead Investment Partner',
         goal='Make final investment decision (PASS/MAYBE/INVEST) based on all evidence',
         backstory=LEAD_PARTNER_PROMPT,
-        tools=[],
+        tools=[GoogleCalendarTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=3

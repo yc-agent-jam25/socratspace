@@ -54,7 +54,7 @@ async def generate_mock_events(session_id: str, request: Request):
         if await request.is_disconnected():
             return
         
-        yield f"data: {json.dumps({
+        event_data = {
             'type': 'agent_message',
             'data': {
                 'agent': agent_id,
@@ -62,7 +62,8 @@ async def generate_mock_events(session_id: str, request: Request):
                 'message_type': message_type,
                 'timestamp': int(datetime.now().timestamp() * 1000)
             }
-        })}\n\n"
+        }
+        yield f"data: {json.dumps(event_data)}\n\n"
         
         # Stagger messages for realism
         await asyncio.sleep(0.5)
@@ -88,7 +89,7 @@ async def generate_mock_events(session_id: str, request: Request):
         if await request.is_disconnected():
             return
         
-        yield f"data: {json.dumps({
+        event_data = {
             'type': 'agent_message',
             'data': {
                 'agent': agent_id,
@@ -96,7 +97,8 @@ async def generate_mock_events(session_id: str, request: Request):
                 'message_type': message_type,
                 'timestamp': int(datetime.now().timestamp() * 1000)
             }
-        })}\n\n"
+        }
+        yield f"data: {json.dumps(event_data)}\n\n"
         
         await asyncio.sleep(0.6)
     
@@ -116,7 +118,7 @@ async def generate_mock_events(session_id: str, request: Request):
         if await request.is_disconnected():
             return
         
-        yield f"data: {json.dumps({
+        event_data = {
             'type': 'agent_message',
             'data': {
                 'agent': agent_id,
@@ -124,7 +126,8 @@ async def generate_mock_events(session_id: str, request: Request):
                 'message_type': message_type,
                 'timestamp': int(datetime.now().timestamp() * 1000)
             }
-        })}\n\n"
+        }
+        yield f"data: {json.dumps(event_data)}\n\n"
         
         await asyncio.sleep(1)
     

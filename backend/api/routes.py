@@ -1,6 +1,6 @@
 """
 REST API routes for VC Council
-TODO: Implement API endpoints
+Handles analysis requests and status polling
 """
 
 from fastapi import APIRouter, HTTPException
@@ -40,39 +40,75 @@ async def start_analysis(request: AnalysisRequest):
     """
     Start a new investment analysis
 
-    Returns session_id that frontend can use for SSE connection
+    Args:
+        request: Analysis request with company data
+
+    Returns:
+        AnalysisResponse with session_id for tracking
+        Frontend should connect to SSE endpoint /api/sse/{session_id} for real-time updates
+
+    Raises:
+        HTTPException: If analysis fails to start
     """
     try:
         logger.info(f"Starting analysis for {request.company_name}")
-        
-        # Call orchestrator to start analysis
+
+        # Start analysis via orchestrator
         session_id = await orchestrator.start_analysis(request.dict())
-        
+
         logger.info(f"Analysis started with session: {session_id}")
-        
+
         return AnalysisResponse(
             status="started",
             session_id=session_id,
-            message=f"Analysis started for {request.company_name}"
+            message=f"Analysis started for {request.company_name}. Connect to SSE endpoint /api/sse/{session_id} for real-time updates."
         )
+
     except Exception as e:
-        logger.error(f"Error starting analysis: {str(e)}", exc_info=True)
-        raise HTTPException(status_code=500, detail=str(e))
+        logger.error(f"Failed to start analysis: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to start analysis: {str(e)}")
 
 @router.get("/analysis/{session_id}")
 async def get_analysis_status(session_id: str):
     """
     Get analysis status and results
+
+    Args:
+        session_id: Session ID from start_analysis
+
+    Returns:
+        dict with status, result, and metadata
+
+    Raises:
+        HTTPException: If session not found
     """
     try:
+        logger.info(f"Fetching analysis status for {session_id}")
+
         result = await orchestrator.get_result(session_id)
-        
+
         if result is None:
             raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
-        
+
         return result
+
     except HTTPException:
         raise
     except Exception as e:
         logger.error(f"Error getting analysis status: {str(e)}", exc_info=True)
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@router.get("/health")
+async def health_check():
+    """
+    Health check endpoint for orchestrator
+
+    Returns:
+        dict with health status and active session count
+    """
+    return {
+        "status": "healthy",
+        "service": "vc-council-orchestrator",
+        "active_sessions": orchestrator.get_session_count()
+    }
