@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Agent, AgentMessage } from '../lib/types';
+import type { Agent, AgentMessage } from '../lib/types';
 
 interface AgentCardProps {
   agent: Agent;

@@ -5,7 +5,7 @@
  */
 
 import React, { useEffect, useState } from 'react';
-import { CompanyData, AgentMessage, Decision, Agent } from '../lib/types';
+import type { CompanyData, AgentMessage, Decision, Agent } from '../lib/types';
 import useWebSocket from '../hooks/useWebSocket';
 import AgentCard from './AgentCard';
 import PhaseIndicator from './PhaseIndicator';
@@ -29,9 +29,9 @@ const agents: Agent[] = [
 ];
 
 const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onReset }) => {
-  const [currentPhase, setCurrentPhase] = useState<string>('research');
-  const [agentMessages, setAgentMessages] = useState<AgentMessage[]>([]);
-  const [decision, setDecision] = useState<Decision | null>(null);
+  const [currentPhase, _setCurrentPhase] = useState<string>('research');
+  const [agentMessages, _setAgentMessages] = useState<AgentMessage[]>([]);
+  const [decision, _setDecision] = useState<Decision | null>(null);
 
   // TODO: Connect WebSocket
   const { lastMessage } = useWebSocket(`${import.meta.env.VITE_WS_URL || 'ws://localhost:8000'}/ws`);

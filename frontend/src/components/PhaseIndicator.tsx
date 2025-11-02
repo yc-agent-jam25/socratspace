@@ -14,12 +14,6 @@ const PhaseIndicator: React.FC<PhaseIndicatorProps> = ({ currentPhase }) => {
   // TODO: Implement stepper/progress indicator
   // Phases: research -> debate -> decision
 
-  const phases = [
-    { id: 'research', label: 'Research' },
-    { id: 'debate', label: 'Debate' },
-    { id: 'decision', label: 'Decision' }
-  ];
-
   return (
     <div>
       <h3>TODO: Phase Indicator</h3>
