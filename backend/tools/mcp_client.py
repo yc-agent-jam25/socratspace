@@ -1,7 +1,7 @@
 """
 Metorial MCP Client
 Handles all communication with Metorial MCP platform using the Metorial SDK
-Supports OAuth authentication for services that require it (Apify, Google Calendar, etc.)
+Supports OAuth authentication for services that require it (Google Calendar, Google Drive, etc.)
 """
 
 from metorial import Metorial
@@ -25,7 +25,6 @@ class MetorialClient:
 
         # Map friendly names to deployment IDs
         self.deployment_ids = {
-            "apify": settings.mcp_apify_id,
             "github": settings.mcp_github_id,
             "hackernews": settings.mcp_hackernews_id,
             "exa": settings.mcp_exa_id,
@@ -35,11 +34,10 @@ class MetorialClient:
 
         # Track which MCPs require OAuth authentication
         # Based on Metorial documentation and actual behavior:
-        # - Apify, Google Calendar, Google Drive require OAuth
+        # - Google Calendar, Google Drive require OAuth
         # - GitHub may require OAuth depending on Metorial deployment configuration
         #   (Some GitHub MCP deployments require OAuth for API access)
         self.oauth_required = {
-            "apify": True,
             "gcalendar": True,
             "gdrive": True,
             "github": True,  # GitHub MCP typically requires OAuth for API access
@@ -56,7 +54,7 @@ class MetorialClient:
         Create an OAuth session for an MCP that requires authentication
 
         Args:
-            mcp_name: Name of MCP (apify, gcalendar, gdrive)
+            mcp_name: Name of MCP (gcalendar, gdrive, github)
             auto_wait: If True, wait for OAuth completion automatically. If False, return URL for manual completion.
 
         Returns:
@@ -133,7 +131,7 @@ class MetorialClient:
         Call a Metorial MCP tool via the run() method
 
         Args:
-            mcp_name: Name of MCP (apify, github, hackernews, exa, etc.)
+            mcp_name: Name of MCP (github, hackernews, exa, gcalendar, etc.)
             tool_name: Descriptive tool name (for logging only)
             parameters: Tool parameters
             natural_message: Optional natural language instruction (if provided, uses this instead of tool_name)

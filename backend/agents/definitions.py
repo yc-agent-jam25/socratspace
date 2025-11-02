@@ -13,7 +13,6 @@ from backend.agents.prompts import (
     BEAR_AGENT_PROMPT,
     LEAD_PARTNER_PROMPT
 )
-from backend.tools.apify_tool import ApifyScraperTool
 from backend.tools.github_tool import GitHubAnalyzerTool
 from backend.tools.hackernews_tool import HackerNewsSearchTool
 from backend.tools.exa_tool import ExaSearchTool
@@ -29,13 +28,13 @@ def create_market_researcher() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: ApifyScraperTool, HackerNewsSearchTool
+    - tools: HackerNewsSearchTool
     """
     return Agent(
         role='Market Research Specialist',
         goal='Research and analyze market size, growth, competitive landscape, and sentiment',
         backstory=MARKET_RESEARCHER_PROMPT,
-        tools=[HackerNewsSearchTool()],  # Apify temporarily disabled for OAuth-free testing
+        tools=[HackerNewsSearchTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -50,13 +49,13 @@ def create_founder_evaluator() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: GitHubAnalyzerTool, ApifyScraperTool
+    - tools: GitHubAnalyzerTool
     """
     return Agent(
         role='Founder Evaluator',
         goal='Assess founder background, technical skills, and execution ability',
         backstory=FOUNDER_EVALUATOR_PROMPT,
-        tools=[GitHubAnalyzerTool()],  # Apify temporarily disabled for OAuth-free testing
+        tools=[GitHubAnalyzerTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -71,13 +70,13 @@ def create_product_critic() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: ApifyScraperTool
+    - tools: [] (works primarily with provided data)
     """
     return Agent(
         role='Product Critic',
         goal='Evaluate product defensibility, moat strength, and competitive threats',
         backstory=PRODUCT_CRITIC_PROMPT,
-        tools=[],  # Apify temporarily disabled for OAuth-free testing
+        tools=[],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -113,13 +112,13 @@ def create_risk_assessor() -> Agent:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: HackerNewsSearchTool, ApifyScraperTool
+    - tools: HackerNewsSearchTool
     """
     return Agent(
         role='Risk Assessor',
         goal='Identify catastrophic failure modes, regulatory risks, and red flags',
         backstory=RISK_ASSESSOR_PROMPT,
-        tools=[HackerNewsSearchTool()],  # Apify temporarily disabled for OAuth-free testing
+        tools=[HackerNewsSearchTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -141,7 +140,6 @@ def create_bull_agent() -> Agent:
         goal='Build the strongest case FOR investing with compelling evidence',
         backstory=BULL_AGENT_PROMPT,
         tools=[
-            # ApifyScraperTool(),  # Temporarily disabled for OAuth-free testing
             HackerNewsSearchTool(),
             GitHubAnalyzerTool(),
             ExaSearchTool()
@@ -166,7 +164,6 @@ def create_bear_agent() -> Agent:
         goal='Build the strongest case AGAINST investing with rigorous evidence',
         backstory=BEAR_AGENT_PROMPT,
         tools=[
-            # ApifyScraperTool(),  # Temporarily disabled for OAuth-free testing
             HackerNewsSearchTool(),
             GitHubAnalyzerTool(),
             ExaSearchTool()
