@@ -18,15 +18,19 @@ class Settings(BaseSettings):
     anthropic_api_key: Optional[str] = None
     llm_provider: str = "openai"
     llm_model: str = "gpt-4-turbo-preview"
+    model: Optional[str] = None  # Alias/shortcut for llm_model (deprecated, use llm_model)
+
+    # Mock Mode (for testing)
+    mock_mode: bool = False
 
     # Metorial Configuration
     metorial_api_key: Optional[str] = "placeholder"
     metorial_base_url: str = "https://api.metorial.com/v1"
 
     # MCP Deployment IDs
-    mcp_apify_id: str
-    mcp_github_id: str
-    mcp_hackernews_id: str
+    mcp_apify_id: Optional[str] = None
+    mcp_github_id: Optional[str] = None
+    mcp_hackernews_id: Optional[str] = None
     mcp_exa_id: Optional[str] = None  # Bonus: Exa search engine
     mcp_gdrive_id: Optional[str] = None
     mcp_gcalendar_id: Optional[str] = None
@@ -43,7 +47,8 @@ class Settings(BaseSettings):
 
     model_config = ConfigDict(
         env_file=".env",  # Load from backend/.env
-        case_sensitive=False
+        case_sensitive=False,
+        extra='ignore'  # Ignore extra fields from environment (like MODEL, MOCK_MODE)
     )
 
     def validate_llm_config(self):

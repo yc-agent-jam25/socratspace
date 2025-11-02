@@ -1,9 +1,9 @@
 /**
  * WebSocket hook for real-time updates
- * TODO: Implement WebSocket connection management
+ * Currently in mock mode for frontend-only development
  */
 
-import { useEffect, useState, useRef } from 'react';
+import { useState } from 'react';
 
 interface UseWebSocketReturn {
   lastMessage: MessageEvent | null;
@@ -11,17 +11,37 @@ interface UseWebSocketReturn {
   readyState: number;
 }
 
+/**
+ * Mock WebSocket hook
+ * Returns a mock connection state for development
+ * Will be replaced with real WebSocket implementation when connecting to backend
+ */
+const useWebSocket = (_url: string): UseWebSocketReturn => {
+  const [lastMessage] = useState<MessageEvent | null>(null);
+  const [readyState] = useState<number>(WebSocket.OPEN); // Mock as always connected
+
+  const sendMessage = (_message: string) => {
+    // Mock implementation - does nothing
+  };
+
+  return { lastMessage, sendMessage, readyState };
+};
+
+export default useWebSocket;
+
+// For future real implementation:
+/*
+import { useEffect, useState, useRef } from 'react';
+
 const useWebSocket = (url: string): UseWebSocketReturn => {
   const [lastMessage, setLastMessage] = useState<MessageEvent | null>(null);
   const [readyState, setReadyState] = useState<number>(WebSocket.CONNECTING);
   const ws = useRef<WebSocket | null>(null);
 
   useEffect(() => {
-    // TODO: Create WebSocket connection
     ws.current = new WebSocket(url);
 
     ws.current.onopen = () => {
-      console.log('WebSocket connected');
       setReadyState(WebSocket.OPEN);
     };
 
@@ -34,11 +54,9 @@ const useWebSocket = (url: string): UseWebSocketReturn => {
     };
 
     ws.current.onclose = () => {
-      console.log('WebSocket disconnected');
       setReadyState(WebSocket.CLOSED);
     };
 
-    // Cleanup on unmount
     return () => {
       ws.current?.close();
     };
@@ -52,5 +70,4 @@ const useWebSocket = (url: string): UseWebSocketReturn => {
 
   return { lastMessage, sendMessage, readyState };
 };
-
-export default useWebSocket;
+*/
