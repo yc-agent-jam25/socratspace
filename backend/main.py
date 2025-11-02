@@ -9,6 +9,7 @@ from fastapi.responses import StreamingResponse
 from config import settings
 from api.routes import router
 from api.sse import sse_manager  # IMPORTANT: Use same import path as orchestrator
+from api.oauth_routes import router as oauth_router  # OAuth routes for GitHub/Calendar auth
 from api.sse_test import create_test_sse_endpoint, generate_mock_events
 import logging
 
@@ -38,6 +39,7 @@ app.add_middleware(
 
 # Include REST routes
 app.include_router(router, prefix="/api")
+app.include_router(oauth_router, prefix="/api")  # OAuth authentication endpoints
 
 # CORS preflight for SSE
 @app.options("/api/sse/{session_id}")

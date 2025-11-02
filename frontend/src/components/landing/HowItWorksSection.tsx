@@ -19,28 +19,35 @@ const steps: Step[] = [
   {
     number: '01',
     title: 'Submit Company Info',
-    description: 'Enter basic details about the startup: name, industry, stage, and pitch deck URL.',
+    description: 'Enter basic details about the startup: name, website, founder GitHub, industry, and product description.',
     icon: '📝',
     color: '#3b82f6',
   },
   {
     number: '02',
-    title: 'Research Phase',
-    description: 'Specialized agents analyze market, founders, product, financials, and risks simultaneously.',
-    icon: '🔍',
+    title: 'Market Discussion',
+    description: 'Specialized agents research the market, then Bull and Bear debate the opportunity. Risk Assessor flags key concerns.',
+    icon: '📊',
     color: '#10b981',
   },
   {
     number: '03',
-    title: 'Bull vs Bear Debate',
-    description: 'Optimistic and skeptical agents present opposing arguments. Watch the deliberation unfold.',
-    icon: '⚖️',
+    title: 'Team & Product Rounds',
+    description: 'Agents evaluate founders and products through sequential discussions. Each round has focused debate before moving on.',
+    icon: '👥',
     color: '#f59e0b',
   },
   {
     number: '04',
+    title: 'Financial Analysis',
+    description: 'Financial Analyst reviews metrics, Bull and Bear argue viability, Risk Assessor identifies financial red flags.',
+    icon: '💰',
+    color: '#ec4899',
+  },
+  {
+    number: '05',
     title: 'Final Decision',
-    description: 'Lead Partner reviews all evidence and delivers: Invest, Maybe, or Pass with detailed reasoning.',
+    description: 'Lead Partner synthesizes all 16 discussion tasks and delivers: Invest, Maybe, or Pass with comprehensive reasoning.',
     icon: '✅',
     color: '#8b5cf6',
   },
@@ -84,7 +91,7 @@ const HowItWorksSection: React.FC = () => {
               letterSpacing: '-0.02em',
             }}
           >
-            Four Phases to Better Decisions
+            Five Rounds of Structured Analysis
           </Typography>
         </Box>
 

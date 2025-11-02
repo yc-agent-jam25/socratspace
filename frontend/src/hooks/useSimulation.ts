@@ -8,14 +8,35 @@ import type { Phase, AgentMessage, Decision } from '../lib/types';
 import { simulationService } from '../lib/simulation';
 import { useSSE as useSSEHook } from './useSSE';
 
+/**
+ * Notification interfaces (must match useSSE.ts)
+ */
+
+// Freelancer job notification (for MAYBE decisions with uncertainty)
+interface FreelancerJobData {
+  content: string;
+  company: string;
+  timestamp: string;
+}
+
+// OAuth authentication request (for GitHub/Calendar integrations)
+interface OAuthRequest {
+  mcp_name: string;
+  auth_url: string;
+  oauth_session_id: string;
+  timestamp?: string;
+}
+
 interface UseSimulationReturn {
   phase: Phase;
   messages: AgentMessage[];
   decision: Decision | null;
+  freelancerJob?: FreelancerJobData | null;
   isRunning: boolean;
   elapsedTime: number;
   connectionStatus?: 'connecting' | 'connected' | 'disconnected' | 'error';
   error?: string | null;
+  oauthRequest?: OAuthRequest | null;
   startSimulation: () => void;
   resetSimulation: () => void;
   reconnect?: () => void;
@@ -108,10 +129,12 @@ export const useSimulation = (options: UseSimulationOptions = {}): UseSimulation
     phase,
     messages,
     decision,
+    freelancerJob: shouldUseSSE ? sse.freelancerJob : undefined,
     isRunning,
     elapsedTime,
     connectionStatus: shouldUseSSE ? sse.connectionStatus : undefined,
     error: shouldUseSSE ? sse.error : undefined,
+    oauthRequest: shouldUseSSE ? sse.oauthRequest : undefined,
     startSimulation,
     resetSimulation,
     reconnect: shouldUseSSE ? sse.reconnect : undefined,

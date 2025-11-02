@@ -7,17 +7,45 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import type { Phase, AgentMessage, Decision } from '../lib/types';
 import { normalizeAgentName } from '../lib/agentUtils';
 
+/**
+ * Notification data interfaces
+ */
+
+// Freelancer job notification (for MAYBE decisions with uncertainty)
+interface FreelancerJobData {
+  content: string;
+  company: string;
+  timestamp: string;
+}
+
+// OAuth authentication request (for GitHub/Calendar integrations)
+interface OAuthRequest {
+  mcp_name: string;
+  auth_url: string;
+  oauth_session_id: string;
+  timestamp?: string;
+}
+
 interface UseSSEReturn {
   phase: Phase;
   messages: AgentMessage[];
   decision: Decision | null;
+  freelancerJob: FreelancerJobData | null;
   connectionStatus: 'connecting' | 'connected' | 'disconnected' | 'error';
   error: string | null;
+  oauthRequest: OAuthRequest | null;
   reconnect: () => void;
 }
 
 interface SSEMessage {
-  type: 'phase_change' | 'agent_message' | 'decision' | 'error' | 'ping';
+  type:
+    | 'phase_change'
+    | 'agent_message'
+    | 'decision'
+    | 'error'
+    | 'ping'
+    | 'freelancer_job_notification'  // External research job posting
+    | 'oauth_request';                // OAuth authentication request
   data: any;
 }
 
@@ -31,9 +59,10 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
   const [phase, setPhase] = useState<Phase>('idle');
   const [messages, setMessages] = useState<AgentMessage[]>([]);
   const [decision, setDecision] = useState<Decision | null>(null);
+  const [freelancerJob, setFreelancerJob] = useState<FreelancerJobData | null>(null);
+  const [oauthRequest, setOAuthRequest] = useState<OAuthRequest | null>(null);
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>('disconnected');
   const [error, setError] = useState<string | null>(null);
-  
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reconnectAttemptsRef = useRef<number>(0);
@@ -128,16 +157,27 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
               setPhase('completed');
               isCompletedRef.current = true; // Mark as completed
               break;
-            
+
             case 'error':
               setError(sseMessage.data.message || 'An error occurred');
               setConnectionStatus('error');
               break;
-            
+
             case 'ping':
               // Heartbeat - just acknowledge, no action needed
               break;
-            
+
+            case 'freelancer_job_notification':
+              // External research job notification (for MAYBE decisions with uncertainty)
+              setFreelancerJob(sseMessage.data as FreelancerJobData);
+              console.log('[SSE] Freelancer job notification received:', sseMessage.data);
+              break;
+
+            case 'oauth_request':
+              // OAuth authentication required (e.g., for GitHub/Calendar integrations)
+              console.log('[SSE] OAuth request received:', sseMessage.data);
+              setOAuthRequest(sseMessage.data);
+              break;
             default:
               console.warn('Unknown SSE message type:', sseMessage.type);
           }
@@ -244,7 +284,9 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
   return {
     phase,
     messages,
+    oauthRequest,
     decision,
+    freelancerJob,
     connectionStatus,
     error,
     reconnect,

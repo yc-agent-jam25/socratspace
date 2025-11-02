@@ -46,8 +46,10 @@ class MetorialClient:
         }
 
         # Cache for OAuth sessions (mcp_name -> oauth_session)
+        # Also cache pending sessions by session_id for status checking
         # In production, you might want to persist these (e.g., in database)
         self._oauth_sessions: Dict[str, Any] = {}
+        self._pending_oauth_sessions: Dict[str, Any] = {}  # session_id -> session object
 
     async def create_oauth_session(self, mcp_name: str, auto_wait: bool = True) -> Dict[str, Any]:
         """
@@ -96,18 +98,26 @@ class MetorialClient:
             print(f"   Please visit this URL to authenticate:")
             print(f"   {oauth_session.url}\n")
             print("⏳ Waiting for OAuth completion...")
-
+            
+            # Note: In async context during calendar creation, we can't send SSE easily
+            # So we'll use auto_wait=False and handle it via polling in orchestrator
+            # For now, just wait (will be handled by calling code)
             await self.metorial.oauth.wait_for_completion([oauth_session])
             print("✅ OAuth session completed!")
 
             # Cache the session
             self._oauth_sessions[mcp_name] = oauth_session
+            # Remove from pending
+            if oauth_session.id in self._pending_oauth_sessions:
+                del self._pending_oauth_sessions[oauth_session.id]
             logger.info(f"OAuth session stored for {mcp_name}. Session ID: {oauth_session.id}")
             logger.info(f"OAuth session object: {oauth_session}")
             logger.info(f"OAuth session attributes: {dir(oauth_session)}")
             return {"session": oauth_session, "url": None, "completed": True}
         else:
             # Return URL for manual completion
+            # Store pending session for status checking
+            self._pending_oauth_sessions[oauth_session.id] = oauth_session
             return {
                 "session": oauth_session,
                 "url": oauth_session.url,
@@ -247,6 +257,9 @@ class _MCPClientProxy:
         if self._instance is None:
             self._instance = MetorialClient()
         return self._instance
+    
+    async def create_oauth_session(self, *args, **kwargs):
+        return await self._ensure_instance().create_oauth_session(*args, **kwargs)
     
     def call_mcp(self, *args, **kwargs):
         return self._ensure_instance().call_mcp(*args, **kwargs)
