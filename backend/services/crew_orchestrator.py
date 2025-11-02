@@ -63,7 +63,8 @@ class VCCouncilOrchestrator:
 
     def __init__(self):
         self.sessions = {}  # Store active sessions
-        self.current_task_agents = {}  # Map session_id -> current agent name
+        self.task_to_agent_map = {}  # Map session_id -> list of agent role names (one per task, 17 total)
+        self.current_task_index = {}  # Map session_id -> current task index (0-16)
 
     async def start_analysis(self, company_data: dict) -> str:
         """
@@ -240,18 +241,26 @@ class VCCouncilOrchestrator:
 
             logger.info(f"Created {len(all_tasks)} sequential tasks")
 
+            # ==========================================
+            # BUILD TASK-TO-AGENT MAPPING
+            # Extract agent role from each task for step_callback attribution
+            # ==========================================
+            task_agent_map = []
+            for i, task in enumerate(all_tasks):
+                agent_role = task.agent.role if hasattr(task, 'agent') and hasattr(task.agent, 'role') else "unknown"
+                task_agent_map.append(agent_role)
+                logger.info(f"Task {i+1} mapped to agent: {agent_role}")
+
+            # Store mapping for this session
+            self.task_to_agent_map[session_id] = task_agent_map
+            self.current_task_index[session_id] = 0  # Start at task 0
+            logger.info(f"✅ Task-to-agent mapping created for session {session_id}: {len(task_agent_map)} tasks mapped")
+
             # Create crew with thread-safe callbacks for SSE broadcasting
             def step_callback_sync(step_output):
-                """Thread-safe wrapper for async step callback"""
+                """Thread-safe wrapper for async step callback (agent activity)"""
                 asyncio.run_coroutine_threadsafe(
                     self._step_callback(session_id, step_output),
-                    loop
-                )
-
-            def task_callback_sync(task_output):
-                """Thread-safe wrapper for async task callback - tracks current agent"""
-                asyncio.run_coroutine_threadsafe(
-                    self._task_callback(session_id, task_output),
                     loop
                 )
 
@@ -260,8 +269,7 @@ class VCCouncilOrchestrator:
                 tasks=all_tasks,
                 process=Process.sequential,  # Run tasks in order
                 verbose=True,
-                step_callback=step_callback_sync,
-                task_callback=task_callback_sync  # Track which agent is executing
+                step_callback=step_callback_sync
             )
 
             logger.info("Starting 17-task sequential debate...")
@@ -337,6 +345,13 @@ class VCCouncilOrchestrator:
             await sse_manager.send_decision(session_id, decision)
             await sse_manager.send_phase_change(session_id, "completed")
 
+            # Cleanup task tracking state
+            if session_id in self.task_to_agent_map:
+                del self.task_to_agent_map[session_id]
+            if session_id in self.current_task_index:
+                del self.current_task_index[session_id]
+            logger.info(f"[CLEANUP] Removed task tracking for completed session {session_id}")
+
             logger.info(f"Analysis completed: {decision.get('decision', 'UNKNOWN')}")
 
         except Exception as e:
@@ -344,6 +359,13 @@ class VCCouncilOrchestrator:
             self.sessions[session_id]["status"] = "failed"
             self.sessions[session_id]["error"] = str(e)
             self.sessions[session_id]["failed_at"] = datetime.now().isoformat()
+
+            # Cleanup task tracking state
+            if session_id in self.task_to_agent_map:
+                del self.task_to_agent_map[session_id]
+            if session_id in self.current_task_index:
+                del self.current_task_index[session_id]
+            logger.info(f"[CLEANUP] Removed task tracking for failed session {session_id}")
 
             # Broadcast error via SSE
             try:
@@ -366,101 +388,61 @@ class VCCouncilOrchestrator:
             step_output: Step output from CrewAI (contains agent and message info)
         """
         try:
-            # Debug: Print step output details
+            # Look up current agent from task-to-agent mapping
+            task_index = self.current_task_index.get(session_id, 0)
+            task_map = self.task_to_agent_map.get(session_id, [])
+            agent_name = task_map[task_index] if task_index < len(task_map) else "unknown"
+
             output_type = type(step_output).__name__
-            print(f"\n{'='*60}")
-            print(f"[STEP CALLBACK DEBUG] Type: {output_type}")
 
-            # Print all attributes
-            attrs = [attr for attr in dir(step_output) if not attr.startswith('_')]
-            print(f"[STEP CALLBACK DEBUG] Attributes: {attrs}")
+            logger.info(f"[STEP CALLBACK] Type: {output_type}, Task: {task_index+1}/17, Agent: {agent_name}")
 
-            # Print repr
-            print(f"[STEP CALLBACK DEBUG] Repr: {repr(step_output)[:500]}")
-
-            logger.info(f"Step callback received type: {output_type}")
-
-            # Extract agent name and message from various CrewAI output types
-            agent_name = "unknown"
+            # Extract and filter messages for curated UX (medium detail)
             message = None
+            message_type = "step"
 
-            # Try to extract agent name from common attributes
-            if hasattr(step_output, 'agent'):
-                agent_obj = step_output.agent
-                print(f"[AGENT EXTRACTION] Found agent attribute, type: {type(agent_obj).__name__}")
-                print(f"[AGENT EXTRACTION] Agent repr: {repr(agent_obj)[:300]}")
-
-                if hasattr(agent_obj, 'role'):
-                    agent_name = agent_obj.role
-                    print(f"[AGENT EXTRACTION] ✅ Extracted from agent.role: {agent_name}")
-                elif isinstance(agent_obj, str):
-                    agent_name = agent_obj
-                    print(f"[AGENT EXTRACTION] ✅ Agent is string: {agent_name}")
-                else:
-                    print(f"[AGENT EXTRACTION] ❌ Agent has no 'role' attribute")
-                    agent_attrs = [a for a in dir(agent_obj) if not a.startswith('_')]
-                    print(f"[AGENT EXTRACTION] Agent attributes: {agent_attrs}")
-            else:
-                print(f"[AGENT EXTRACTION] No 'agent' attribute found")
-
-            # Method 2: Try task.agent
-            if agent_name == "unknown" and hasattr(step_output, 'task'):
-                print(f"[AGENT EXTRACTION] Trying task.agent...")
-                task = step_output.task
-                if hasattr(task, 'agent') and hasattr(task.agent, 'role'):
-                    agent_name = task.agent.role
-                    print(f"[AGENT EXTRACTION] ✅ Extracted from task.agent.role: {agent_name}")
-
-            # Final status
-            if agent_name == "unknown":
-                print(f"[AGENT EXTRACTION] ❌ FAILED - Agent name still unknown")
-            else:
-                print(f"[AGENT EXTRACTION] ✅ SUCCESS - Agent name: {agent_name}")
-
-            print(f"{'='*60}\n")
-
-            # Extract message based on output type
             if output_type == 'AgentFinish':
-                # AgentFinish - agent completed task with final answer
-                if hasattr(step_output, 'return_values') and isinstance(step_output.return_values, dict):
-                    output_text = step_output.return_values.get('output', '')
-                    message = f"✅ Agent Complete: {str(output_text)[:500]}"
-                else:
-                    message = f"✅ Agent Complete"
-            elif hasattr(step_output, 'thought'):
-                # AgentAction - has thought + tool usage
-                message = f"💭 Thinking: {step_output.thought}"
-            elif hasattr(step_output, 'result'):
-                # ToolResult - has result from tool
-                result_str = str(step_output.result)[:500]  # Limit length
-                message = f"🔧 Tool Result: {result_str}"
-            elif hasattr(step_output, 'raw'):
-                # TaskOutput - final task output
-                message = f"✅ Task Complete: {str(step_output.raw)[:500]}"
-            elif hasattr(step_output, 'output'):
-                message = str(step_output.output)[:500]
-            elif isinstance(step_output, dict):
-                message = step_output.get('output', str(step_output)[:500])
-            else:
-                # Fallback - convert to string
-                message_str = str(step_output)[:500]
-                if len(message_str.strip()) > 0:
-                    message = f"📝 {message_str}"
-                else:
-                    message = None
+                # ✅ SHOW: Final conclusions (user wants to see this)
+                if hasattr(step_output, 'output'):
+                    output_text = str(step_output.output)
+                    # Only show substantial conclusions (not empty/error messages)
+                    if len(output_text) > 100:
+                        message = f"✅ {output_text[:800]}"  # Longer for conclusions
+                        message_type = "conclusion"
+                        logger.info(f"[STEP CALLBACK] Broadcasting conclusion ({len(output_text)} chars)")
+
+            elif hasattr(step_output, 'thought') and step_output.thought:
+                # ✅ SHOW: Agent reasoning (user wants to see thoughts)
+                thought_text = str(step_output.thought)
+                # Filter out noisy/repetitive thoughts
+                if len(thought_text) > 20 and not thought_text.startswith("I tried reusing"):
+                    message = f"💭 {thought_text[:500]}"
+                    message_type = "thought"
+                    logger.info(f"[STEP CALLBACK] Broadcasting thought ({len(thought_text)} chars)")
+
+            # ❌ SKIP: Tool results (too noisy for medium detail)
+            # ❌ SKIP: Other step types (TaskOutput, dict, etc.)
+            # Only show meaningful thoughts and conclusions
 
             # Broadcast to frontend via SSE if we have a message
             if message and len(message.strip()) > 0:
-                logger.info(f"Broadcasting SSE to session {session_id}: [{agent_name}] {message[:80]}...")
                 await sse_manager.send_agent_message(
                     session_id,
                     agent_name,
                     message,
-                    "step"
+                    message_type  # Use dynamic message_type (thought/conclusion/step)
                 )
-                logger.info(f"✅ SSE broadcast successful for session {session_id}")
+                logger.info(f"[STEP CALLBACK] ✅ Broadcasted {message_type} to frontend")
+
+                # Track task progression: AgentFinish with conclusion = task completed
+                if output_type == 'AgentFinish' and message_type == "conclusion":
+                    current_index = self.current_task_index.get(session_id, 0)
+                    if current_index < 16:  # Don't increment beyond task 17 (index 16)
+                        self.current_task_index[session_id] = current_index + 1
+                        logger.info(f"[TASK PROGRESSION] Task {current_index+1} completed. Moving to task {current_index+2}/17")
             else:
-                logger.warning(f"⚠️ Step callback: No message to broadcast (type: {output_type})")
+                # Silently skip - this is expected for tool results and other filtered steps
+                pass
 
         except Exception as e:
             logger.error(f"❌ Step callback error: {str(e)}", exc_info=True)
