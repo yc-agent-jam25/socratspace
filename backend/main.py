@@ -72,15 +72,15 @@ async def sse_endpoint(session_id: str, request: Request):
     Currently uses test endpoint for mock events.
     """
     logger.info(f"SSE connection requested for session: {session_id}")
-    
-    # Use test endpoint for now (generates mock events)
-    # TODO: Replace with real orchestrator when ready:
-    # event_generator = sse_manager.stream_events(session_id, request)
-    
+
     # Get origin from request
     origin = request.headers.get("origin", "*")
-    
-    event_generator = generate_mock_events(session_id, request)
+
+    # Use real SSE manager connected to orchestrator
+    event_generator = sse_manager.stream_events(session_id, request)
+
+    # Mock implementation (disabled):
+    # event_generator = generate_mock_events(session_id, request)
     
     response = StreamingResponse(
         event_generator,

@@ -35,6 +35,11 @@ class AnalysisResponse(BaseModel):
     session_id: str
     message: str
 
+@router.options("/analyze")
+async def analyze_options():
+    """Handle CORS preflight for analyze endpoint"""
+    return {}
+
 @router.post("/analyze", response_model=AnalysisResponse)
 async def start_analysis(request: AnalysisRequest):
     """
