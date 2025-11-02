@@ -1,6 +1,5 @@
 """
-CrewAI Agent Definitions
-TODO: Create the 8 agent objects with proper configuration
+CrewAI Agent Definitions for the VC Council investment analysis system.
 """
 
 from crewai import Agent
@@ -14,127 +13,193 @@ from backend.agents.prompts import (
     BEAR_AGENT_PROMPT,
     LEAD_PARTNER_PROMPT
 )
-# TODO: Import tools when ready
-# from backend.tools.apify_tool import ApifyScraperTool
-# from backend.tools.github_tool import GitHubAnalyzerTool
-# from backend.tools.hackernews_tool import HackerNewsSearchTool
-# from backend.tools.gcalendar_tool import GoogleCalendarTool
+from backend.tools._stubs import DummyTool
 
 # ========== RESEARCH AGENTS (Phase 1) ==========
 
 def create_market_researcher() -> Agent:
     """
-    Create market research specialist agent
+    Create market research specialist agent.
 
     Configuration:
     - allow_delegation=False: Focus on own research
     - verbose=True: See thinking process
     - max_iter=5: Limit iterations
-    - tools: ApifyScraperTool(), HackerNewsSearchTool()
-
-    TODO: Implement agent creation
+    - tools: DummyTool (stub until MCP tools ready)
     """
-    # TODO: Implement
     return Agent(
         role='Market Research Specialist',
-        goal='TODO: Add goal',
+        goal='Research and analyze market size, growth, competitive landscape, and sentiment',
         backstory=MARKET_RESEARCHER_PROMPT,
-        tools=[],  # TODO: Add tools when ready
+        tools=[DummyTool()],
         verbose=True,
         allow_delegation=False,
         max_iter=5
     )
 
+
 def create_founder_evaluator() -> Agent:
     """
-    Create founder evaluation agent
+    Create founder evaluation agent.
 
-    TODO: Implement agent with GitHub and Apify tools
+    Configuration:
+    - allow_delegation=False: Focus on own research
+    - verbose=True: See thinking process
+    - max_iter=5: Limit iterations
+    - tools: DummyTool (stub until GitHub/Apify tools ready)
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Founder Evaluator',
+        goal='Assess founder background, technical skills, and execution ability',
+        backstory=FOUNDER_EVALUATOR_PROMPT,
+        tools=[DummyTool()],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=5
+    )
+
 
 def create_product_critic() -> Agent:
     """
-    Create product and moat analysis agent
+    Create product and moat analysis agent.
 
-    TODO: Implement agent with Apify tool
+    Configuration:
+    - allow_delegation=False: Focus on own research
+    - verbose=True: See thinking process
+    - max_iter=5: Limit iterations
+    - tools: DummyTool (stub until Apify tool ready)
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Product Critic',
+        goal='Evaluate product defensibility, moat strength, and competitive threats',
+        backstory=PRODUCT_CRITIC_PROMPT,
+        tools=[DummyTool()],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=5
+    )
+
 
 def create_financial_analyst() -> Agent:
     """
-    Create financial analyst agent
+    Create financial analyst agent.
 
-    TODO: Implement agent (no tools needed)
+    Configuration:
+    - allow_delegation=False: Focus on own analysis
+    - verbose=True: See thinking process
+    - max_iter=5: Limit iterations
+    - tools: DummyTool (stub, works primarily with provided data)
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Financial Analyst',
+        goal='Calculate LTV:CAC, burn rate, runway, and financial health metrics',
+        backstory=FINANCIAL_ANALYST_PROMPT,
+        tools=[DummyTool()],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=5
+    )
+
 
 def create_risk_assessor() -> Agent:
     """
-    Create risk assessment agent
+    Create risk assessment agent.
 
-    TODO: Implement agent with Apify and HackerNews tools
+    Configuration:
+    - allow_delegation=False: Focus on own research
+    - verbose=True: See thinking process
+    - max_iter=5: Limit iterations
+    - tools: DummyTool (stub until Apify/HN tools ready)
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Risk Assessor',
+        goal='Identify catastrophic failure modes, regulatory risks, and red flags',
+        backstory=RISK_ASSESSOR_PROMPT,
+        tools=[DummyTool()],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=5
+    )
 
 # ========== DEBATE AGENTS (Phase 3) ==========
 
 def create_bull_agent() -> Agent:
     """
-    Create Bull advocate agent
+    Create Bull advocate agent.
 
     Configuration:
     - allow_delegation=True: Can ask research agents for more evidence
-    - tools=[] : No direct tools, uses research findings
+    - tools=[]: No direct tools, uses research findings
     - max_iter=4: Slightly fewer iterations
-
-    TODO: Implement agent creation
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Bull Advocate',
+        goal='Build the strongest case FOR investing with compelling evidence',
+        backstory=BULL_AGENT_PROMPT,
+        tools=[],
+        verbose=True,
+        allow_delegation=True,
+        max_iter=4
+    )
+
 
 def create_bear_agent() -> Agent:
     """
-    Create Bear advocate agent
+    Create Bear advocate agent.
 
-    TODO: Implement agent with delegation enabled
+    Configuration:
+    - allow_delegation=True: Can ask research agents for more evidence
+    - tools=[]: No direct tools, uses research findings
+    - max_iter=4: Slightly fewer iterations
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Bear Advocate',
+        goal='Build the strongest case AGAINST investing with rigorous evidence',
+        backstory=BEAR_AGENT_PROMPT,
+        tools=[],
+        verbose=True,
+        allow_delegation=True,
+        max_iter=4
+    )
+
 
 # ========== DECISION MAKER (Phase 5) ==========
 
 def create_lead_partner() -> Agent:
     """
-    Create Lead Investment Partner agent
+    Create Lead Investment Partner agent.
 
     Configuration:
     - allow_delegation=False: Makes decision independently
-    - tools=[GoogleCalendarTool()]: Can create calendar events
+    - tools=[]: No tools needed, calendar events in JSON output
     - max_iter=3: Quick decision making
-
-    TODO: Implement agent creation
     """
-    # TODO: Implement
-    pass
+    return Agent(
+        role='Lead Investment Partner',
+        goal='Make final investment decision (PASS/MAYBE/INVEST) based on all evidence',
+        backstory=LEAD_PARTNER_PROMPT,
+        tools=[],
+        verbose=True,
+        allow_delegation=False,
+        max_iter=3
+    )
 
 # ========== HELPER FUNCTIONS ==========
 
 def create_all_agents() -> dict:
     """
-    Create all 8 agents and return as dictionary
+    Create all 8 agents and return as dictionary.
 
     Returns:
-        dict: {agent_id: Agent object}
-
-    TODO: Implement to return all 8 agents
+        dict: {agent_id: Agent object} with all 8 agents
     """
-    # TODO: Implement
     return {
         "market_researcher": create_market_researcher(),
-        # TODO: Add other 7 agents
+        "founder_evaluator": create_founder_evaluator(),
+        "product_critic": create_product_critic(),
+        "financial_analyst": create_financial_analyst(),
+        "risk_assessor": create_risk_assessor(),
+        "bull_agent": create_bull_agent(),
+        "bear_agent": create_bear_agent(),
+        "lead_partner": create_lead_partner()
     }
