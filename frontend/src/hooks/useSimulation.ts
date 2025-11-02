@@ -1,10 +1,12 @@
 /**
  * Custom hook for managing debate simulation
+ * Can use SSE for real-time updates or mock simulation for development
  */
 
 import { useState, useCallback, useEffect } from 'react';
 import type { Phase, AgentMessage, Decision } from '../lib/types';
 import { simulationService } from '../lib/simulation';
+import { useSSE as useSSEHook } from './useSSE';
 
 interface UseSimulationReturn {
   phase: Phase;
@@ -12,17 +14,40 @@ interface UseSimulationReturn {
   decision: Decision | null;
   isRunning: boolean;
   elapsedTime: number;
+  connectionStatus?: 'connecting' | 'connected' | 'disconnected' | 'error';
+  error?: string | null;
   startSimulation: () => void;
   resetSimulation: () => void;
+  reconnect?: () => void;
 }
 
-export const useSimulation = (): UseSimulationReturn => {
+interface UseSimulationOptions {
+  sessionId?: string | null;
+  useSSE?: boolean; // If true, use SSE instead of mock simulation
+}
+
+export const useSimulation = (options: UseSimulationOptions = {}): UseSimulationReturn => {
+  const { sessionId = null, useSSE = false } = options;
+  // Use SSE if enabled and sessionId provided, otherwise use mock simulation
+  const shouldUseSSE = useSSE && !!sessionId;
+  const sse = useSSEHook(sessionId, shouldUseSSE);
+  
   const [phase, setPhase] = useState<Phase>('idle');
   const [messages, setMessages] = useState<AgentMessage[]>([]);
   const [decision, setDecision] = useState<Decision | null>(null);
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const [startTime, setStartTime] = useState<number | null>(null);
+  
+  // Sync SSE state when using SSE
+  useEffect(() => {
+    if (shouldUseSSE) {
+      setPhase(sse.phase);
+      setMessages(sse.messages);
+      setDecision(sse.decision);
+      setIsRunning(sse.phase !== 'completed' && sse.phase !== 'idle');
+    }
+  }, [shouldUseSSE, sse.phase, sse.messages, sse.decision]);
 
   // Update elapsed time every second
   useEffect(() => {
@@ -36,6 +61,14 @@ export const useSimulation = (): UseSimulationReturn => {
   }, [isRunning, startTime]);
 
   const startSimulation = useCallback(() => {
+    // If using SSE, don't start mock simulation
+    if (shouldUseSSE) {
+      // SSE will handle state updates automatically
+      setIsRunning(true);
+      setStartTime(Date.now());
+      return;
+    }
+
     // Reset state
     setPhase('idle');
     setMessages([]);
@@ -44,7 +77,7 @@ export const useSimulation = (): UseSimulationReturn => {
     setElapsedTime(0);
     setStartTime(Date.now());
 
-    // Start simulation
+    // Start mock simulation
     simulationService.start({
       onPhaseChange: (newPhase) => {
         setPhase(newPhase);
@@ -59,7 +92,7 @@ export const useSimulation = (): UseSimulationReturn => {
         setIsRunning(false);
       }
     });
-  }, []);
+  }, [shouldUseSSE, sessionId]);
 
   const resetSimulation = useCallback(() => {
     simulationService.reset();
@@ -77,8 +110,11 @@ export const useSimulation = (): UseSimulationReturn => {
     decision,
     isRunning,
     elapsedTime,
+    connectionStatus: shouldUseSSE ? sse.connectionStatus : undefined,
+    error: shouldUseSSE ? sse.error : undefined,
     startSimulation,
-    resetSimulation
+    resetSimulation,
+    reconnect: shouldUseSSE ? sse.reconnect : undefined,
   };
 };
 

@@ -30,6 +30,10 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import BusinessIcon from '@mui/icons-material/Business';
 import PsychologyIcon from '@mui/icons-material/Psychology';
 import AssessmentIcon from '@mui/icons-material/Assessment';
+import CloudDoneIcon from '@mui/icons-material/CloudDone';
+import CloudOffIcon from '@mui/icons-material/CloudOff';
+import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
+import Alert from '@mui/material/Alert';
 
 interface DebateViewerProps {
   sessionId: string;
@@ -49,7 +53,20 @@ const agents: Agent[] = [
 ];
 
 const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onReset }) => {
-  const { phase, messages, decision, isRunning, elapsedTime, startSimulation } = useSimulation();
+  // Check if we should use SSE (when backend is ready, set VITE_USE_SSE=true)
+  const useSSE = import.meta.env.VITE_USE_SSE === 'true';
+  
+  const {
+    phase,
+    messages,
+    decision,
+    isRunning,
+    elapsedTime,
+    connectionStatus,
+    error,
+    startSimulation,
+    reconnect,
+  } = useSimulation({ sessionId, useSSE });
   const [activeTab, setActiveTab] = useState<'chamber' | 'decision'>('chamber');
 
   // Start simulation when component mounts
@@ -138,6 +155,42 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
                 variant="outlined"
                 size="small"
               />
+              {/* SSE Connection Status */}
+              {connectionStatus && (
+                <Chip
+                  icon={
+                    connectionStatus === 'connected' ? (
+                      <CloudDoneIcon />
+                    ) : connectionStatus === 'error' ? (
+                      <ErrorOutlineIcon />
+                    ) : (
+                      <CloudOffIcon />
+                    )
+                  }
+                  label={
+                    connectionStatus === 'connected'
+                      ? 'Connected'
+                      : connectionStatus === 'connecting'
+                      ? 'Connecting...'
+                      : connectionStatus === 'error'
+                      ? 'Error'
+                      : 'Disconnected'
+                  }
+                  color={
+                    connectionStatus === 'connected'
+                      ? 'success'
+                      : connectionStatus === 'error'
+                      ? 'error'
+                      : 'default'
+                  }
+                  size="small"
+                  variant={connectionStatus === 'connected' ? 'filled' : 'outlined'}
+                  onClick={connectionStatus === 'error' && reconnect ? reconnect : undefined}
+                  sx={{
+                    cursor: connectionStatus === 'error' && reconnect ? 'pointer' : 'default',
+                  }}
+                />
+              )}
             </Stack>
           </Box>
           
@@ -154,6 +207,23 @@ const DebateViewer: React.FC<DebateViewerProps> = ({ sessionId, companyData, onR
           </Button>
         </Box>
       </Paper>
+
+      {/* Error Alert */}
+      {error && (
+        <Alert
+          severity="error"
+          action={
+            reconnect && (
+              <Button color="inherit" size="small" onClick={reconnect}>
+                Reconnect
+              </Button>
+            )
+          }
+          sx={{ mb: 2 }}
+        >
+          {error}
+        </Alert>
+      )}
 
       {/* Phase Indicator */}
       <PhaseIndicator currentPhase={phase} />
