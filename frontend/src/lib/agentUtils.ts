@@ -33,12 +33,10 @@ export const normalizeAgentName = (agentName: string): string => {
 
     // System messages (from backend orchestrator)
     'system': 'system',
-
-    // DO NOT map 'unknown' to 'system' - keep it as 'unknown' to debug backend issues
-    'unknown': 'unknown',
   };
 
-  return roleToIdMap[agentName] || agentName;
+  // If agent name is not found in map, default to 'system' instead of 'unknown'
+  return roleToIdMap[agentName] || 'system';
 };
 
 /**

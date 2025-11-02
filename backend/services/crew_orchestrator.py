@@ -51,6 +51,7 @@ import asyncio
 import uuid
 import logging
 import json
+import re
 from typing import Optional, Dict, Any
 from datetime import datetime
 
@@ -328,14 +329,110 @@ class VCCouncilOrchestrator:
 
             # Parse and store result
             logger.info(f"Crew completed. Result type: {type(result)}")
-
-            if isinstance(result, str):
-                try:
-                    decision = json.loads(result)
-                except json.JSONDecodeError:
-                    decision = {"decision": "ERROR", "raw_output": result}
+            logger.info(f"Result attributes: {dir(result) if hasattr(result, '__dict__') else 'N/A'}")
+            
+            # CrewAI returns a CrewOutput object, we need to extract the actual output
+            # Try multiple ways to extract the decision JSON
+            decision = None
+            raw_output = None
+            
+            # Try to get raw output from CrewOutput
+            if hasattr(result, 'raw'):
+                raw_output = result.raw
+                logger.info(f"Extracted from result.raw (type: {type(raw_output)}, length: {len(str(raw_output)) if raw_output else 0})")
+            elif hasattr(result, 'output'):
+                raw_output = result.output
+                logger.info(f"Extracted from result.output (type: {type(raw_output)}, length: {len(str(raw_output)) if raw_output else 0})")
+            elif hasattr(result, 'final_answer'):
+                raw_output = result.final_answer
+                logger.info(f"Extracted from result.final_answer (type: {type(raw_output)}, length: {len(str(raw_output)) if raw_output else 0})")
+            elif isinstance(result, str):
+                raw_output = result
+                logger.info(f"Result is already a string (length: {len(raw_output)})")
+            elif isinstance(result, dict):
+                # Already a dict, use it directly
+                decision = result
+                logger.info(f"Result is already a dict: {decision.get('decision', 'UNKNOWN')}")
             else:
-                decision = result if isinstance(result, dict) else {"decision": "UNKNOWN", "result": str(result)}
+                # Try converting to string
+                raw_output = str(result)
+                logger.info(f"Converted result to string (length: {len(raw_output)})")
+            
+            # If we don't have decision yet and have raw_output, try to parse it
+            if not decision and raw_output:
+                # If it's a string, try to find JSON in it
+                if isinstance(raw_output, str):
+                    # Look for JSON object in the string
+                    # CrewAI output often has "Final Answer:" prefix or is wrapped in markdown
+                    json_start = raw_output.find('{')
+                    json_end = raw_output.rfind('}') + 1
+                    
+                    if json_start != -1 and json_end > json_start:
+                        json_str = raw_output[json_start:json_end]
+                        logger.debug(f"Found JSON in string (start: {json_start}, end: {json_end}, length: {len(json_str)})")
+                        try:
+                            decision = json.loads(json_str)
+                            logger.info(f"✅ Successfully parsed JSON decision: {decision.get('decision', 'UNKNOWN')}")
+                        except json.JSONDecodeError as e:
+                            logger.warning(f"Failed to parse JSON from string: {e}")
+                            logger.debug(f"JSON string preview: {json_str[:500]}")
+                            # Try to extract decision field using regex as fallback
+                            decision_match = re.search(r'"decision"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE)
+                            if decision_match:
+                                decision_type = decision_match.group(1).upper()
+                                logger.info(f"Extracted decision using regex: {decision_type}")
+                                
+                                # Try to extract other fields too
+                                reasoning_match = re.search(r'"reasoning"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE | re.DOTALL)
+                                memo_match = re.search(r'"investment_memo"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE | re.DOTALL)
+                                events_match = re.search(r'"calendar_events"\s*:\s*(\[[^\]]+\])', raw_output, re.IGNORECASE | re.DOTALL)
+                                
+                                decision = {
+                                    "decision": decision_type,
+                                    "reasoning": reasoning_match.group(1) if reasoning_match else "No reasoning provided",
+                                    "investment_memo": memo_match.group(1) if memo_match else "No memo provided",
+                                    "calendar_events": json.loads(events_match.group(1)) if events_match else []
+                                }
+                            else:
+                                logger.error("Could not extract decision from output")
+                                decision = {"decision": "ERROR", "raw_output": raw_output[:2000]}
+                    else:
+                        # No JSON found, try regex to extract decision
+                        logger.debug("No JSON braces found, trying regex extraction")
+                        decision_match = re.search(r'"decision"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE)
+                        if decision_match:
+                            decision_type = decision_match.group(1).upper()
+                            logger.info(f"Extracted decision using regex: {decision_type}")
+                            
+                            # Extract other fields
+                            reasoning_match = re.search(r'"reasoning"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE | re.DOTALL)
+                            memo_match = re.search(r'"investment_memo"\s*:\s*"([^"]+)"', raw_output, re.IGNORECASE | re.DOTALL)
+                            events_match = re.search(r'"calendar_events"\s*:\s*(\[[^\]]+\])', raw_output, re.IGNORECASE | re.DOTALL)
+                            
+                            decision = {
+                                "decision": decision_type,
+                                "reasoning": reasoning_match.group(1) if reasoning_match else "No reasoning provided",
+                                "investment_memo": memo_match.group(1) if memo_match else "No memo provided",
+                                "calendar_events": json.loads(events_match.group(1)) if events_match else []
+                            }
+                        else:
+                            logger.error(f"Could not find decision in output. Raw output preview: {raw_output[:500]}")
+                            decision = {"decision": "ERROR", "raw_output": raw_output[:2000]}
+                else:
+                    # Not a string, try to use it directly if it's a dict
+                    if isinstance(raw_output, dict):
+                        decision = raw_output
+                        logger.info(f"Raw output is a dict: {decision.get('decision', 'UNKNOWN')}")
+                    else:
+                        logger.error(f"Raw output is not a string or dict (type: {type(raw_output)})")
+                        decision = {"decision": "UNKNOWN", "result": str(raw_output)[:2000]}
+            
+            # Fallback if nothing worked
+            if not decision:
+                logger.error("Failed to extract decision from CrewAI output")
+                logger.error(f"Result type: {type(result)}")
+                logger.error(f"Result str preview: {str(result)[:500]}")
+                decision = {"decision": "UNKNOWN", "raw_output": str(result)[:2000]}
 
             self.sessions[session_id]["status"] = "completed"
             self.sessions[session_id]["result"] = decision
@@ -344,6 +441,10 @@ class VCCouncilOrchestrator:
 
             # Broadcast final decision via SSE
             await sse_manager.send_decision(session_id, decision)
+
+            # Create calendar events if present in decision
+            if decision and "calendar_events" in decision and decision["calendar_events"]:
+                await self._create_calendar_events(session_id, decision["calendar_events"])
             await sse_manager.send_phase_change(session_id, "completed")
 
             # Cleanup task tracking state
@@ -447,6 +548,149 @@ class VCCouncilOrchestrator:
 
         except Exception as e:
             logger.error(f"❌ Step callback error: {str(e)}", exc_info=True)
+
+    async def _create_calendar_events(self, session_id: str, calendar_events: list):
+        """
+        Create Google Calendar events from the decision
+
+        Args:
+            session_id: Session ID
+            calendar_events: List of calendar event dicts with title, start_time, end_time, attendees, description
+        """
+        try:
+            from tools.gcalendar_tool import GoogleCalendarTool
+            from datetime import datetime, timedelta
+            import dateutil.parser
+            import asyncio
+
+            logger.info(f"Creating {len(calendar_events)} calendar events for session {session_id}")
+
+            # Initialize calendar tool
+            calendar_tool = GoogleCalendarTool()
+
+            # Broadcast status update
+            await sse_manager.send_agent_message(
+                session_id,
+                "Lead Investment Partner",
+                f"📅 Creating {len(calendar_events)} calendar events...",
+                "info"
+            )
+
+            created_count = 0
+            for event in calendar_events:
+                try:
+                    # Extract event details
+                    title = event.get("title", "Investment Follow-up")
+                    start_time_str = event.get("start_time")
+                    end_time_str = event.get("end_time")
+                    attendees = event.get("attendees", [])
+                    description = event.get("description", "")
+
+                    # Calculate duration in minutes
+                    if start_time_str and end_time_str:
+                        try:
+                            start_dt = dateutil.parser.isoparse(start_time_str)
+                            end_dt = dateutil.parser.isoparse(end_time_str)
+                            duration_minutes = int((end_dt - start_dt).total_seconds() / 60)
+                        except:
+                            duration_minutes = 60  # Default 1 hour
+                    else:
+                        duration_minutes = 60
+
+                    # Convert attendees list to email strings if needed
+                    # The attendees might be in format ["Partner: Sarah Chen"]
+                    # We'll just pass them as-is for now, or convert to valid emails if needed
+                    email_attendees = []
+                    for attendee in attendees:
+                        if isinstance(attendee, str):
+                            # If it's a name like "Partner: Sarah Chen", skip for now
+                            # In production, you'd map these to actual email addresses
+                            if "@" in attendee:
+                                email_attendees.append(attendee)
+                    
+                    # Check if Google Calendar OAuth is needed before creating event
+                    from tools.mcp_client import mcp_client
+                    client_instance = mcp_client._ensure_instance()
+                    
+                    # Debug logging
+                    logger.info(f"Checking for Google Calendar OAuth session...")
+                    logger.info(f"Cached OAuth sessions: {list(client_instance._oauth_sessions.keys())}")
+                    
+                    if "gcalendar" not in client_instance._oauth_sessions:
+                        # Need OAuth - send notification to frontend
+                        oauth_result = await client_instance.create_oauth_session("gcalendar", auto_wait=False)
+                        if oauth_result.get("url"):
+                            await sse_manager.send_oauth_request(
+                                session_id,
+                                "gcalendar",
+                                oauth_result["url"],
+                                oauth_result["session"].id
+                            )
+                            await sse_manager.send_agent_message(
+                                session_id,
+                                "Lead Investment Partner",
+                                f"🔗 Google Calendar authentication required. Please authenticate in the dialog.",
+                                "warning"
+                            )
+                            # Wait for OAuth completion via polling
+                            max_wait = 300  # 5 minutes
+                            wait_interval = 2  # Check every 2 seconds
+                            waited = 0
+                            while waited < max_wait:
+                                if "gcalendar" in client_instance._oauth_sessions:
+                                    break
+                                await asyncio.sleep(wait_interval)
+                                waited += wait_interval
+                            if "gcalendar" not in client_instance._oauth_sessions:
+                                raise Exception("Google Calendar OAuth timed out. Please authenticate and try again.")
+                    
+                    # Create the calendar event using async method (we're in async context)
+                    result = await calendar_tool._arun(
+                        title=title,
+                        start_time=start_time_str,
+                        duration_minutes=duration_minutes,
+                        description=description,
+                        attendees=email_attendees if email_attendees else None
+                    )
+
+                    logger.info(f"✅ Created calendar event: {title}")
+                    created_count += 1
+
+                    # Broadcast success message
+                    await sse_manager.send_agent_message(
+                        session_id,
+                        "Lead Investment Partner",
+                        f"✅ Calendar event created: {title} on {start_time_str}",
+                        "info"
+                    )
+
+                except Exception as event_error:
+                    logger.error(f"Failed to create calendar event '{event.get('title', 'Unknown')}': {event_error}")
+                    # Continue to next event even if one fails
+                    await sse_manager.send_agent_message(
+                        session_id,
+                        "Lead Investment Partner",
+                        f"⚠️ Could not create calendar event: {event.get('title', 'Unknown')}",
+                        "warning"
+                    )
+
+            # Final summary
+            logger.info(f"Calendar events created: {created_count}/{len(calendar_events)}")
+            await sse_manager.send_agent_message(
+                session_id,
+                "Lead Investment Partner",
+                f"📅 Calendar setup complete: {created_count}/{len(calendar_events)} events created",
+                "success"
+            )
+
+        except Exception as e:
+            logger.error(f"Failed to create calendar events: {e}", exc_info=True)
+            await sse_manager.send_agent_message(
+                session_id,
+                "Lead Investment Partner",
+                f"⚠️ Calendar integration error: {str(e)}",
+                "warning"
+            )
 
     async def get_result(self, session_id: str) -> Optional[dict]:
         """

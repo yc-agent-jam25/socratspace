@@ -114,6 +114,15 @@ class SSEManager:
             "code": error_code,
             "timestamp": datetime.now().isoformat()
         })
+    
+    async def send_oauth_request(self, session_id: str, mcp_name: str, auth_url: str, oauth_session_id: str):
+        """Broadcast OAuth authentication request to frontend"""
+        await self.broadcast(session_id, "oauth_request", {
+            "mcp_name": mcp_name,
+            "auth_url": auth_url,
+            "oauth_session_id": oauth_session_id,
+            "timestamp": datetime.now().isoformat()
+        })
 
     async def send_ping(self, session_id: str):
         """Send heartbeat ping"""

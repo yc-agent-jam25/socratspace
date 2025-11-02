@@ -7,6 +7,7 @@ import React, { useState } from 'react';
 import { Box, Typography, Collapse, IconButton, Stepper, Step, StepLabel, StepContent, Chip } from '@mui/material';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
+import { preprocessMarkdown } from '../../lib/markdownUtils';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
@@ -256,16 +257,24 @@ const AgentReasoningCard: React.FC<AgentReasoningCardProps> = ({
                         fontWeight: 600,
                         margin: '0.5rem 0',
                       },
+                      '& > *': {
+                        overflowX: 'auto',
+                        overflowY: 'visible',
+                      },
                       '& table': {
                         borderCollapse: 'collapse',
                         width: '100%',
                         margin: '0.5rem 0',
-                        fontSize: '0.8125rem'
+                        fontSize: '0.8125rem',
+                        display: 'table',
+                        minWidth: '100%',
                       },
                       '& th, & td': {
                         border: '1px solid rgba(255, 255, 255, 0.1)',
                         padding: '0.5rem',
-                        textAlign: 'left'
+                        textAlign: 'left',
+                        whiteSpace: 'normal',
+                        wordWrap: 'break-word',
                       },
                       '& th': {
                         backgroundColor: 'rgba(255, 255, 255, 0.05)',
@@ -273,7 +282,7 @@ const AgentReasoningCard: React.FC<AgentReasoningCardProps> = ({
                       }
                     }}
                   >
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.message}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{preprocessMarkdown(message.message)}</ReactMarkdown>
                   </Box>
                   <Typography
                     variant="caption"

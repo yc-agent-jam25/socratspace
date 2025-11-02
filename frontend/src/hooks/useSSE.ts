@@ -7,17 +7,25 @@ import { useEffect, useState, useRef, useCallback } from 'react';
 import type { Phase, AgentMessage, Decision } from '../lib/types';
 import { normalizeAgentName } from '../lib/agentUtils';
 
+interface OAuthRequest {
+  mcp_name: string;
+  auth_url: string;
+  oauth_session_id: string;
+  timestamp?: string;
+}
+
 interface UseSSEReturn {
   phase: Phase;
   messages: AgentMessage[];
   decision: Decision | null;
   connectionStatus: 'connecting' | 'connected' | 'disconnected' | 'error';
   error: string | null;
+  oauthRequest: OAuthRequest | null;
   reconnect: () => void;
 }
 
 interface SSEMessage {
-  type: 'phase_change' | 'agent_message' | 'decision' | 'error' | 'ping';
+  type: 'phase_change' | 'agent_message' | 'decision' | 'error' | 'ping' | 'oauth_request';
   data: any;
 }
 
@@ -33,6 +41,7 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
   const [decision, setDecision] = useState<Decision | null>(null);
   const [connectionStatus, setConnectionStatus] = useState<'connecting' | 'connected' | 'disconnected' | 'error'>('disconnected');
   const [error, setError] = useState<string | null>(null);
+  const [oauthRequest, setOAuthRequest] = useState<OAuthRequest | null>(null);
   
   const eventSourceRef = useRef<EventSource | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -136,6 +145,14 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
             
             case 'ping':
               // Heartbeat - just acknowledge, no action needed
+              break;
+            
+            case 'oauth_request':
+              // OAuth authentication required (e.g., during calendar creation)
+              // This will be handled by DebateViewer to show OAuth dialog
+              console.log('[SSE] OAuth request received:', sseMessage.data);
+              // We'll expose this via return value so DebateViewer can handle it
+              setOAuthRequest(sseMessage.data);
               break;
             
             default:
@@ -244,6 +261,7 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
   return {
     phase,
     messages,
+    oauthRequest,
     decision,
     connectionStatus,
     error,

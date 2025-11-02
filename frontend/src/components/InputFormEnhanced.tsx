@@ -17,6 +17,7 @@ import {
 } from '@mui/material';
 import type { CompanyData } from '../lib/types';
 import { api } from '../lib/api';
+import OAuthDialog from './OAuthDialog';
 
 // Icons
 import BusinessIcon from '@mui/icons-material/Business';
@@ -41,6 +42,11 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
 
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  
+  // OAuth state
+  const [showOAuthDialog, setShowOAuthDialog] = useState(false);
+  const [oauthMcpName, setOauthMcpName] = useState<string>('github');
+  const [pendingFormSubmission, setPendingFormSubmission] = useState(false);
 
   // Calculate form completion
   const requiredFields = ['company_name', 'website', 'industry', 'product_description'];
@@ -58,6 +64,17 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
       return;
     }
 
+    setError(null);
+
+    // Always check/ensure GitHub OAuth is set up first
+    // Even if founder_github is empty, the Founder Evaluator agent may need GitHub access
+    // This way OAuth is ready if needed during analysis
+    setOauthMcpName('github');
+    setPendingFormSubmission(true);
+    setShowOAuthDialog(true);
+  };
+
+  const startAnalysis = async () => {
     setLoading(true);
     setError(null);
 
@@ -65,10 +82,41 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
       const response = await api.startAnalysis(formData);
       const sessionId = response.session_id;
       onAnalysisStart(sessionId, formData);
-    } catch (err) {
-      setError('Failed to start analysis. Please try again.');
-      setLoading(false);
+    } catch (err: any) {
+      // Check if error is OAuth-related
+      if (err.message && (err.message.includes('OAuth') || err.message.includes('authentication'))) {
+        // OAuth needed - show dialog
+        setOauthMcpName('github');
+        setPendingFormSubmission(true);
+        setShowOAuthDialog(true);
+        setLoading(false);
+      } else {
+        setError(err.message || 'Failed to start analysis. Please try again.');
+        setLoading(false);
+      }
     }
+  };
+
+  const handleOAuthComplete = async (_sessionId: string) => {
+    // Check if we need to do Google Calendar OAuth next
+    if (pendingFormSubmission && oauthMcpName === 'github') {
+      // GitHub OAuth done, now do Google Calendar
+      setOauthMcpName('gcalendar');
+      // Dialog will stay open for Google Calendar
+    } else {
+      // All OAuth done (both GitHub and Google Calendar)
+      setShowOAuthDialog(false);
+      if (pendingFormSubmission) {
+        setPendingFormSubmission(false);
+        await startAnalysis();
+      }
+    }
+  };
+
+  const handleOAuthCancel = () => {
+    setShowOAuthDialog(false);
+    setPendingFormSubmission(false);
+    setLoading(false);
   };
 
   const handleFieldChange = (
@@ -504,6 +552,15 @@ const InputFormEnhanced: React.FC<InputFormEnhancedProps> = ({ onAnalysisStart }
           </Typography>
         </Stack>
       </Box>
+
+      {/* OAuth Dialog */}
+      <OAuthDialog
+        open={showOAuthDialog}
+        mcpName={oauthMcpName}
+        mcpDisplayName={oauthMcpName === 'github' ? 'GitHub' : oauthMcpName === 'gcalendar' ? 'Google Calendar' : 'Service'}
+        onComplete={handleOAuthComplete}
+        onCancel={handleOAuthCancel}
+      />
     </Box>
   );
 };

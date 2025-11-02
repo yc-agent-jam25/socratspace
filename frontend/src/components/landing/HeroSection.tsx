@@ -230,7 +230,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
             {[
               { value: '<5min', label: 'Analysis Time' },
               { value: '100%', label: 'Transparent' },
-              { value: '3', label: 'Decision Phases' },
+              { value: '5', label: 'Discussion Rounds' },
             ].map((stat, index) => (
               <Box
                 key={index}

@@ -8,6 +8,10 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from config import settings
 from api.routes import router
+<<<<<<< Updated upstream
+=======
+from api.oauth_routes import router as oauth_router
+>>>>>>> Stashed changes
 from backend.api.sse import sse_manager  # IMPORTANT: Use same import path as orchestrator
 from api.sse_test import create_test_sse_endpoint, generate_mock_events
 import logging
@@ -38,6 +42,7 @@ app.add_middleware(
 
 # Include REST routes
 app.include_router(router, prefix="/api")
+app.include_router(oauth_router, prefix="/api")
 
 # CORS preflight for SSE
 @app.options("/api/sse/{session_id}")
