@@ -1,0 +1,2287 @@
+============================================================
+Enriching Test Dataset
+============================================================
+Companies to enrich: 555
+Concurrent requests: 15
+This will take a while (rate limiting)...
+
+  🔍 Enriching: Red Barn Robotics
+  🔍 Enriching: Mentra
+  🔍 Enriching: BlindPay
+  🔍 Enriching: Vantel
+  🔍 Enriching: Fira
+  🔍 Enriching: assistant-ui
+  🔍 Enriching: Artifact
+  🔍 Enriching: Axal
+  🔍 Enriching: ThirdLayer
+  🔍 Enriching: TrainLoop
+  🔍 Enriching: Tally
+  🔍 Enriching: SAMMY Labs
+  🔍 Enriching: Instinct
+  🔍 Enriching: Mercura
+  🔍 Enriching: Lightbox
+     Founders: 2
+       Joaquim Dickson, Ashwin Iyer
+     Product: Building the lunar future. . Founded in 2024 by Joaquim Dickson, Ashwin Iyer, an...
+  🔍 Enriching: Cedar
+     Founders: 2
+       Corbin Klett, Antony Samuel
+     Product: An Collaborative, AI-native IDE for Hardware Engineers. Founded in 2025 by Corbi...
+  🔍 Enriching: Browser Use
+     Founders: 2
+       Samai Patel, Nand Vinchhi
+     Product: Automate Data Entry From Inbox to ERP. Founded in 2025 by Samai Patel and Nand V...
+  🔍 Enriching: TamLabs
+     Founders: 2
+       Joe Savidge, Shav Vimalendiran
+     Product: Live, AI-powered graph of every possible click path in your software. Founded in...
+  🔍 Enriching: Ergo
+     Founders: 2
+       Lukas Bock, Stefan Zheng
+     Product: AI Quote and Order Automation for Distributors & Manufacturers. Founded in 2024 ...
+  🔍 Enriching: CopyCat
+     Founders: 3
+       Joao Borges, Gabriel Lyra, Gustavo Marinho
+     Product: Stablecoin API for global payments. Founded in 2024 by Joao Borges, Gabriel Lyra...
+  🔍 Enriching: Paratus Health
+     Founders: 2
+       Adam Iseman, Ilya Kelner
+     Product: A Roomba for weeds on a farm. . Founded in 2023 by Adam Iseman, Ilya Kelner, and...
+  🔍 Enriching: Butter
+     Founders: 2
+       Kevin Gu, Regina Lin
+     Product: Building Dex, the AI Browser Copilot. Founded in 2025 by Kevin Gu and Regina Lin...
+  🔍 Enriching: Bluebook
+     Founders: 1
+       Simon Farshid
+     Product: Open Source React.js Library for AI Chat. Founded in 2024 by Simon Farshid, assi...
+  🔍 Enriching: TensorPool
+     Founders: 2
+       Dylan Player, Alexandru Turcanu
+     Product: Cursor for Content Creation. Founded in 2023 by Dylan Player and Alexandru Turca...
+  🔍 Enriching: Dalus
+     Founders: 2
+       Mason Pierce, Jackson Stokes
+     Product: Reasoning Fine-Tuning. Founded in 2025 by Mason Pierce and Jackson Stokes, Train...
+  ✅ Processed 10/555 companies...
+  🔍 Enriching: Roark
+     Founders: 2
+       Alexander Israelov, Cayden Pierce
+     Product: Building the open source smart glasses operating system. Founded in 2024 by Alex...
+  🔍 Enriching: Rebolt
+     Founders: 2
+       Alexey Taktarov, Alex Tkachenko
+     Product: Financial research platform for investment firms. Founded in 2025 by Alexey Takt...
+  🔍 Enriching: Spott
+     Founders: 2
+       Joshua Doolan, Ben Doolan
+     Product: Cursor for Microsoft Word. Founded in 2025 by Joshua Doolan and Ben Doolan, TamL...
+  🔍 Enriching: Woz
+     Founders: 1
+       Gregor Zunic
+     Product: Leading open-source web agent project with 50k stars in 3 months. Founded in 202...
+  🔍 Enriching: Proception Inc
+     Founders: 1
+       Philip Andersson
+     Product: AI for accounting. Founded in 2024 by Philip Andersson and Filip Stål, Bluebook ...
+  🔍 Enriching: Demeter
+     Founders: 2
+       Yash Dulla, Ishan Sheth
+     Product: AI Agents for Sales Operations. Founded in 2025 by Yash Dulla and Ishan Sheth, E...
+  🔍 Enriching: Wildcard
+     Founders: 2
+       Joshua Martinez, Hlumelo Notshe
+     Product: Vercel For GPUs. Founded in 2025 by Joshua Martinez, Hlumelo Notshe, and Tycho S...
+  🔍 Enriching: Permitify
+     Founders: 2
+       Abhi Balijepalli, Zyad Elgohary
+     Product: AI Biopsy Callback Platform for Dermatologists. Founded in 2024 by Abhi Balijepa...
+  ✅ Processed 20/555 companies...
+  🔍 Enriching: Reditus Space
+     Founders: 2
+       Isabelle Ilyia, Jesse Li
+     Product: The open source copilot for any app. Founded in 2025 by Isabelle Ilyia and Jesse...
+  🔍 Enriching: Optifye.ai
+     Founders: 1
+       Erik Dunteman
+     Product: Muscle Memory Cache for Agents. Founded in 2024 by Erik Dunteman, Butter has 2 e...
+  🔍 Enriching: Pinch
+     Founders: 2
+       Daniel Gauci, James Zammit
+     Product: Test, monitor, and improve your voice agents. Founded in 2025 by Daniel Gauci an...
+  🔍 Enriching: Retrofit
+     Founders: 1
+       Rami Ghanem
+     Product: Coming soon!. Founded in 2025 by Rami Ghanem, Tally has 2 employees based in ....
+  🔍 Enriching: Archon
+     Founders: 1
+       Eliot Khachi
+     Product: AI-Powered Hardware System Design Software. Founded in 2024 by Eliot Khachi and ...
+  🔍 Enriching: Forge Automation
+     Founders: 2
+       Jay Li, Jack Xu
+     Product: Making humanoids dexterous enough to thread a needle. Founded in 2024 by Jay Li ...
+  ✅ Processed 30/555 companies...
+  🔍 Enriching: Mastra
+     Founders: 2
+       Dev Jain, Qiaochu Li
+     Product: AI Value Creation Team for Private Equity. Founded in 2024 by Dev Jain and Qiaoc...
+  🔍 Enriching: AfterQuery
+     Founders: 1
+       Tannen Hall
+     Product: Medical Voice Agents for Patient Management. Founded in 2024 by Pablo Bermudez-C...
+  🔍 Enriching: Misprint
+     Founders: 1
+       Kaushik Mahorker
+     Product: Sell Products in ChatGPT Shopping. Founded in 2025 by Kaushik Mahorker, Wildcard...
+  🔍 Enriching: FuseAI
+     Founders: 2
+       Ben Collins, Brad Eckert
+     Product: AI platform enabling anyone to build and scale software businesses. Founded in 2...
+  🔍 Enriching: Miyagi Labs
+     Founders: 2
+       Celia Manzano, Javier Sanchez
+     Product: Build apps and agents by speaking with AI. Founded in 2025 by Celia Manzano and ...
+  🔍 Enriching: Artificial Societies
+     Founders: 2
+       Vivaan Baid, Kushal Mohta
+     Product: AI performance monitoring for factory workers. Founded in 2024 by Vivaan Baid an...
+  🔍 Enriching: TripleZip
+     Founders: 2
+       Sam Jung, George Parks
+     Product: We help software companies sell to government. Founded in 2024 by Sam Jung and G...
+  🔍 Enriching: Peppr AI
+     Founders: 2
+       Abhi Aiyer, Sam Bhagwat
+     Product: The Javascript framework for building AI agents, from the Gatsby devs. Founded i...
+  ✅ Processed 40/555 companies...
+  🔍 Enriching: Infinite
+     Founders: 2
+       Adam Chandler, Alexander Densley
+     Product: AI co-pilot for building plan review and building code compliance. Founded in 20...
+  🔍 Enriching: Sennu AI
+     Founders: 2
+       Carlos Georgescu, Spencer Mateega
+     Product: Research lab investigating the boundaries of AI capabilities. Founded in 2024 by...
+  🔍 Enriching: Orbital Operations
+     Founders: 2
+       Stef Crum, Will Sherman
+     Product: Reusable Satellites for zero-g manufacturing. Founded in 2024 by Stef Crum and W...
+  🔍 Enriching: Mesh
+     Founders: 1
+       Guang Cui
+     Product: AI tutors for exam prep. Founded in 2025 by Guang Cui and Tyrone Davis III, Miya...
+  🔍 Enriching: Outlit
+     Founders: 1
+       Saurav Bubber
+     Product: The only outbound sales software you will ever need. . Founded in 2024 by Saurav...
+  🔍 Enriching: Tire Swing
+     Founders: 1
+       Christian Safka
+     Product: Real-time AI Voice Translation for Developers. Founded in 2025 by Christian Safk...
+  🔍 Enriching: Harper
+     Founders: 2
+       Lander Degreve, Samuel Smeys
+     Product: AI-native ATS/CRM for recruiting firms. Founded in 2024 by Lander Degreve, Samue...
+  🔍 Enriching: Calltree
+     Founders: 2
+       Grayson Pike, Yash Sahota
+     Product: Automating CRE accounting with AI. Founded in 2025 by Grayson Pike and Yash Saho...
+  🔍 Enriching: Nitrode
+     Founders: 2
+       Walter Raftus, Timothy Seto
+     Product: Software Enabled CNC Parts Supplier. Founded in 2022 by Walter Raftus and Timoth...
+  🔍 Enriching: Karsa
+     Founders: 2
+       Nitya Arora, Sachitt Arora
+     Product: Self-improving knowledge base synthesizing scattered company data. Founded in 20...
+  🔍 Enriching: Exla
+     Founders: 1
+       Sandra Lifshits
+     Product: A vintage marketplace curated by AI. Founded in 2024 by Sandra Lifshits, Retrofi...
+  🔍 Enriching: Confident AI
+     Founders: 2
+       Raj Lad, Nikhil Srinivasan
+     Product: Global B2B Stablecoin Processor. Founded in 2024 by Raj Lad and Nikhil Srinivasa...
+  🔍 Enriching: Riviera
+     Founders: 2
+       James He, Patrick Sharpe
+     Product: We use AI to simulate entire human societies. Founded in 2024 by James He and Pa...
+  🔍 Enriching: Waypoint Transit
+     Founders: 2
+       Erin Kim, Nandini Ramakrishnan
+     Product: Building your AI finance co-worker. Founded in 2024 by Erin Kim and Nandini Rama...
+  🔍 Enriching: Snowbase
+     Founders: 2
+       Ross Doherty, Ben Schleuniger
+     Product: High Thrust Space Vehicles for Satellite Defense. Founded in 2024 by Ross Dohert...
+  ✅ Processed 50/555 companies...
+  🔍 Enriching: Agentin AI
+     Founders: 2
+       Josh Earle, Leo Paz
+     Product: AI Quoting and Proposals. Founded in 2024 by Josh Earle and Leo Paz, Outlit has ...
+  🔍 Enriching: ReJot
+     Founders: 2
+       Sriman Gaddam, Sukhjit Singh
+     Product: Hands off Salesforce QA. Founded in 2025 by Sriman Gaddam and Sukhjit Singh, Sen...
+  🔍 Enriching: General Trajectory
+  ⏸️  Completed 50/555, pausing briefly...
+     Founders: 2
+       Kun Qian, Robertson Taylor
+     Product: Enterprise-grade AI support reps for call centers. Founded in 2025 by Kun Qian a...
+  🔍 Enriching: Solidroad
+     Founders: 2
+       Corey Anderson, Cameron Hake
+     Product: Find and keep track of your ideal customers. . Founded in 2024 by Corey Anderson...
+  🔍 Enriching: Trata
+     Founders: 2
+       Eva Herget, Jonathan Jenkins
+     Product: Misprint is building Robinhood for Pokemon cards. Founded in 2025 by Eva Herget ...
+  🔍 Enriching: Haleum
+     Founders: 3
+       Sejoon Chang, Richard Gu, Ben Kim
+     Product: AI game development engine & platform. Founded in 2024 by Sejoon Chang, Richard ...
+  🔍 Enriching: Lucidic AI
+     Founders: 2
+       Shahryar Hasnani, Dale Wilson
+     Product: Stablecoin neobank for emerging markets. Founded in 2025 by Shahryar Hasnani and...
+  🔍 Enriching: Mundo AI
+     Founders: 1
+       Sankeerth Rao Karingula
+     Product: AI Agents that automate enterprise software processes. Founded in 2024 by Sankee...
+  🔍 Enriching: G LNK
+     Founders: 1
+       Jeffrey Ip
+     Product: Open-Source Unit Testing for LLM Applications. Founded in 2024 by Jeffrey Ip and...
+  🔍 Enriching: Strike
+     Founders: 2
+       Viraat Das, Pranav Nair
+     Product: An SDK to run transformer models anywhere. Founded in 2025 by Viraat Das and Pra...
+  🔍 Enriching: AthenaHQ
+     Founders: 2
+       Shaun Lane, Daniel Tyshler
+     Product: AI Employees for Hotels. Founded in 2024 by Shaun Lane and Daniel Tyshler, Rivie...
+  ✅ Processed 60/555 companies...
+  🔍 Enriching: Lopus AI
+     Founders: 1
+       Joshua Belofsky
+     Product: Reasoning models for robotics. Founded in 2024 by Joshua Belofsky, General Traje...
+  🔍 Enriching: Cenote
+     Founders: 2
+       Tushar Nair, Dakotah Rice
+     Product: AI-native commercial insurance brokerage. Founded in 2024 by Tushar Nair and Dak...
+  🔍 Enriching: Harbera
+     Founders: 2
+       Alexander Chen, Eric Cho
+     Product: AI-powered research desk for hedge funds. Founded in 2025 by Alexander Chen, Eri...
+  🔍 Enriching: Stillwind
+     Founders: 2
+       Ryan Johnston, Varun Tandon
+     Product: We automate urban planning so cities can build cheaper and faster. Founded in 20...
+  🔍 Enriching: Bindwell
+     Founders: 2
+       Patrick Finlay, Mark Hughes
+     Product: AI agents for CX teams, starting with training and QA. Founded in 2023 by Patric...
+  🔍 Enriching: Pickle
+     Founders: 2
+       Adarsh Ambati, Ansh Gupta
+     Product: Human Risk Intelligence for the AI-era. Founded in 2024 by Adarsh Ambati, Ansh G...
+  🔍 Enriching: Lucid
+     Founders: 2
+       Wilco Kruijer, Jan Schutte
+     Product: Sync engine to share data across engineering teams in enterprises. Founded in 20...
+  🔍 Enriching: Macadamia
+     Founders: 2
+       Andrew Yan, Alan Yao
+     Product: Get Your Brand Discovered on ChatGPT. Founded in 2025 by Andrew Yan and Alan Yao...
+  🔍 Enriching: Asteroid
+     Founders: 2
+       Aamish Ahmad Beg, Danylo Borodchuk
+     Product: Data Unification for GTM Analytics . Founded in 2024 by Aamish Ahmad Beg and Dan...
+  🔍 Enriching: Gale
+     Founders: 2
+       Ronit Jain, Aarav Patel
+     Product: Prediction markets for businesses. Founded in 2024 by Ronit Jain and Aarav Patel...
+  🔍 Enriching: Pave Robotics
+     Founders: 2
+       Kofi Ansong, Kristy Gao
+     Product: Automate back office tasks for medical clinics. Founded in 2024 by Kofi Ansong, ...
+  🔍 Enriching: PAX Markets
+     Founders: 2
+       Raouf Abujaber, Rayan Ghandour
+     Product: Simplifying Collaboration for Healthcare Organizations & Professionals. Founded ...
+  🔍 Enriching: Olive
+     Founders: 2
+       Sophia Clark, Veronica Nutting
+     Product: AI Healthcare Provider Credentialing Software. Founded in 2025 by Sophia Clark a...
+  🔍 Enriching: hud
+     Founders: 3
+       Naijide Anwaer, Garreth Lee, Jason Liao
+     Product: High Quality Multilingual Training Data for AI Models. Founded in 2024 by Naijid...
+  ✅ Processed 70/555 companies...
+  🔍 Enriching: finbar
+     Founders: 2
+       Brecht Pierreux, Abel Van Steenweghen
+     Product: AI Agents for Complex Engineering Projects. Founded in 2025 by Brecht Pierreux a...
+  🔍 Enriching: Cuckoo Labs
+     Founders: 2
+       Lucas Irvine, Paul Witten
+     Product: AI Powered Affordable Housing Eligibility. Founded in 2025 by Lucas Irvine and P...
+  🔍 Enriching: Mecha Health
+     Founders: 4
+       Sanio Jung, Chris Kang, Emmett Kim
+     Product: We're building a living digital clone for everyone. Founded in 2024 by Sanio Jun...
+  🔍 Enriching: GradeWiz
+     Founders: 2
+       Joe Hewett, David Mlcoch
+     Product: AI Browser Agents for the Back-Office. Founded in 2024 by Joe Hewett and David M...
+  🔍 Enriching: HealthKey
+     Founders: 2
+       Alberto Hojel, Rami Seid
+     Product: interactive video models. Founded in 2024 by Alberto Hojel and Rami Seid, Lucid ...
+  ✅ Processed 80/555 companies...
+  🔍 Enriching: Operand
+     Founders: 2
+       Shrey Gupta, Bardia Safari
+     Product: Build admin dashboards with a prompt. Founded in 2024 by Shrey Gupta and Bardia ...
+  🔍 Enriching: Osmosis
+     Founders: 2
+       Josh Kelly, Mason Landon Smith
+     Product: Robots that repair roads. Founded in 2024 by Josh Kelly and Mason Landon Smith, ...
+  🔍 Enriching: Swerve
+     Founders: 2
+       Max Bohun, Aman Garg
+     Product: AI Grading for Teachers. Founded in 2024 by Max Bohun and Aman Garg, GradeWiz ha...
+  🔍 Enriching: Mosaic
+     Founders: 2
+       Gunwoo Kim, Yong Hee Lee
+     Product: Real-time AI translator for global sales and marketing. Founded in 2024 by Gunwo...
+  🔍 Enriching: Cifrato
+     Founders: 2
+       Lukas Ego, Hannes Furmans
+     Product: Autonomous Electrical Engineering. Founded in 2024 by Lukas Ego, Hannes Furmans,...
+  🔍 Enriching: Oki
+     Founders: 3
+       Ahmed Abdulaal, Hugo Fry, Ayodeji Ijishakin
+     Product: Foundation models to automate x-ray analysis for radiologists. Founded in 2024 b...
+  ✅ Processed 90/555 companies...
+  🔍 Enriching: ZeroEntropy
+     Founders: 2
+       Rahul Gudise, Haokun Qin
+     Product: Fast and Data-Driven Immigration Platform. Founded in 2024 by Rahul Gudise, Haok...
+  🔍 Enriching: Bezel
+     Founders: 2
+       Love Redin, Ulme Wennberg
+     Product: AI Software for Commercial Insurance Brokers. Founded in 2024 by Love Redin and ...
+  🔍 Enriching: Cardamon
+     Founders: 2
+       Robin Gan, Edward Huang
+     Product: The AI investment analyst. Founded in 2023 by Robin Gan and Edward Huang, finbar...
+  🔍 Enriching: Amby Health
+     Founders: 2
+       Benjamin Kilimnik, Pete Stevenson
+     Product: Exchange and co-located trading facility, on a chip. Founded in 2024 by Benjamin...
+  🔍 Enriching: Trim
+     Founders: 2
+       Ram Gorthi, Akhil Iyengar
+     Product: AI to Replace Management Consulting. Founded in 2024 by Ram Gorthi, Akhil Iyenga...
+  🔍 Enriching: Tergle
+     Founders: 2
+       Andy Lyu, Kasey Zhang
+     Product: Online Reinforcement Learning for AI Agents. Founded in 2024 by Andy Lyu and Kas...
+  🔍 Enriching: Rally
+     Founders: 2
+       Soroush Saryazdi, Jason Zhou
+     Product: Make & Watch Fun Videos. Founded in 2025 by Soroush Saryazdi and Jason Zhou, Swe...
+  🔍 Enriching: Adam
+     Founders: 0
+     Product: AI Accountant for Retail. Founded in  by Juan Pisco, Cifrato has 0 employees bas...
+  🔍 Enriching: Inversion Semiconductor
+     Founders: 2
+       Lorenss Martinsons, Parth Patel
+     Product: Platform for building RL environments and evals . Founded in 2025 by Lorenss Mar...
+  🔍 Enriching: careCycle
+     Founders: 2
+       Andy Liang, Abhinav Sinha
+     Product: Weights & Biases for AI Agents. Founded in 2025 by Andy Liang, Abhinav Sinha, an...
+  🔍 Enriching: Paragon
+     Founders: 2
+       Adish Jain, Kyle Wade
+     Product: Create and run your own video editing AI agents. Founded in 2024 by Adish Jain a...
+  🔍 Enriching: SalesPatriot
+     Founders: 2
+       Timmy Dang, Yos Wagenmans
+     Product: AI Copilot for Ambulance Agencies (EMS). Founded in 2025 by Timmy Dang and Yos W...
+  🔍 Enriching: Maive
+     Founders: 2
+       Luofei Chen, Aayush Tyagi
+     Product: Personalized Updates on Company Progress. Founded in 2025 by Luofei Chen and Aay...
+  🔍 Enriching: Weave
+     Founders: 1
+       Kashyap Achar
+     Product: Digital AI humans that model clothes for e-commerce brands. Founded in 2025 by K...
+  ✅ Processed 100/555 companies...
+  🔍 Enriching: Caseflood.ai
+     Founders: 1
+       Josh Sabol
+     Product: AI-powered Patient Identification for Clinical Trials. Founded in 2025 by Josh S...
+  🔍 Enriching: Tejas AI
+     Founders: 2
+       Dmytro Astakhov, Areg Nzsdejan
+     Product: AI compliance co-pilot for regulated financial businesses. Founded in 2025 by Dm...
+  🔍 Enriching: Trava
+  ⏸️  Completed 100/555, pausing briefly...
+     Founders: 1
+       Emanuel Gordis
+     Product: A foundation model for physics. Founded in 2024 by Emanuel Gordis, Trim has 3 em...
+  🔍 Enriching: Maritime Fusion
+     Founders: 1
+       Adam Bowen
+     Product: AI Agents for Audit. Founded in 2025 by Adam Bowen, Tergle has  employees based ...
+  🔍 Enriching: a0.dev
+     Founders: 2
+       Rohan Karthik, Daniel Vega
+     Product: Manufacturing the most powerful chips, 15x faster. Founded in 2024 by Rohan Kart...
+  🔍 Enriching: General Agency
+     Founders: 2
+       Zach Dive, Aaron Li
+     Product: AI Powered CAD. Founded in 2025 by Zach Dive and Aaron Li, Adam has 4 employees ...
+  🔍 Enriching: A1Base
+     Founders: 2
+       Kasyap Chakra, Ishir Vaidyanath
+     Product: The AI Growth Engine for Industrials. Founded in 2025 by Kasyap Chakra and Ishir...
+  🔍 Enriching: Verbiflow
+     Founders: 2
+       Thiago Peres, Nick Telecki
+     Product: Financial OS for Modern Fleets. Founded in 2025 by Thiago Peres and Nick Telecki...
+  🔍 Enriching: Toothy AI
+     Founders: 2
+       Will Cray, David Tondreau
+     Product: AI for Home Services. Founded in 2025 by Will Cray and David Tondreau, Maive has...
+  🔍 Enriching: Rocketable
+     Founders: 1
+       Nelson Ray
+     Product: We help defense firms win more contracts with the Pentagon. Founded in 2024 by N...
+  ✅ Processed 110/555 companies...
+  🔍 Enriching: Contrario
+     Founders: 2
+       Ethan Hilton, Tolen Schreid
+     Product: the AI inbound sales team for law firms. Founded in 2025 by Ethan Hilton and Tol...
+  🔍 Enriching: Ovlo
+     Founders: 2
+       Andrew Churchill, Adam Cohen
+     Product: AI to understand engineering work. Founded in 2024 by Andrew Churchill and Adam ...
+  🔍 Enriching: Truffle AI
+     Founders: 2
+       Alex Doonanco, Evan Roubekas
+     Product: Voice AI teams for medicare agencies. Founded in 2024 by Alex Doonanco and Evan ...
+  🔍 Enriching: superglue
+     Founders: 1
+       Pushkar Lanka
+     Product: AI agents for global trade compliance. Founded in 2025 by Pushkar Lanka, Trava h...
+  🔍 Enriching: Conntour
+     Founders: 1
+       Alan Wells
+     Product: The AI Maximalist Software Holding Company. Founded in 2023 by Alan Wells, Rocke...
+  🔍 Enriching: Closure
+     Founders: 2
+       Harvey Hu, Mo Nasir
+     Product: AI coworkers that can learn and act just like a human. Founded in 2024 by Harvey...
+  🔍 Enriching: Promptless
+     Founders: 2
+       Navvye Anand, Tyler Rose
+     Product: Discovering new pesticides with AI. Founded in 2024 by Navvye Anand and Tyler Ro...
+  🔍 Enriching: Scout
+     Founders: 2
+       Kashyab Ambarani, Rishi Mahadevan
+     Product: People search that works. Founded in 2024 by Kashyab Ambarani and Rishi Mahadeva...
+  ✅ Processed 120/555 companies...
+  🔍 Enriching: Subtrace
+     Founders: 2
+       Pennie Huang, Pasha Rayan
+     Product: Twilio for AI Agents. Founded in 2025 by Pennie Huang and Pasha Rayan, A1Base ha...
+  🔍 Enriching: Vocality Health
+     Founders: 2
+       Johnny Chen, Matt Kerrigan
+     Product: AI for insurance verification & billing at dental clinics. Founded in 2024 by Jo...
+  🔍 Enriching: Astro
+     Founders: 2
+       Ayomide Omolewa, Seth Setse
+     Product: We make mobile apps using AI. Founded in 2025 by Ayomide Omolewa and Seth Setse,...
+  🔍 Enriching: Dartboard Energy
+     Founders: 2
+       Ghita Houir Alami, Nicholas Pipitone
+     Product: High accuracy search API over unstructured data. Founded in 2024 by Ghita Houir ...
+  🔍 Enriching: Karoo
+     Founders: 2
+       Rahul Karajgikar, Shaunak Srivastava
+     Product: AWS for AI Agents. Founded in 2024 by Rahul Karajgikar and Shaunak Srivastava, T...
+  🔍 Enriching: awen
+     Founders: 2
+       Amer Eid, Andrew Malouf
+     Product: AI agents for supply chain workflow automation. Founded in 2025 by Amer Eid and ...
+  🔍 Enriching: Dollyglot
+     Founders: 2
+       Matan Goldner, Tomer Kulla
+     Product: AI to monitor thousands of security cameras. Founded in 2024 by Matan Goldner an...
+  🔍 Enriching: Alice.tech
+     Founders: 1
+       Vivek Jayaram
+     Product: Voice AI for medical language translation. Founded in 2025 by Vivek Jayaram and ...
+  🔍 Enriching: Stamp
+     Founders: 2
+       Adhityaa Chandrasekar, Sachin Sridhar
+     Product: Zero code network tracer. Founded in 2024 by Adhityaa Chandrasekar and Sachin Sr...
+  🔍 Enriching: Splash Inc.
+     Founders: 2
+       Stefan Faistenauer, Adina Goerres
+     Product: Workflow automation engine. Founded in 2024 by Stefan Faistenauer and Adina Goer...
+  🔍 Enriching: Orchids
+     Founders: 2
+       Max Bertfield, Noah Fichter
+     Product: AI-powered student information system for K-12 schools. Founded in 2024 by Max B...
+  ✅ Processed 130/555 companies...
+  🔍 Enriching: Axiom
+     Founders: 2
+       Arya Marwaha, Aditya Sood
+     Product: AI-powered recruiting for startups. Founded in 2025 by Arya Marwaha and Aditya S...
+  🔍 Enriching: Steinmetz
+     Founders: 2
+       Justin Cohen, Jason Kaufmann
+     Product: Fusion reactors for ships. Founded in 2024 by Justin Cohen and Jason Kaufmann, M...
+  🔍 Enriching: SubImage
+     Founders: 2
+       Frances Liu, Prithvi Ramakrishnan
+     Product: An AI teammate that automatically updates your customer-facing docs. Founded in ...
+  🔍 Enriching: Hey Telo
+     Founders: 2
+       Jeanot Dawson, Oliver Lambson
+     Product: Canadian neobank focused on lending. Founded in 2024 by Jeanot Dawson, Oliver La...
+  🔍 Enriching: Praxim
+     Founders: 1
+       Archit Mehta
+     Product: The AI Native Email Client. Founded in 2024 by Archit Mehta, Stamp has 1 employe...
+  🔍 Enriching: Excellence Learning
+     Founders: 1
+       Rohun Ati
+     Product: AI Analyst for Electricity Markets. Founded in 2024 by Rohun Ati, Dartboard Ener...
+  🔍 Enriching: NextByte
+     Founders: 1
+       Alex Fuster
+     Product: The world’s first AI energy developer. Founded in 2024 by Alex Fuster, Astro has...
+  🔍 Enriching: Casixty
+     Founders: 2
+       Ivan Avanesov, Marcell Veszpremi
+     Product: Autonomous patrol-boats for National Security . Founded in 2024 by Ivan Avanesov...
+  ✅ Processed 140/555 companies...
+  🔍 Enriching: Leaping AI
+     Founders: 2
+       Preston Ellis, Henry Zhang
+     Product: Trade memecoins, perpetuals, and earn yield. Founded in 2024 by Preston Ellis an...
+  🔍 Enriching: Vetnio
+     Founders: 2
+       Patrick Gadd, Kim Rants
+     Product: AI-driven exam prep. Founded in 2024 by Patrick Gadd and Kim Rants, Alice.tech h...
+  🔍 Enriching: Candor
+     Founders: 2
+       Owen Brake, Ethan Childerhose
+     Product: Hardware for Electric Vehicles. Founded in 2024 by Owen Brake and Ethan Childerh...
+  🔍 Enriching: Bild AI
+     Founders: 2
+       Gilad Levy, Aaron Zelinger
+     Product: We help law enforcement solve crime. Founded in 2024 by Gilad Levy and Aaron Zel...
+  🔍 Enriching: Trace
+     Founders: 2
+       Alexis Bonnafont, Sovann Linden
+     Product: AI tutor starting with maths and science. Founded in 2025 by Alexis Bonnafont, S...
+  🔍 Enriching: Revise Robotics
+     Founders: 1
+       Eylon Miz
+     Product: Reddit Marketing Agent for technical audiences. Founded in 2024 by Eylon Miz, Ca...
+  🔍 Enriching: Enhanced Radar
+     Founders: 2
+       Daniel Grittner, Christopher Grittner
+     Product: Voice AI for Home Services. Founded in 2024 by Daniel Grittner and Christopher G...
+  🔍 Enriching: Edexia
+     Founders: 2
+       Jason Madeano, Matt Stallone
+     Product: AI recruiter tuned to identify the best vibe coders. Founded in 2025 by Jason Ma...
+  🔍 Enriching: Quantstruct
+     Founders: 2
+       Ethne Laude, Marcus Zimmerman
+     Product: We help companies win government funding with AI. Founded in 2025 by Ethne Laude...
+  🔍 Enriching: Invo
+     Founders: 2
+       Alex Chantavy, Kunaal Sikka
+     Product: Software that maps your infrastructure. Open core alternative to Wiz. Founded in...
+  🔍 Enriching: Onlook
+     Founders: 2
+       Kevin Lu, Bach Tran
+     Product: The AI Full Stack Engineer. Founded in 2024 by Kevin Lu and Bach Tran, Orchids h...
+  🔍 Enriching: Delineate
+     Founders: 1
+       Thibault Henriet
+     Product: We are rebuilding photoshop with an AI-voice interface. Founded in 2023 by Thiba...
+  🔍 Enriching: Exin Therapeutics
+     Founders: 1
+       Gaurav Luhariwala
+     Product: Risk Decisioning Platform for Banks. Founded in 2025 by Gaurav Luhariwala, Tejas...
+  🔍 Enriching: Rivet
+     Founders: 2
+       Roop Pal, Puneet Sukhija
+     Product: AI that understands construction blueprints. Founded in 2024 by Roop Pal and Pun...
+  🔍 Enriching: Openroll
+     Founders: 2
+       Shraey Bhatia, Arkadiy Telegin
+     Product: Voice AI agents to automate call centers (digital call center workers). Founded ...
+  ✅ Processed 150/555 companies...
+  🔍 Enriching: Fixpoint
+  ⏸️  Completed 150/555, pausing briefly...
+     Founders: 1
+       Thomas Minassian
+     Product: Character.AI with real time video avatars. Founded in 2024 by Paul-Henri Biojout...
+  🔍 Enriching: Bear
+     Founders: 2
+       Rupesh Jeyaram, Antonio Monreal
+     Product: Automating refurbishment of $1T in consumer electronics. Founded in 2024 by Rupe...
+  🔍 Enriching: Moss
+     Founders: 2
+       Saner Cakir, Kayla Lee
+     Product: Voice AI Customer Support for Financial Services. Founded in 2024 by Saner Cakir...
+  🔍 Enriching: MarkIt
+     Founders: 2
+       Newman Hu, Sarthak Srinivas
+     Product: AI documentation engineer – test & autoimprove stale product docs. Founded in 20...
+  🔍 Enriching: Dome
+     Founders: 2
+       Daniel Gibbon, Nathan Wang
+     Product: AI Teacher Assistant for Grading Essays. Founded in 2023 by Daniel Gibbon and Na...
+  🔍 Enriching: Clicks
+     Founders: 1
+       Patrick Foster
+     Product: AI-Powered Collections Platform for Food Distributors. Founded in 2024 by Patric...
+  🔍 Enriching: Fastshot
+     Founders: 2
+       Eric Button, Kristian Gaylord
+     Product: AI for air traffic control. Founded in 2024 by Eric Button and Kristian Gaylord,...
+  🔍 Enriching: Claybird
+     Founders: 2
+       Jawad Iqbal, Emily Nieves
+     Product: Agents for Accelerated Clinical Trial Design. Founded in 2024 by Jawad Iqbal and...
+  🔍 Enriching: LunaBill
+     Founders: 2
+       Porsev Aslan, Mattias Lindell
+     Product: The world's first Agentic compensation platform. Founded in 2024 by Porsev Aslan...
+  🔍 Enriching: Velvet
+     Founders: 1
+       Max Henry Xie
+     Product: AI Copilot that automates admin work for veterinary professionals. Founded in 20...
+  🔍 Enriching: Stratus Aviation
+     Founders: 1
+       Sam Gorman
+     Product: Rivet helps product designers change software without coding. Founded in 2025 by...
+  🔍 Enriching: Bluma
+     Founders: 2
+       Siddhant Paliwal, Janak Sunil
+     Product: Market to AI Agents. Founded in 2025 by Siddhant Paliwal and Janak Sunil, Bear h...
+  🔍 Enriching: Lightberry
+     Founders: 2
+       Elvira Dzhuraeva, Dmitry Fatkhi
+     Product: Lovable for mobile apps. Founded in 2025 by Elvira Dzhuraeva and Dmitry Fatkhi, ...
+  🔍 Enriching: The Hog
+     Founders: 2
+       Sri Raghu Malireddi, Harsha Nalluru
+     Product: Real-time semantic search for Conversational AI. Founded in 2024 by Sri Raghu Ma...
+  🔍 Enriching: Telemetron
+     Founders: 2
+       Chanhyung Kim, Roland Saavedra
+     Product: Silver Bullet for Trade Compliance. Founded in 2025 by Chanhyung Kim and Roland ...
+  🔍 Enriching: Boom AI
+     Founders: 2
+       Ivan Lazarte, Gabriel Ocana Santero
+     Product: AI drug discovery platform for neurotherapeutics. Founded in 2024 by Ivan Lazart...
+  🔍 Enriching: Freeport Markets
+     Founders: 2
+       Jakub Cichon, Dylan Mikus
+     Product: Source and manage experts for AI training jobs. Founded in 2023 by Jakub Cichon ...
+  🔍 Enriching: Miniswap
+     Founders: 2
+       Saad Jamal, Abdullah Nauman
+     Product: Claybird plans, creates, and edits your AI video ad. Founded in 2025 by Saad Jam...
+  🔍 Enriching: Rovi Health
+     Founders: 2
+       David Day, Suhail Parry
+     Product: Automating Calls for Healthcare Billing Teams. Founded in 2025 by David Day, Suh...
+  🔍 Enriching: Lemma
+     Founders: 1
+       Hunter Nguyen
+     Product: AI-powered intelligence layer for airports. Founded in 2025 by Hunter Nguyen and...
+  🔍 Enriching: Mantle
+     Founders: 2
+       Stephen Ni, Alisa Wu
+     Product: Automating Short-Form Video Ads at Scale. Founded in 2025 by Stephen Ni and Alis...
+  🔍 Enriching: Karumi
+     Founders: 2
+       Lucas Mantovani, Lucas Tucker
+     Product: The Adobe Premiere of AI video. Founded in 2025 by Lucas Mantovani and Lucas Tuc...
+  🔍 Enriching: Icarus
+     Founders: 2
+       Hudson Liao, Paulo Nascimento
+     Product: Your Go-To-Market Command Center. Founded in 2025 by Hudson Liao and Paulo Nasci...
+  🔍 Enriching: Waffer
+     Founders: 2
+       Shivani Patel, Hamza Shaikh
+     Product: Customer Support Platform Built for Hardware. Founded in 2025 by Shivani Patel a...
+  🔍 Enriching: Denki
+     Founders: 1
+       Daniel Farrell
+     Product: Cursor for Designers. Founded in 2024 by Daniel Farrell and Kiet Ho, Onlook has ...
+  ✅ Processed 160/555 companies...
+  🔍 Enriching: Metorial
+     Founders: 2
+       Ali Attar, Stephan Koenigstorfer
+     Product: The social brain for robots. Founded in 2025 by Ali Attar and Stephan Koenigstor...
+  🔍 Enriching: Kalpa Labs
+     Founders: 2
+       Will Hanna, Zak Singh
+     Product: The Marketplace for Tabletop Games. Founded in 2025 by Will Hanna and Zak Singh,...
+  🔍 Enriching: Absurd
+     Founders: 2
+       Bryan Reed, Lihong Wang
+     Product: Intelligent DeFi Investment Platform. Founded in 2025 by Bryan Reed and Lihong W...
+  🔍 Enriching: Clad Labs
+     Founders: 2
+       Cole Gawin, Jerry Zhang
+     Product: Continuous learning for AI agents. Founded in 2025 by Cole Gawin and Jerry Zhang...
+  🔍 Enriching: Automax.ai
+     Founders: 2
+       Tarun Vallabhaneni, Santosh Vallabhaneni
+     Product: Text-based healthcare that slashes employer health spend. Founded in 2025 by Tar...
+  🔍 Enriching: Specific
+     Founders: 2
+       Samrath Chadha, Gautam Paranjape
+     Product: Build internal agents to automate back office work with one prompt. Founded in 2...
+  🔍 Enriching: Relaw
+     Founders: 2
+       Juan Casian, Sergio Garcia
+     Product: Your AI sales and support team for e-commerce brands. Founded in 2025 by Juan Ca...
+  ✅ Processed 180/555 companies...
+  🔍 Enriching: Narrative
+     Founders: 2
+       Toni Lopez, Pablo Omenaca
+     Product: AI-powered product demos. Founded in 2025 by Toni Lopez and Pablo Omenaca, Karum...
+  🔍 Enriching: Crunched
+     Founders: 1
+       Henry Kwan
+     Product: Stratospheric birds for defense. Founded in 2023 by Henry Kwan, Icarus has 6 emp...
+  🔍 Enriching: Lua Global Inc
+     Founders: 2
+       Kurush Dubash, Kunal Roy
+     Product: A unified API for prediction markets, like Kalshi and Polymarket. Founded in 202...
+  🔍 Enriching: Spatial AI
+     Founders: 2
+       Dominik Helmreich, Oliver Knapp
+     Product: The first AI back-office worker that works like a human. Founded in 2025 by Domi...
+  ✅ Processed 170/555 companies...
+  🔍 Enriching: Sourcebot
+     Founders: 2
+       Damian Chng, Philip Ho
+     Product: Absurd AI Launch Videos. Founded in 2025 by Damian Chng, Philip Ho, and Daniel K...
+  🔍 Enriching: Zalos
+     Founders: 2
+       Kevin Le, Richard Wang
+     Product: brainrot ide. Founded in 2025 by Kevin Le and Richard Wang, Clad Labs has 2 empl...
+  🔍 Enriching: Aside
+     Founders: 2
+       Fabian Lindfors, Iman Radjavi
+     Product: Platform for engineers to build backends without code. Founded in 2025 by Fabian...
+  🔍 Enriching: Everest
+     Founders: 1
+       Tobias Herber
+     Product: Vercel for MCP. Founded in 2025 by Tobias Herber and Karim (Wen) Rahme, Metorial...
+  ✅ Processed 190/555 companies...
+  🔍 Enriching: Expected Parrot
+     Founders: 2
+       Gautam Jha, Prashant Shishodia
+     Product: Frontier Speech models. Founded in 2025 by Gautam Jha and Prashant Shishodia, Ka...
+  🔍 Enriching: Imagine AI
+     Founders: 1
+       Ragav Sachdeva
+     Product: Lovable for Animated Graphics Videos. Founded in 2025 by Ragav Sachdeva, Waffer ...
+  🔍 Enriching: Anto Biosciences
+     Founders: 3
+       Victor Chapman, Aryan Sawhney, Vatsal Shah
+     Product: Edit thousands of hours of footage in seconds. Founded in 2025 by Victor Chapman...
+  🔍 Enriching: Patent Watch
+     Founders: 2
+       Philip Borge, Michael Sakowski
+     Product: The first Excel AI analyst built by and for Excel power users. Founded in 2025 b...
+  🔍 Enriching: s2.dev
+     Founders: 2
+       Brendan Kellam, Michael Sukkarieh
+     Product: Helping humans and AI agents understand massive codebases. Founded in 2024 by Br...
+  🔍 Enriching: Tornyol
+     Founders: 1
+       Stefan Kruger
+     Product: Self-Serve AI powered Sales, Support & Booking Agents. Founded in 2025 by Stefan...
+  🔍 Enriching: Nucleo
+     Founders: 2
+       Jun Kim, Sanghun Lee
+     Product: Real-time suggestions for sales calls. Founded in 2024 by Jun Kim, Sanghun Lee, ...
+  🔍 Enriching: Leadbay
+     Founders: 2
+       Felipe Jin Li, David Jin Li
+     Product: AI for Auditors at Public Companies. Founded in 2025 by Felipe Jin Li and David ...
+  🔍 Enriching: Pixley AI
+     Founders: 2
+       William Fairbairn, Hung Hoang
+     Product: Computer Agents for Finance tasks like reconciliation, in your system!. Founded ...
+  🔍 Enriching: Cortex AI
+     Founders: 1
+       Humza Ahmed
+     Product: AI Agents for automating real-estate appraisals. Founded in 2025 by Humza Ahmed,...
+  🔍 Enriching: Play Health
+  ⏸️  Completed 200/555, pausing briefly...
+     Founders: 1
+       Yolanda Cao
+     Product: We build AI support engineers for outsourced IT services (MSPs). Founded in 2025...
+  🔍 Enriching: Casey
+     Founders: 1
+       Alex Petkos
+     Product: Data for robot foundational models. Founded in 2025 by Alex Petkos, Spatial AI h...
+  ✅ Processed 200/555 companies...
+  🔍 Enriching: Selfin
+     Founders: 2
+       Neo Lee, Sky Yang
+     Product: A Better You for B2B Sales. Founded in 2025 by Neo Lee and Sky Yang, Imagine AI ...
+  🔍 Enriching: Compyle
+     Founders: 2
+       John Horton, Robin Horton
+     Product: Simulate your stakeholders. Founded in 2024 by John Horton and Robin Horton, Exp...
+  🔍 Enriching: Lexi
+     Founders: 2
+       Stephen Balogh, Shikhar Bhushan
+     Product: Streams as a cloud storage primitive. Founded in 2023 by Stephen Balogh, Shikhar...
+  🔍 Enriching: Codyco
+     Founders: 2
+       Andreas Stroe, Alexander Stroe
+     Product: AI for detecting patent infringements. Founded in 2025 by Andreas Stroe and Alex...
+  🔍 Enriching: ComplyDo
+     Founders: 2
+       Richie Hsiung, Frank Li
+     Product: The agentic AI Word editor. Founded in 2025 by Richie Hsiung and Frank Li, Praxi...
+  🔍 Enriching: Bravi
+     Founders: 2
+       Angelica Iacovelli, Luca Pegolotti
+     Product: Automated CT scan analysis for oncology care. Founded in 2025 by Angelica Iacove...
+  🔍 Enriching: Bellman
+     Founders: 2
+       Paula Gutierrez, Joel Tomas Pimentel
+     Product: The first AI Bank. Founded in 2025 by Paula Gutierrez and Joel Tomas Pimentel, S...
+  🔍 Enriching: Sunflower
+     Founders: 1
+       Lucas Ngoo
+     Product: Large-scale real-world robot & egocentric data for embodied AI. Founded in 2025 ...
+  🔍 Enriching: Redapto
+     Founders: 2
+       Pranit Agrawal, Krish Iyengar
+     Product: The first platform where parents & kids can co-create AI cartoon shows. Founded ...
+  🔍 Enriching: Articulate
+     Founders: 2
+       Chris Farestveit, Vinh Ha
+     Product: AI Assistant for B2C Law Firms. Founded in 2025 by Chris Farestveit and Vinh Ha,...
+  🔍 Enriching: Aleph Lab
+     Founders: 2
+       Endrit Bytyqi, Stefan Schaff
+     Product: AI Receptionist for Hotel Groups. Founded in 2025 by Endrit Bytyqi, Stefan Schaf...
+  ✅ Processed 220/555 companies...
+  🔍 Enriching: Logical
+     Founders: 2
+       Yash Jain, Arnav Jain
+     Product: Granular Customer Research at Scale. Founded in 2025 by Yash Jain, Arnav Jain, a...
+  🔍 Enriching: Kestrel AI
+     Founders: 2
+       Moritz Moser, Matthias Schneider
+     Product: More Comply, Less Do. Most flexible compliance engine for enterprises. Founded i...
+  🔍 Enriching: Sciloop
+     Founders: 2
+       Jonathan Miranda, Mark Nazzaro
+     Product: Lovable for Software Engineers. Founded in 2025 by Jonathan Miranda and Mark Naz...
+  🔍 Enriching: Multifactor
+     Founders: 1
+       Anas Bouassami
+     Product: Automating communications for home services companies. Founded in 2025 by Anas B...
+  🔍 Enriching: Allus AI
+     Founders: 2
+       Ian Miller, Andrea Mazzocchi
+     Product: Perimenopause health platform redefining women's midlife care. Founded in 2025 b...
+  🔍 Enriching: Unsiloed AI
+     Founders: 0
+     Product: The infrastructure layer for insurance distribution. Founded in 2025 by Nico Hän...
+  🔍 Enriching: SF Tensor
+     Founders: 1
+       Arvid Ernst Gollwitzer
+     Product: A multimodal foundation model for microbial communities. Founded in 2025 by Davi...
+  🔍 Enriching: AnswerThis
+     Founders: 2
+       Anushka Idamekorala, Sam Karu
+     Product: A hyper context-aware and proactive desktop AI copilot. Founded in 2025 by Anush...
+  🔍 Enriching: Nivara
+     Founders: 1
+       Koby Conrad
+     Product: Building the Sobriety Platform for the future of Superintelligence. 🌻. Founded i...
+  🔍 Enriching: SellRaze
+     Founders: 2
+       Evan Chopra, Raman Varma
+     Product: AI-Native Kubernetes Ops & Security Platform. Founded in 2025 by Evan Chopra and...
+  🔍 Enriching: Mod AI
+     Founders: 2
+       Blake Passe, Milind Sagaram
+     Product: Speeding Up Construction with AI. Founded in 2025 by Blake Passe and Milind Saga...
+  🔍 Enriching: Semble AI
+     Founders: 2
+       Ludovic Granger, Milan Stankovic
+     Product: Discover and qualify SMB leads others can’t find. Founded in 2023 by Ludovic Gra...
+  🔍 Enriching: Flick
+     Founders: 0
+     Product: We build micro-drones that kill mosquitoes. . Founded in  by Clovis Piedallu and...
+  ✅ Processed 210/555 companies...
+  🔍 Enriching: hillclimb
+     Founders: 2
+       Bilal Asmatullah, Osman Siddique
+     Product: Fully automated scientific discovery. Founded in 2025 by Bilal Asmatullah and Os...
+  ✅ Processed 230/555 companies...
+  🔍 Enriching: Wardstone
+     Founders: 2
+       Anirudh Pupneja, Cheril Shah
+     Product: Self-improving systems for Customer Support Teams. Founded in 2025 by Anirudh Pu...
+  🔍 Enriching: Hypercubic
+     Founders: 2
+       Harshit Garg, Kiran Mohan
+     Product: AI Powered Associates. Founded in 2025 by Harshit Garg and Kiran Mohan, Lexi has...
+  🔍 Enriching: Cranston AI
+     Founders: 2
+       Vivek Nair, Colin Roberts
+     Product: Zero-trust authentication, authorization, and auditing for AI agents. Founded in...
+  🔍 Enriching: Questom
+     Founders: 2
+       Adnan Abbas, Aman Mishra
+     Product: API for parsing multimodal unstructured data. Founded in 2025 by Adnan Abbas and...
+  🔍 Enriching: Veria Labs
+     Founders: 2
+       Tejas Agarwal, Pankaj Mishra
+     Product: The intelligence layer for how your teams use AI. Founded in 2025 by Tejas Agarw...
+  🔍 Enriching: PlayVision
+     Founders: 2
+       Tom Koska, Luk Koska
+     Product: Infrastructure for AI labs to focus on research. Founded in 2025 by Tom Koska, L...
+  🔍 Enriching: Koyal
+     Founders: 2
+       Dan Han, Jaihee Kim
+     Product: Your child’s AI language buddy inside the games they already love. . Founded in ...
+  🔍 Enriching: Kaigo Health
+     Founders: 2
+       Ethan Boyers, Jonathan Tyshler
+     Product: Autonomous fire and life-safety systems engineer. Founded in 2025 by Ethan Boyer...
+  🔍 Enriching: Norra
+     Founders: 1
+       Ayush Garg
+     Product: AI platform helping 200k+ researchers accelerate scientific discovery. Founded i...
+  🔍 Enriching: Soren
+     Founders: 2
+       Ray Wang, Zoey Zhang
+     Product: End-to-end AI filmmaking software. Founded in 2025 by Ray Wang and Zoey Zhang, F...
+  ✅ Processed 240/555 companies...
+  🔍 Enriching: Dari
+     Founders: 2
+       Zhisen An, Christopher Kai Cui
+     Product: Transforming manufacturing with next-gen Vision Foundation Model. Founded in 202...
+  🔍 Enriching: The Context Company
+     Founders: 2
+       Cayden Liao, Jayden Sarveshkumar
+     Product: Automated security for high-stakes industries. Founded in 2025 by Cayden Liao, J...
+  🔍 Enriching: Sorce
+     Founders: 2
+       Sebastian Fischer, Tobias Fischer
+     Product: Satellites for Missile Defense. Founded in 2025 by Sebastian Fischer and Tobias ...
+  🔍 Enriching: Caddy
+     Founders: 2
+       Jun Park, Ibrakhim Ustelbay
+     Product: Math RL Environments for Post-training. Founded in 2025 by Jun Park and Ibrakhim...
+  🔍 Enriching: Alt-X
+     Founders: 2
+       Sai Gurrapu, Aayush Naik
+     Product: AI to maintain and modernize COBOL/mainframes. Founded in 2025 by Sai Gurrapu an...
+  🔍 Enriching: Locus
+     Founders: 1
+       Max Minsker
+     Product: Full-service AI for accounting and finance. Founded in 2025 by Max Minsker and S...
+  🔍 Enriching: Deeptrace
+     Founders: 2
+       Ritanshu Dokania, Abhimanyu Yadav
+     Product: AI Customer Support for the Merchandise Industry. . Founded in 2025 by Ritanshu ...
+  🔍 Enriching: Aspect
+     Founders: 2
+       Anish Gupta, Marc Zoghby
+     Product: AI Moneyball for Sports. Founded in 2025 by Anish Gupta and Marc Zoghby, PlayVis...
+  🔍 Enriching: Hyperspell
+     Founders: 2
+       Ben Rubin, Yining Zhang
+     Product: AI Operations Platform for Nursing Facilites. Founded in 2025 by Ben Rubin and Y...
+  ✅ Processed 250/555 companies...
+  🔍 Enriching: Bolna AI
+     Founders: 2
+       Tyler Ma, Jeff Mao
+     Product: The fastest way to sell online. Founded in 2023 by Tyler Ma and Jeff Mao, SellRa...
+  🔍 Enriching: Nexus
+     Founders: 1
+       Kevin Xie
+     Product: Domain-specific evals for your vertical AI. Founded in 2025 by Kevin Xie, Soren ...
+  🔍 Enriching: Zavo
+     Founders: 2
+       Ryan Samadi, Michael Wachsman
+     Product: AI Diligence Tools for Private Investors. Founded in 2024 by Ryan Samadi and Mic...
+  🔍 Enriching: MOVEdot
+     Founders: 2
+       Gauri Agarwal, Mehul Agarwal
+     Product: Personalized Audio to Video Filmmaking. Founded in 2025 by Gauri Agarwal and Meh...
+  🔍 Enriching: Parrot
+  ⏸️  Completed 250/555, pausing briefly...
+     Founders: 2
+       Benjamin Hong, Avyay Varadarajan
+     Product: The easiest way to build reliable browser use agents. Founded in 2025 by Benjami...
+  🔍 Enriching: Parse
+     Founders: 2
+       Cole Dermott, Eliot Lee
+     Product: Payment infrastructure for agents. Founded in 2025 by Cole Dermott and Eliot Lee...
+  🔍 Enriching: Structured AI
+     Founders: 2
+       Rajiv Sancheti, Connor Waslo
+     Product: Control all your work apps with your voice. Founded in 2025 by Rajiv Sancheti an...
+  🔍 Enriching: Uplane
+     Founders: 2
+       Rohil Agarwal, Arman Kumaraswamy
+     Product: Observability for AI agents to help developers fix failures fast. Founded in 202...
+  🔍 Enriching: AirCaps
+     Founders: 2
+       Andy Lee, Sri Somasundaram
+     Product: AI agents for on-call. Founded in 2025 by Andy Lee and Sri Somasundaram, Deeptra...
+  🔍 Enriching: Brickanta
+     Founders: 2
+       Edison Chiu, Gurish Sharma
+     Product: AI Agents for post-production teams. Founded in 2025 by Edison Chiu, Gurish Shar...
+  🔍 Enriching: Remedy
+     Founders: 2
+       Shady Al Shoha, Assem Chammah
+     Product: Business-led Enterprise AI. Founded in 2024 by Shady Al Shoha and Assem Chammah,...
+  🔍 Enriching: Semiotic
+     Founders: 2
+       Bruno Finco, Girish Radhakrishnan
+     Product: AI Agents for Physical World Testing. Founded in 2024 by Bruno Finco and Girish ...
+  🔍 Enriching: Lapis
+     Founders: 2
+       Ilkan Gezer, Can Zehebi
+     Product: Agentic Point of Sale for restaurants and retail. Founded in 2025 by Ilkan Gezer...
+  🔍 Enriching: Nox Metals
+     Founders: 0
+     Product: Voice AI to enable India's next billion. Founded in  by Prateek Sachan and Maitr...
+  🔍 Enriching: Blue
+     Founders: 1
+       Manu Ebert
+     Product: Memory for AI Agents. Founded in 2024 by Conor Brennan-Burke and Manu Ebert, Hyp...
+  ✅ Processed 260/555 companies...
+  🔍 Enriching: Mixy
+     Founders: 1
+       Erik Dahl
+     Product: TikTok for language learning. Founded in 2024 by Erik Dahl, Amir P. Hanna, and J...
+  🔍 Enriching: Paloma
+     Founders: 2
+       Daniel Ajayi, David Alade
+     Product: Tinder for jobs. Founded in 2024 by Daniel Ajayi, David Alade, and Oluwapelumi D...
+  🔍 Enriching: Uplift AI
+     Founders: 0
+     Product: AI autopilot for digital advertising. Founded in 2025 by Marvin Abdel-Massih, Ju...
+  🔍 Enriching: RealRoots
+     Founders: 2
+       Peter Chien, Lukas Klaiber
+     Product: AI-powered outpatient care management platform. Founded in 2024 by Peter Chien, ...
+  🔍 Enriching: Luminal
+     Founders: 1
+       Alex Forman
+     Product: Build an API to interact with any website in seconds. . Founded in 2025 by Alex ...
+  🔍 Enriching: Freya
+     Founders: 2
+       Linus Bein Fahlander, Lucas Otterling
+     Product: Cursor for construction estimation & project management. Founded in 2025 by Linu...
+  ✅ Processed 270/555 companies...
+  🔍 Enriching: burnt
+     Founders: 2
+       Madhav Lavakare, Nirbhay Narang
+     Product: AR glasses to better understand, remember and learn from conversations. Founded ...
+  🔍 Enriching: Avent
+     Founders: 2
+       Nikhil Devaraj, Sai Mandhan
+     Product: AI Agents for Pharmacies. Founded in 2025 by Nikhil Devaraj, Sai Mandhan, and Vi...
+  🔍 Enriching: Cacao
+     Founders: 2
+       Issy Greenslade, Brandon Abreu Smith
+     Product: Agentic AI workforce for pre-construction design engineering. Founded in 2025 by...
+  🔍 Enriching: Veritus Agent
+     Founders: 1
+       Zane Hengsperger
+     Product: The modern factory for fast, low-cost metals. . Founded in 2025 by Zane Hengsper...
+  🔍 Enriching: Outrove
+     Founders: 2
+       Omar Abdelaziz, Farhan Hossain
+     Product: The first voice assistant that can control every app on your iPhone. Founded in ...
+  🔍 Enriching: NOSO LABS
+     Founders: 2
+       Alex Avnit, Nazli Danis
+     Product: AI-native CRM for putting post-sales operations on autopilot. Founded in 2025 by...
+  🔍 Enriching: Vulcan Technologies
+     Founders: 2
+       Muhammad Bin Sabir, Hammad Malik
+     Product: Foundational Voice Models for regional languages. Founded in 2024 by Muhammad Bi...
+  🔍 Enriching: Spotlight Realty
+     Founders: 2
+       Joe Kennedy, Jonah Siegle
+     Product: Make Mashups. Founded in 2025 by Joe Kennedy and Jonah Siegle, Mixy has 2 employ...
+  🔍 Enriching: Interfere
+     Founders: 2
+       Joe Fioti, Matthew Gunton
+     Product: Making AI run fast on any hardware. Founded in 2025 by Joe Fioti, Matthew Gunton...
+  ✅ Processed 280/555 companies...
+  🔍 Enriching: Munify
+     Founders: 1
+       Abhay Kalra
+     Product: AI agents for industrial commerce. Founded in 2025 by Abhay Kalra, Avent has 2 e...
+  🔍 Enriching: RowFlow
+     Founders: 2
+       Bryan Grisales, Michael Roberson
+     Product: AI-native design firm. Founded in 2025 by Bryan Grisales, Michael Roberson, and ...
+  🔍 Enriching: TectoAI
+     Founders: 2
+       Alec Howard, Carlos Jimenez
+     Product: The Global Dollar App for Brazil. Founded in 2025 by Alec Howard, Carlos Jimenez...
+  🔍 Enriching: Duranium
+     Founders: 2
+       Tunga Bayrak, Tomas Nepala
+     Product: Voice AI for Enterprises. Founded in 2025 by Tunga Bayrak and Tomas Nepala, Frey...
+  🔍 Enriching: Perspectives Health
+     Founders: 2
+       Varunram Ganesh, Sai Surbehera
+     Product: The Fastest, Most Accurate AI Search Analytics Platform. Founded in 2025 by Varu...
+  🔍 Enriching: Modelence
+     Founders: 2
+       Tara Kappel, Dorothy Li
+     Product: AI social app for female transplants. Founded in 2024 by Tara Kappel and Dorothy...
+  🔍 Enriching: Magnetic
+     Founders: 2
+       Joseph Jacob, Rhea Karimpanal
+     Product: Agentic Operating System for Food Supply Chain. Founded in 2023 by Joseph Jacob,...
+  🔍 Enriching: Fleetline
+     Founders: 2
+       Joey Stein, Joshua March
+     Product: AI agents for the consumer lending industry. Founded in 2025 by Joshua March, Da...
+  🔍 Enriching: Clodo
+     Founders: 1
+       Saif Elhager
+     Product: Ultra-realistic AI Recruiter. Founded in 2025 by Saif Elhager and Ahmed ElShiree...
+  🔍 Enriching: stagewise
+     Founders: 2
+       Jack Bubes, Alec Olesky
+     Product: Replacing forms with AI conversations. Founded in 2025 by Jack Bubes and Alec Ol...
+  🔍 Enriching: Flywheel AI
+     Founders: 1
+       Berkley Noble
+     Product: Reshoring critical metal production. Founded in 2025 by Berkley Noble and Brende...
+  🔍 Enriching: Juxta
+     Founders: 2
+       Eduard Piliposyan, Aram Shatakhtsyan
+     Product: All-in-one TypeScript cloud for production AI apps. Founded in 2025 by Eduard Pi...
+  🔍 Enriching: Okibi
+     Founders: 2
+       Raymond Allie, Jake Phelan
+     Product: AI powered brokerage reducing residential rental commissions in NYC…. Founded in...
+  🔍 Enriching: dScribe AI
+     Founders: 1
+       Julian Goetze
+     Product: The frontend coding agent for real codebases. Founded in 2024 by Julian Goetze a...
+  ✅ Processed 300/555 companies...
+  🔍 Enriching: Kernel
+     Founders: 2
+       Veer Juneja, Saurav Kumar
+     Product: Optimizing fleet planning with data driven algorithms. Founded in 2025 by Veer J...
+  🔍 Enriching: Reacher
+     Founders: 2
+       Tanner Jones, Aleksander Mekhanik
+     Product: AI regulatory drafting and compliance. Founded in 2025 by Tanner Jones, Aleksand...
+  🔍 Enriching: Certus AI
+     Founders: 2
+       Patrick Fay, Thomas Shelley
+     Product: AI Tax Preparer for CPA firms. Founded in 2024 by Patrick Fay and Thomas Shelley...
+  🔍 Enriching: Hera
+     Founders: 2
+       Rithvik Chuppala, Sid Rajaram
+     Product: AI For Large Scale Construction. Founded in 2025 by Rithvik Chuppala and Sid Raj...
+  🔍 Enriching: Nottelabs
+     Founders: 2
+       Mahimana Bhatt, Jash Mota
+     Product: Waymo for excavators. Founded in 2023 by Mahimana Bhatt and Jash Mota, Flywheel ...
+  🔍 Enriching: Pally
+     Founders: 2
+       Winston Chi, Alex Xi
+     Product: Build AI agents for field technicians to diagnose and sell 10x better. Founded i...
+  🔍 Enriching: Locata
+     Founders: 1
+       Khalid Ashmawy
+     Product: The Cross-Border Neobank for the Middle East. Founded in 2025 by Khalid Ashmawy,...
+  🔍 Enriching: AutoAce
+     Founders: 1
+       Luke Shiels
+     Product: Build software that never breaks. Founded in 2025 by Luke Shiels, Interfere has ...
+  ✅ Processed 290/555 companies...
+  🔍 Enriching: Fernstone
+     Founders: 1
+       Eshan Dosani
+     Product: Operating System for Addiction Clinics. Founded in 2024 by Eshan Dosani, Kyle Hy...
+  🔍 Enriching: Pleom
+     Founders: 2
+       Mahyad Ghassemi, Saurav Mitra
+     Product: Build AI coworkers using natural language, it's Lovable for agents. Founded in 2...
+  🔍 Enriching: Convexia
+     Founders: 2
+       Cole Robertson, Warren Wijaya Wang
+     Product: Computer vision for bulk inventory tracking. Founded in 2024 by Cole Robertson a...
+  🔍 Enriching: SigmanticAI
+  ⏸️  Completed 300/555, pausing briefly...
+     Founders: 2
+       Niosha Afsharikia, Roksana Baleshzar
+     Product: Recruit and Monitor AI Employees. Founded in 2025 by Niosha Afsharikia, PhD and ...
+  🔍 Enriching: Opennote
+     Founders: 2
+       Lucas Giordano, Andrea Pinto
+     Product: Reliable Web Agents for Enterprise. Founded in 2025 by Lucas Giordano and Andrea...
+  🔍 Enriching: Sira
+     Founders: 2
+       Rafael Garcia, Catherine Jue
+     Product: Crazy Fast Browsers-as-a-Service. Founded in 2025 by Rafael Garcia and Catherine...
+  🔍 Enriching: F4
+     Founders: 1
+       Peter Tribelhorn
+     Product: AI Motion Designer. Founded in 2025 by Peter Tribelhorn and Chia-Lun Wu, Hera ha...
+  🔍 Enriching: Metis
+     Founders: 2
+       Joshua Chang, Alejandro Salinas
+     Product: AI Referral Automation for Primary Care Clinics. Founded in 2025 by Joshua Chang...
+  🔍 Enriching: Eden
+     Founders: 2
+       Adam Gamieldien, Isaac Nichols
+     Product: Replacing the restaurant phone line with Voice AI. Founded in 2025 by Adam Gamie...
+  🔍 Enriching: Altur
+     Founders: 2
+       Bora Mutluoglu, Jerry Qian
+     Product: We automate creator marketing for the world's largest brands. Founded in 2024 by...
+  🔍 Enriching: PARES AI
+     Founders: 2
+       Bradley Bunch, Michael Wong
+     Product: AI-native operating system for car dealerships. Founded in 2025 by Bradley Bunch...
+  🔍 Enriching: Avelis Health
+     Founders: 0
+     Product: Talk to your AI. Founded in  by Royce Arockiasamy, Pleom has 0 employees based i...
+  🔍 Enriching: Nautilus
+     Founders: 2
+       Sunjeet Chugh, Evan Meyer
+     Product: AI Agents for Accounts Payable. Founded in 2025 by Sunjeet Chugh and Evan Meyer,...
+  🔍 Enriching: Humoniq
+     Founders: 2
+       Rohil Khare, Tamzid Razzaque
+     Product: The Cursor for Chip Design - Delivering Silicon-Ready Chip Designs…. Founded in ...
+  🔍 Enriching: Palace
+     Founders: 2
+       Haz Hubble, Wyatt Lansford
+     Product: Intelligent Unified Inbox + Personal CRM. Founded in 2024 by Haz Hubble and Wyat...
+  ✅ Processed 310/555 companies...
+  🔍 Enriching: Idler
+     Founders: 1
+       John Ferrara
+     Product: Building a GPS alternative 100x more powerful with no hardware needed. Founded i...
+  🔍 Enriching: Floot
+     Founders: 2
+       Luke Button, James Chen
+     Product: AI-powered insurance brokerage for businesses. Founded in 2025 by Luke Button, J...
+  🔍 Enriching: Alara
+     Founders: 2
+       Nathan Belaye, Antonio Chan
+     Product: AI Native Rippling for Deskless Workers. Founded in 2025 by Nathan Belaye and An...
+  🔍 Enriching: Socratix AI
+     Founders: 2
+       Abhi Arya, Rishi Srihari
+     Product: Write, learn, and connect ideas—all in one place. Founded in 2025 by Abhi Arya, ...
+  🔍 Enriching: Minimal AI
+     Founders: 2
+       Aidan Cantu, Paul Shin
+     Product: Automating compliance checks for engineering drawings. Founded in 2025 by Aidan ...
+  🔍 Enriching: Risely AI
+     Founders: 2
+       Ivan Chub, Nalu Concepcion
+     Product: Scale AI for reinforcement learning environments. . Founded in 2025 by Ivan Chub...
+  🔍 Enriching: Omnara
+     Founders: 2
+       Angel Onuoha, Ahmad Shehu
+     Product: We audit medical claims for self-insured employers and health plans. Founded in ...
+  🔍 Enriching: Knowlify
+     Founders: 2
+       Todd Sullivan, Will Weber
+     Product: AI-Native BPO for travel & transport. Founded in 2025 by Todd Sullivan and Will ...
+  🔍 Enriching: Autosana
+     Founders: 2
+       Ayaan Parikh, Rahul Vijayan
+     Product: The world's first AI-maximalist pharma company. Founded in 2025 by Ayaan Parikh ...
+  🔍 Enriching: April
+     Founders: 2
+       Edward Look, Yujian Yao
+     Product: The easiest way for non-coders to build apps with AI. Founded in 2025 by Edward ...
+  🔍 Enriching: Iron Grid
+     Founders: 1
+       Zihao Wang
+     Product: Helping commercial real estate brokers find and close more deals. Founded in 202...
+  🔍 Enriching: Finto
+     Founders: 2
+       Jason He, Alex Talamonti
+     Product: Autonomous Marketing AI for Ecommerce Brands. Founded in 2025 by Jason He and Al...
+  🔍 Enriching: Motives
+     Founders: 2
+       Amayr Babar, Ali Sareini
+     Product: AI platform to grow and to optimize car washes. Founded in 2024 by Amayr Babar a...
+  🔍 Enriching: Relling
+     Founders: 2
+       Aryan Shah, Aayush Sheth
+     Product: Infrastructure to build reliable agents. Founded in 2025 by Aryan Shah, Aayush S...
+  ✅ Processed 320/555 companies...
+  🔍 Enriching: Hyprnote
+     Founders: 2
+       Leeds Rising, Derek Ye
+     Product: Operational intelligence for PE funds and PE-backed companies. Founded in 2025 b...
+  🔍 Enriching: mcp-use
+     Founders: 1
+       Elyas Obbad
+     Product: Procurement Platform for Dental Offices. Founded in 2025 by Elyas Obbad, Dr. Sab...
+  ✅ Processed 330/555 companies...
+  🔍 Enriching: Novaflow
+     Founders: 1
+       Luis Olave
+     Product: Voice AI Agents for Debt Collection. Founded in 2023 by Pedro Fernández and Luis...
+  🔍 Enriching: Perseus Defense
+     Founders: 2
+       Riya Jagetia, Satya Vasanth Tumati
+     Product: AI coworkers for fraud and risk teams. Founded in 2025 by Riya Jagetia and Satya...
+  🔍 Enriching: Phases
+     Founders: 2
+       Shahryar Abbasi, Danial Asif
+     Product: AI agents that automate administrative work across college campuses. . Founded i...
+  🔍 Enriching: Solva
+     Founders: 2
+       Kartik Sarangmath, Ishaan Sehgal
+     Product: The Command Center for AI Agents. Founded in 2025 by Kartik Sarangmath and Ishaa...
+  🔍 Enriching: Albacore Inc.
+     Founders: 2
+       Titus Ex, Niek Hogenboom
+     Product: AI Agents for E-commerce Customer Support. Founded in 2024 by Titus Ex and Niek ...
+  🔍 Enriching: Riff
+     Founders: 2
+       Jason Steinberg, Yuvan Sundrani
+     Product: AI Agents for Mobile QA. Founded in 2025 by Jason Steinberg and Yuvan Sundrani, ...
+  🔍 Enriching: Mohi
+     Founders: 2
+       Linus Boehm, Jonas Morgner
+     Product: AI accounting for enterprise finance teams. Founded in 2025 by Linus Boehm, Jona...
+  🔍 Enriching: Mimos
+     Founders: 2
+       John Jeong, Deokhaeng Lee
+     Product: Open-source AI notetaker for the enterprise. Founded in 2023 by John Jeong, Deok...
+  🔍 Enriching: Nozomio
+     Founders: 3
+       Jonathan Maynard, Ritam Rana, Arjun Talati
+     Product: Convert textual content into explainer videos in < 15s. Founded in 2025 by Jonat...
+  🔍 Enriching: VibeFlow
+     Founders: 2
+       Jai Relan, Anya Singh
+     Product: Data and infra for world models. Founded in 2025 by Jai Relan and Anya Singh, Re...
+  🔍 Enriching: Comena
+     Founders: 2
+       Luigi Pederzani, Pietro Zullo
+     Product: Open-source dev tools and infrastructure for MCP. Founded in 2025 by Luigi Peder...
+  🔍 Enriching: Normal
+     Founders: 2
+       John Huddleston, Dante Vaisbort
+     Product: Autonomous undersea vehicles to deter maritime invasions. Founded in 2025 by Joh...
+  🔍 Enriching: GhostEye
+     Founders: 2
+       Neha Suresh, Akash Thakur
+     Product: Voice AI Executive Assistant. Founded in 2025 by Neha Suresh and Akash Thakur, A...
+  🔍 Enriching: Channel3
+     Founders: 2
+       Aman Agarwal, Amulya Balakrishnan
+     Product: The AI data analyst for biology labs. Founded in 2025 by Aman Agarwal and Amulya...
+  🔍 Enriching: Epicenter
+     Founders: 2
+       Fern Morrison, Gabriele Pozzato
+     Product: AI Insurance for hardware. Founded in 2025 by Fern Morrison and Gabriele Pozzato...
+  🔍 Enriching: Candytrail
+     Founders: 2
+       Jason Cornelius, Steve Messinger
+     Product: America's Golden Dome for Drones. Founded in 2025 by Jason Cornelius and Steve M...
+  🔍 Enriching: Embedder
+     Founders: 2
+       Adith Reddi, Kenny Zhang
+     Product: Cursor for music production. Founded in 2025 by Adith Reddi and Kenny Zhang, Rif...
+  🔍 Enriching: Flai
+     Founders: 0
+     Product: Consumer focus groups run by AI. Founded in  by Sean Conley and Sam Stoll, Motiv...
+  ✅ Processed 340/555 companies...
+  🔍 Enriching: b-12
+     Founders: 2
+       Michael Korovkin, Rohit Sirosh
+     Product: Helping companies rank in AI search. Founded in 2025 by Michael Korovkin and Roh...
+  🔍 Enriching: Fulcrum
+     Founders: 1
+       Arlan Rakhmetzhanov
+     Product: Context augmentation for agents. Founded in 2025 by Arlan Rakhmetzhanov, Nozomio...
+  🔍 Enriching: Trace
+     Founders: 1
+       Sorena Amini
+     Product: Automates insurance claims and stops incorrect payouts. Founded in 2025 by Soren...
+  🔍 Enriching: The Interface
+  ⏸️  Completed 350/555, pausing briefly...
+     Founders: 2
+       Hudhayfa Nazoordeen, Anson Yu
+     Product: Modern compliance for drones, robots, IoT, and beyond. Founded in 2025 by Hudhay...
+  🔍 Enriching: IronLedger.ai
+     Founders: 2
+       Mohammad Eshan, Charles Antoine Malenfant
+     Product: Human-Centric Security Validation. Founded in 2025 by Mohammad Eshan and Charles...
+  🔍 Enriching: Doe
+     Founders: 2
+       Almo Sutedjo, Jiehua Wu
+     Product: AI agents for distributors and manufacturers to automate order entry. Founded in...
+  🔍 Enriching: Louiza Labs
+     Founders: 1
+       Evan Seeyave
+     Product: Analyze and understand complex agent workflows with clarity. Founded in 2025 by ...
+  ✅ Processed 350/555 companies...
+  🔍 Enriching: Parachute
+     Founders: 2
+       Ayush Mahna, Aditya Mahna
+     Product: AI agents for in-person sales teams, starting with coaching. Founded in 2025 by ...
+  🔍 Enriching: Kalinda
+     Founders: 1
+       James Wall
+     Product: Automating clinical trials, starting with patient recruitment. Founded in 2025 b...
+  🔍 Enriching: Stellon Labs
+     Founders: 2
+       Uzay Girit, Kaivalya Hariharan
+     Product: The agentic debugger for AI systems. Founded in 2025 by Uzay Girit and Kaivalya ...
+  🔍 Enriching: BootLoop
+     Founders: 2
+       Juan Alzugaray, Alen Polakof
+     Product: We Bring Customers to Your Dealership. Founded in 2025 by Juan Alzugaray, Alen P...
+  🔍 Enriching: Nexa Labs
+     Founders: 1
+       Andres Bran
+     Product: Chemical Copilot for Pharma and Biotech. Founded in 2025 by Andres Bran and Zlat...
+  🔍 Enriching: Induction Labs
+     Founders: 2
+       Alessia Paccagnella, Elia Saquand
+     Product: Shopify for saas. Founded in 2025 by Alessia Paccagnella and Elia Saquand, VibeF...
+  🔍 Enriching: AgentHub
+     Founders: 2
+       Tim Cherkasov, Artur Romanov
+     Product: Workflow automation that routes tasks to humans and AI. Founded in 2025 by Tim C...
+  🔍 Enriching: cocreate
+     Founders: 2
+       Max Raven, Peyton Shields
+     Product: The foundations for AI-native media. Founded in 2025 by Max Raven and Peyton Shi...
+  🔍 Enriching: Slashy
+     Founders: 1
+       Larissa Tyagi
+     Product: Digital Twins. Founded in 2025 by Larissa Tyagi, Louiza Labs has 2 employees bas...
+  🔍 Enriching: Wedge
+     Founders: 2
+       Ethan Gibbs, Bob Wei
+     Product: Coding Agent for Firmware. Founded in 2025 by Ethan Gibbs and Bob Wei, Embedder ...
+  ✅ Processed 360/555 companies...
+  🔍 Enriching: CareSwift
+     Founders: 2
+       George Lawrence, Alexander Schiff
+     Product: Database of every product on the internet. Founded in 2025 by George Lawrence an...
+  🔍 Enriching: Pangolin
+     Founders: 2
+       Sohil Bhatia, Sayan Bhatia
+     Product: Deep research for class action law firms. Founded in 2025 by Sohil Bhatia and Sa...
+  ✅ Processed 370/555 companies...
+  🔍 Enriching: Kestroll
+     Founders: 2
+       Divam Gupta, Rohan Joshi
+     Product: Building tiny frontier AI models that run on edge devices. Founded in 2025 by Di...
+  🔍 Enriching: Tesora
+     Founders: 2
+       Aria Vikram, Tony Yamin
+     Product: Infrastructure for hospitals to monitor and deploy clinical AI . Founded in 2025...
+  🔍 Enriching: DeepAware AI
+     Founders: 1
+       Chris Markus
+     Product: Firmware in minutes, not months - rigorously tested on real hardware. Founded in...
+  🔍 Enriching: Stockline
+     Founders: 2
+       Jeffrey Li, Jonathan Li
+     Product: Training the best computer use models in the world. Automate anything. Founded i...
+  🔍 Enriching: Sagekit
+     Founders: 2
+       Nick Amore, Samuel Li
+     Product: AI agents for property accounting. Founded in 2025 by Nick Amore and Samuel Li, ...
+  🔍 Enriching: Keystone
+     Founders: 3
+       Zarif Azher, Kenneth Chan, Samuel Xie
+     Product: Implantable microchips and AI for cattle monitoring. Founded in 2025 by Zarif Az...
+  🔍 Enriching: Nori
+     Founders: 2
+       Pranjali Awasthi, Harsha Gaddipati
+     Product: AI Native Ops Layer for Business Workflows. Founded in 2025 by Pranjali Awasthi,...
+  🔍 Enriching: DeepGrove
+     Founders: 2
+       Milo Schwartz, Owen Schwartz
+     Product: Open-source alternative to Cloudflare Tunnels. Founded in 2025 by Milo Schwartz ...
+  ✅ Processed 380/555 companies...
+  🔍 Enriching: Frizzle
+     Founders: 0
+     Product: AI Digital Asset Manager. Founded in  by Benjamin Skinner and Tom Yang, Kestroll...
+  🔍 Enriching: Skope
+     Founders: 2
+       Archish Arun, Tamish Pulappadi
+     Product: AI-native video production software that automates post-production. Founded in 2...
+  🔍 Enriching: OnDeck AI
+     Founders: 2
+       John Paul Mussalli, Brian Weigand
+     Product: AI scribe for Ambulance Reports. Founded in 2025 by John Paul Mussalli, Brian We...
+  🔍 Enriching: Alter
+     Founders: 2
+       Shayaan Emran, Edward Zhang
+     Product: Frontier Intelligence. On Any Device. Founded in 2025 by Shayaan Emran and Edwar...
+  🔍 Enriching: Imprezia
+     Founders: 2
+       Devraj Gopal, Steven Segawa
+     Product: Palantir for Healthcare AI Agents. Founded in 2025 by Devraj Gopal and Steven Se...
+  🔍 Enriching: Lilac
+     Founders: 2
+       Adrian Barbir, Richard Ou
+     Product: Autonomous AI workforce for PE roll-ups. Founded in 2025 by Adrian Barbir and Ri...
+  🔍 Enriching: Janet AI
+     Founders: 2
+       Harish Agarwal, Dave Zohrob
+     Product: Mint.com for Health—All your health data + personal health coach. Founded in 202...
+  🔍 Enriching: Cyberdesk
+     Founders: 2
+       Tom Greenwald, Anders Lie
+     Product: Connect all of your apps by chatting with AI. Founded in 2025 by Tom Greenwald a...
+  🔍 Enriching: Qualify.bot
+     Founders: 4
+       Tesla, Abhay Gupta, Meta
+     Product: AI Grading for Teachers. Founded in 2025 by Abhay Gupta and Shyam Sai, Frizzle h...
+  🔍 Enriching: Panels
+     Founders: 2
+       Youssef Kallel, Sandra Tang
+     Product: The simulation and evaluation engine for AI agents. Founded in 2025 by Youssef K...
+  🔍 Enriching: Wafer
+     Founders: 2
+       Vivek Rao, Federico Reyes Gomez
+     Product: Digital employees for manufacturing operations. Founded in 2025 by Vivek Rao and...
+  🔍 Enriching: Orange Slice
+     Founders: 1
+       Pablo Hansen
+     Product: Your team's on-call AI engineer. Founded in 2025 by Pablo Hansen, Keystone has 1...
+  🔍 Enriching: Overdrive Health
+     Founders: 1
+       Mariem Ould Ismail
+     Product: AI-native ERP for food wholesalers. Founded in 2025 by Moncef DJAFRI and Mariem ...
+  🔍 Enriching: Monarcha
+     Founders: 2
+       Connor Park, Ben Smith
+     Product: . Founded in 2025 by Connor Park and Ben Smith, Skope has 2 employees based in S...
+  ✅ Processed 390/555 companies...
+  🔍 Enriching: Lotas
+     Founders: 2
+       Ryan Ewing, Lucas Ewing
+     Product: Spot GPUs that use idle GPUs from enterprises. Founded in 2025 by Ryan Ewing and...
+  🔍 Enriching: Design Arena
+     Founders: 2
+       Emilio Andere, Steven Arellano
+     Product: Optimized AI Inference. Custom Built for Your Stack. Founded in 2025 by Emilio A...
+  🔍 Enriching: EffiGov
+     Founders: 2
+       Jason Le, Aaron Wenk
+     Product: Audio Data for AI Labs. Founded in 2025 by Jason Le and Aaron Wenk, Panels has 2...
+  🔍 Enriching: bitrig
+     Founders: 2
+       Rohan Datta, Yash Goenka
+     Product: AI phone agents for Commercial Lending . Founded in 2025 by Rohan Datta and Yash...
+  🔍 Enriching: Lark
+     Founders: 1
+       Alan Duong
+     Product: Self learning computer use agent for developers. Founded in 2025 by Mahmoud Al-M...
+  🔍 Enriching: Topological
+     Founders: 2
+       Alexander Dungate, Sepand Dyanatkar
+     Product: Analyze any footage, without training a model. Founded in 2025 by Alexander Dung...
+  🔍 Enriching: datafruit
+     Founders: 2
+       Vihaar Nandigala, Kishan Sripada
+     Product: AI agents that find you customers who already want to buy. Founded in 2025 by Vi...
+  ✅ Processed 400/555 companies...
+  🔍 Enriching: ContextFort
+     Founders: 2
+       Jerry Huang, Stela Tong
+     Product: Help AI data centers unlock more compute and become more efficient. Founded in 2...
+  🔍 Enriching: ZeroEval
+     Founders: 1
+       Bishesh Khadka
+     Product: The World's First AI Ad Network. Founded in 2025 by Bishesh Khadka, Imprezia has...
+  🔍 Enriching: Verne Robotics
+     Founders: 2
+       Everett Lee, James Spokes
+     Product: An expert for your spatial data. Founded in 2025 by Everett Lee and James Spokes...
+  🔍 Enriching: Pharmie AI
+     Founders: 2
+       Srikar Dandamuraju, Kevan Dodhia
+     Product: Secure access control and authorization platform for agent workflows. Founded in...
+  🔍 Enriching: Liva AI
+     Founders: 2
+       Jorge Guerra, William Nickols
+     Product: Cursor for Data Science — secure, AI-native IDE for data scientists. Founded in ...
+  🔍 Enriching: Pond
+  ⏸️  Completed 400/555, pausing briefly...
+     Founders: 2
+       Grace Li, Kamryn Ohly
+     Product: World's largest crowdsourced benchmark for AI-generated design. Founded in 2025 ...
+  🔍 Enriching: Ghostship
+     Founders: 2
+       William Barthell, Adhit Sankaran
+     Product: The AI-Native Jira. Founded in 2025 by William Barthell and Adhit Sankaran, Jane...
+  🔍 Enriching: Shor
+     Founders: 2
+       Daniel Inge, Michael Schroeder
+     Product: AI Powered Medical Billing. Founded in 2025 by Daniel Inge and Michael Schroeder...
+  🔍 Enriching: Golpo
+     Founders: 1
+       Aden Clemente
+     Product: The AI OS for Cities. Founded in 2025 by Aden Clemente and Aubteen Pour-Biazar, ...
+  🔍 Enriching: Async
+     Founders: 2
+       Ashley Mo, Aoi Otani
+     Product: Scale AI for video and voice data. Founded in 2025 by Ashley Mo and Aoi Otani, L...
+  🔍 Enriching: Lanesurf
+     Founders: 2
+       Neer Jain, Aniruddh Sriram
+     Product: The first AI pharmacy technician. Founded in 2025 by Neer Jain and Aniruddh Srir...
+  🔍 Enriching: Gaus
+     Founders: 1
+       Ashwin Ramachandran
+     Product: Helping construction contractors find errors in blueprints. Founded in 2025 by A...
+  ✅ Processed 410/555 companies...
+  🔍 Enriching: Blank Bio
+     Founders: 2
+       Tim Donnelly, Kyle Macomber
+     Product: Vibe code, test, and deploy Swift apps. All from your iPhone. Founded in 2025 by...
+  🔍 Enriching: truthsystems
+     Founders: 2
+       Jack Brown, Vijit Dhingra
+     Product: AI Native Billing Platform. Founded in 2025 by Jack Brown and Vijit Dhingra, Lar...
+  🔍 Enriching: AgentMail
+     Founders: 3
+       Venkat Arun, Abhiram Chennupati, Tom Jeong
+     Product: AI DevOps Engineer. Founded in 2025 by Venkat Arun, Abhiram Chennupati, Tom Jeon...
+  🔍 Enriching: TraceRoot.AI
+     Founders: 1
+       Sebastian Crossa
+     Product: Auto-optimizer for AI agents. Founded in 2025 by Jonathan Chávez and Sebastian C...
+  🔍 Enriching: Halluminate
+     Founders: 2
+       Daivik Goel, Avi Konduru
+     Product: The fastest, most affordable payroll for global teams. Founded in 2025 by Daivik...
+  🔍 Enriching: MangoDesk
+     Founders: 2
+       Jesse Choe, Gautham Ramachandran
+     Product: AI Agents that Find Bugs in Your Product. Founded in 2025 by Jesse Choe and Gaut...
+  🔍 Enriching: The Prompting Company
+     Founders: 2
+       Zeyneb Kaya, Nicole Ma
+     Product: Physics-based foundation models for CAD optimization. Founded in 2025 by Zeyneb ...
+  🔍 Enriching: Acrely
+     Founders: 2
+       Aditya Jha, Neil Nie
+     Product: AI models that teach robots new skills in hours. Founded in 2025 by Aditya Jha a...
+  🔍 Enriching: Dedalus Labs
+     Founders: 2
+       Aagam Dalal, Brian Williams
+     Product: Superhuman for text messages. Founded in 2025 by Aagam Dalal and Brian Williams,...
+  🔍 Enriching: Closera
+     Founders: 2
+       Paul Bae, Mikkel Kim
+     Product: AI-native Linear. Founded in 2025 by Paul Bae and Mikkel Kim, Async has 2 employ...
+  🔍 Enriching: Meteor
+     Founders: 2
+       Shraman Kar, Shreyas Kar
+     Product: Most Powerful AI Video Gen Model for Explainer Videos From Documents. Founded in...
+  🔍 Enriching: GETASAP
+     Founders: 2
+       Bruno Koba, Daniel Tulha Hochstetler
+     Product: AI advisor for retail investors. Founded in 2025 by Bruno Koba and Daniel Tulha ...
+  🔍 Enriching: Adaptional
+     Founders: 2
+       Pratham Bansal, Sarthak Singh Chauhan
+     Product: Voice AI for booking freight. Founded in 2025 by Pratham Bansal and Sarthak Sing...
+  ✅ Processed 420/555 companies...
+  🔍 Enriching: Prox
+     Founders: 2
+       Xinwei He, Zecheng Zhang
+     Product: Open source AI agents auto-fix your production bugs. Founded in 2025 by Xinwei H...
+  🔍 Enriching: Pingo AI
+     Founders: 1
+       Braden Wong
+     Product: A database for your mind, built on plain text. Founded in 2025 by Braden Wong, E...
+  🔍 Enriching: Rid
+     Founders: 2
+       Haakam Aujla, Michael Kim
+     Product: Email Inboxes for AI Agents. Founded in 2025 by Haakam Aujla, Michael Kim, and A...
+  🔍 Enriching: Synthetic Society
+     Founders: 2
+       Alex Mac, Nam Nguyen
+     Product: Automatically blocking risky behavior with real-time governance agents. Founded ...
+  🔍 Enriching: Cactus
+     Founders: 2
+       Wyatt Marshall, Jerry Wu
+     Product: Data and RL environments to automate knowledge work. Founded in 2024 by Wyatt Ma...
+  🔍 Enriching: Nixo
+     Founders: 2
+       Derek Armfield, Alek Stefanov
+     Product: AI CSR + Dispatch for HVAC. Founded in 2025 by Derek Armfield and Alek Stefanov,...
+  🔍 Enriching: Serafis
+     Founders: 2
+       Philip Fradkin, Jonny Hsu
+     Product: RNA-based AI for better drugs and smarter clinical trials. Founded in 2025 by Ph...
+  🔍 Enriching: WAYLINE
+     Founders: 2
+       Raghav Arora, Pranavkrishna Suresh
+     Product: Tech-Enabled Distributor for Retailers. Founded in 2023 by Raghav Arora and Pran...
+  🔍 Enriching: Ambral
+     Founders: 2
+       Ankith Subramanya, Ananth Subramanya
+     Product: Simple platform to create data for AI. Founded in 2025 by Ankith Subramanya and ...
+  🔍 Enriching: Fluidize
+     Founders: 2
+       Chinmay Patel, Anmol Tukrel
+     Product: AI employees for commercial real estate. Founded in 2025 by Chinmay Patel and An...
+  🔍 Enriching: Autumn
+     Founders: 2
+       Catherine Di, Windsor Nguyen
+     Product: Connect any LLM to any MCP tools and create complex agents in minutes. Founded i...
+  ✅ Processed 430/555 companies...
+  🔍 Enriching: Asha Health
+     Founders: 2
+       Farhan Khan, Pranav Madhukar
+     Product: An AI-Native Browser. Founded in 2025 by Farhan Khan and Pranav Madhukar, Meteor...
+  🔍 Enriching: Apolink
+     Founders: 2
+       Kevin Cox, Suril Kantaria
+     Product: AI underwriting for insurance. Founded in 2024 by Kevin Cox and Suril Kantaria, ...
+  🔍 Enriching: HumanLayer
+     Founders: 2
+       Gregory Makodzeba, Dima Yanovsky
+     Product: Your digital co-workers built for logistics. Founded in 2025 by Gregory Makodzeb...
+  🔍 Enriching: Loombotic
+     Founders: 2
+       Kevin Chandra, Michelle Marcelline
+     Product: We help products get mentioned in ChatGPT. Founded in 2025 by Kevin Chandra, Mic...
+  🔍 Enriching: Roundabout Technologies
+     Founders: 2
+       Morrie Schonfeld, Michael Xing
+     Product: AI companion that helps you learn languages. Founded in 2025 by Morrie Schonfeld...
+  🔍 Enriching: Synth
+     Founders: 2
+       Ethan Breit, Lucas Crupi
+     Product: Wire Harnesses in as little as 7 days. Founded in 2024 by Ethan Breit and Lucas ...
+  🔍 Enriching: Careforce (prev. Helpcare AI)
+     Founders: 2
+       Priya Khandelwal, Priti Rangnekar
+     Product: Get SaaS-level margins from your AI forward deployed services. Founded in 2025 b...
+  ✅ Processed 440/555 companies...
+  🔍 Enriching: Canvas
+     Founders: 2
+       Akkshay Khoslaa, Gokul Kumarresen
+     Product: We help medical practices become AI-native. Founded in 2024 by Akkshay Khoslaa a...
+  🔍 Enriching: Ember
+     Founders: 1
+       Dexter Horthy
+     Product: Getting AI Coding Agents to solve hard problems in complex codebases. Founded in...
+  🔍 Enriching: Relvy AI
+     Founders: 2
+       Aaron Chew, Kavan Doctor
+     Product: Synthetic Users to Simulate Real Users. Founded in 2025 by Aaron Chew and Kavan ...
+  🔍 Enriching: Friday
+     Founders: 2
+       Collin Barnwell, Sabeek Pradhan
+     Product: Software for AI-powered traffic lights. Founded in 2024 by Collin Barnwell and S...
+  ✅ Processed 450/555 companies...
+  🔍 Enriching: SRE.ai
+     Founders: 1
+       Rohan Sharma
+     Product: The AI knowledge graph for institutional investors. Founded in 2025 by Rohan Sha...
+  🔍 Enriching: Ryvn
+     Founders: 1
+       Onkar Singh
+     Product: 24/7 satellite connectivity in low Earth orbit. Founded in 2024 by Onkar Singh, ...
+  🔍 Enriching: Melder
+     Founders: 2
+       Henry Bae, Alex Fleury
+     Product: Helping scientists and engineers run experiments with AI. . Founded in 2025 by H...
+  🔍 Enriching: BookMyFlight
+     Founders: 2
+       Sam Brickman, Jack Stettner
+     Product: AI-powered Account Managers. Founded in 2025 by Sam Brickman and Jack Stettner, ...
+  🔍 Enriching: Foundry
+     Founders: 1
+       Essam Sleiman
+     Product: The AI GTM Engineer. Founded in 2024 by Essam Sleiman, Canvas has 3 employees ba...
+  🔍 Enriching: Forerunner AI
+     Founders: 2
+       Henry Ndubuaku, Roman Shemet
+     Product: Kernels & Engine for running AI on phones. Founded in 2025 by Henry Ndubuaku and...
+  🔍 Enriching: FutureClinic
+     Founders: 1
+       Huzaifa Sial
+     Product: AI Workers for Healthcare Orgs to Find, Call & Schedule More Patients. Founded i...
+  🔍 Enriching: Edgedive
+     Founders: 2
+       Jason Okra, Eric Rowell
+     Product: AI voice for property managers. Founded in 2025 by Jason Okra and Eric Rowell, W...
+  🔍 Enriching: Surge
+  ⏸️  Completed 450/555, pausing briefly...
+     Founders: 1
+       Allen Naliath
+     Product: The AI Email Client. Founded in 2024 by Allen Naliath, Friday has 1 employees ba...
+  🔍 Enriching: Sunset
+     Founders: 2
+       Charlene Wang, Warren Wang
+     Product: AI RCM. A/R Analysis in 3 days or less. Reduce claim denials by 55%. . Founded i...
+  🔍 Enriching: ArchiLabs
+     Founders: 1
+       Josh Purtell
+     Product: We build Research Engineering Agents. Founded in 2024 by Josh Purtell, Synth has...
+  🔍 Enriching: Revi
+     Founders: 2
+       Benedikt Stroebl, Veniamin Veselovsky
+     Product: Sell with a text. Founded in 2025 by Benedikt Stroebl and Veniamin Veselovsky, R...
+  🔍 Enriching: Metreecs
+     Founders: 2
+       Albert Lam, Shardool Patel
+     Product: Easy and secure customer cloud deployments. Founded in 2024 by Albert Lam and Sh...
+  🔍 Enriching: Diffusion Studio
+     Founders: 2
+       Philip Brewer, Ashwin Dharne
+     Product: AI formulas and document support for Microsoft Excel. Founded in 2024 by Philip ...
+  🔍 Enriching: BrowserBook
+     Founders: 2
+       Bharath Bhat, Simranjit Singh
+     Product: AI powered debugging notebooks for incident response. Founded in 2024 by Bharath...
+  🔍 Enriching: Alex
+     Founders: 2
+       Kesav Kosana, Arav Seth
+     Product: We make booking a flight as easy as booking an Uber. Founded in 2024 by Kesav Ko...
+  ✅ Processed 460/555 companies...
+  🔍 Enriching: Gander
+     Founders: 1
+       Manil Lakabi
+     Product: Infrastructure to ship real apps with AI - end-to-end in the browser. Founded in...
+  🔍 Enriching: Innate
+     Founders: 3
+       Nabil Belahouane, Hassan Mirza, Riyan Moussaoui
+     Product: Personal doctors through chat. Founded in 2024 by Nabil Belahouane, Hassan Mirza...
+  🔍 Enriching: Capy
+     Founders: 2
+       Yash Kadadi, Will Nida
+     Product: AI that gets aircraft flying faster. Founded in 2024 by Yash Kadadi and Will Nid...
+  🔍 Enriching: Consus
+     Founders: 2
+       Dennis Beatty, Brett Beatty
+     Product: Stripe for telephony. Founded in 2024 by Dennis Beatty and Brett Beatty, Surge h...
+  🔍 Enriching: CollectWise
+     Founders: 2
+       Edward Aryee, Raj Kadiyala
+     Product: AI DevOps Agents. Founded in 2024 by Edward Aryee and Raj Kadiyala, SRE.ai has 5...
+  🔍 Enriching: Origami
+     Founders: 2
+       Stephen Walter, Kaela Worthen
+     Product: Find and move money after a death. Founded in 2024 by Stephen Walter and Kaela W...
+  🔍 Enriching: Fresco
+     Founders: 1
+       Max Nuyen
+     Product: AI-enabled M&A deal origination. Founded in 2023 by Benjamin McKinzey and Max Nu...
+  🔍 Enriching: PermitPortal
+     Founders: 1
+       Arjan Guglani
+     Product: Automation System for Global Aviation. Founded in 2024 by Arjan Guglani, Gander ...
+  🔍 Enriching: Gecko Security
+     Founders: 2
+       Jorrie Brettin, Christopher Schlaepfer
+     Product: The Browser Automation IDE. Founded in 2024 by Jorrie Brettin and Christopher Sc...
+  🔍 Enriching: Curo
+     Founders: 2
+       Ayush Rodrigues, John Yeo
+     Product: Billing infrastructure for AI. Founded in 2025 by Ayush Rodrigues and John Yeo, ...
+  🔍 Enriching: Dexter
+     Founders: 2
+       Vignesh Anand, Axel Peytavin
+     Product: Personal AI Robots. Founded in 2024 by Vignesh Anand and Axel Peytavin, Innate h...
+  🔍 Enriching: Moonshine
+     Founders: 2
+       Nimesh Chakravarthi, Deepan Mehta
+     Product: The AI Support Engineer. Founded in 2025 by Nimesh Chakravarthi and Deepan Mehta...
+  🔍 Enriching: AutoComputer
+     Founders: 2
+       Martin Dimitrov, Elie Dufeu
+     Product: AI-powered demand forecasting for retail. Founded in 2024 by Martin Dimitrov, El...
+  🔍 Enriching: Crustdata
+     Founders: 1
+       Kieran White
+     Product: Electric fleets park and charge anywhere with Curo. Founded in 2023 by Kieran Wh...
+  🔍 Enriching: Tiny
+     Founders: 2
+       Akhil Gupta, Arvind Veluvali
+     Product: AI copilot for construction superintendents. Founded in 2024 by Akhil Gupta and ...
+  🔍 Enriching: vly.ai
+     Founders: 1
+       Konstantin Paulus
+     Product: The multimodal AI studio for professional creatives. Founded in 2023 by Konstant...
+  ✅ Processed 470/555 companies...
+  🔍 Enriching: Pearson Labs
+     Founders: 2
+       Alexandru Enache, Radu Mazilu
+     Product: AI Operating System for Pre-construction. Founded in 2024 by Alexandru Enache an...
+  ✅ Processed 480/555 companies...
+  🔍 Enriching: Stewdio
+     Founders: 0
+     Product: Automating consumer debt collection with AI. Founded in 2024 by Sean OBrien, Col...
+  🔍 Enriching: Platus
+     Founders: 2
+       Jeevan Jutla, Artemiy Malyshau
+     Product: The AI Security Engineer to Find and Fix Vulnerabilities . Founded in 2024 by Je...
+  🔍 Enriching: Unusual
+     Founders: 1
+       Eric Magliarditi
+     Product: Your single source of truth for government documents. Founded in 2024 by Eric Ma...
+  🔍 Enriching: Charm
+     Founders: 2
+       Brian Bakerman, William Meng
+     Product: AI Copilot for Architects. Founded in 2024 by Brian Bakerman and William Meng, A...
+  🔍 Enriching: HYBRD
+     Founders: 2
+       Harsha Gundala, Ganesh Pimpale
+     Product: Building software to understanding the world with a camera. Founded in 2024 by H...
+  🔍 Enriching: Codebuff
+     Founders: 1
+       Daniel Edrisian
+     Product: The Cursor for Xcode. Founded in 2024 by Daniel Edrisian, Alex has 3 employees b...
+  🔍 Enriching: Karmen
+     Founders: 2
+       Madhav Singhal, Rick Sugden
+     Product: Desktop RPA with AI computer use. Founded in 2024 by Madhav Singhal and Rick Sug...
+  🔍 Enriching: Lingo.dev
+     Founders: 2
+       Vincent Garrigues, Caterina Kiehntopf
+     Product: Next-generation AI workflow automation. Founded in 2024 by Vincent Garrigues, Ca...
+  🔍 Enriching: Sphinx
+     Founders: 2
+       Nalin Semwal, Justin Sun
+     Product: AI Software Engineer. Founded in 2024 by Nalin Semwal and Justin Sun, Capy has 4...
+  🔍 Enriching: Luthor
+     Founders: 0
+     Product: Real-time B2B data via simple APIs. Founded in  by Abhilash Chowdhary, Manmohit ...
+  🔍 Enriching: Keye
+     Founders: 2
+       Felix Gerlach, Alexander Sporenberg
+     Product: Instant Legal Infrastructure - Draft, Sign, Notarize & Process. Founded in 2024 ...
+  🔍 Enriching: RiskCube
+     Founders: 1
+       Stephanie Young
+     Product: AI agents to automate corporate transactions. Founded in 2024 by Stephanie Young...
+  🔍 Enriching: CTGT
+     Founders: 2
+       Manav Bokinala, Victor Cheng
+     Product: The world's best AI web app builder. Founded in 2024 by Manav Bokinala and Victo...
+  🔍 Enriching: RevisionDojo
+     Founders: 2
+       Gray Newfield, Noah Newfield
+     Product: Charm is the universal payments app — send money to anyone. Founded in 2024 by G...
+  🔍 Enriching: ISSEN
+     Founders: 2
+       Will Jack, Keller Maloney
+     Product: Change AI's mind about your brand. Get more leads. Founded in 2024 by Will Jack ...
+  🔍 Enriching: attimet
+     Founders: 1
+       Blake Shao
+     Product: All-in-one AI creative platform. Founded in 2024 by Blake Shao and Jialiang (JZ)...
+  ✅ Processed 490/555 companies...
+  🔍 Enriching: Smooth
+     Founders: 2
+       Brandon Chen, James Grugett
+     Product: The CLI tool that writes code for you. Founded in 2024 by Brandon Chen and James...
+  🔍 Enriching: Reticular
+     Founders: 2
+       Kenson Chung, Finn Mallery
+     Product: AI that finds your perfect customers. Founded in 2024 by Kenson Chung and Finn M...
+  🔍 Enriching: Astrix Health
+     Founders: 2
+       Ben Katz, Matt Ruiters
+     Product: The performance hub for modern athletes. Founded in 2024 by Ben Katz, Matt Ruite...
+  🔍 Enriching: Cosmic
+     Founders: 2
+       Jonas Ebrahimi, Naman Wahi
+     Product: AI Assistant for Construction Project Managers. Founded in 2024 by Jonas Ebrahim...
+  🔍 Enriching: Cekura
+     Founders: 2
+       Alexandre Berkovic, Chrisjan Wust
+     Product: AI Compliance Analysts for Banks & Fintechs. Founded in 2024 by Alexandre Berkov...
+  🔍 Enriching: Archil
+     Founders: 2
+       Tarush Agarwal, Shashij Gupta
+     Product: Voice AI and Chat AI agents: Testing and Observability. Founded in 2024 by Tarus...
+  ✅ Processed 510/555 companies...
+  🔍 Enriching: Sandra AI
+     Founders: 2
+       Cyril Gorlla, Trevor Tuttle
+     Product: CTGT safeguards against reputational risk from GenAI across your org. Founded in...
+  🔍 Enriching: Vespper
+     Founders: 1
+       Mariano Sorgente
+     Product: AI realtime voice companion for language learning. Founded in 2024 by Mariano So...
+  🔍 Enriching: VortexifyAI
+     Founders: 2
+       Conor Brown, Lalit Lal
+     Product: The Smartest Private Equity Investor. Founded in 2024 by Conor Brown, Lalit Lal,...
+  ✅ Processed 500/555 companies...
+  🔍 Enriching: Revyl
+  ⏸️  Completed 500/555, pausing briefly...
+     Founders: 2
+       Janet Liu, Bowen Liu
+     Product: AI tutors for students. Founded in 2023 by Janet Liu, Bowen Liu, and Michael Ton...
+  🔍 Enriching: Raycaster
+     Founders: 2
+       Luca Pinchetti, Antonio Vespoli
+     Product: Fast, simple, reliable AI browser agent. Founded in 2024 by Luca Pinchetti and A...
+  🔍 Enriching: Lightscreen AI
+     Founders: 2
+       Sam Park, Josh Park
+     Product: Build, monetize, and deploy full-stack websites in minutes. Founded in 2024 by S...
+  🔍 Enriching: Afternoon.co
+     Founders: 1
+       Andrei Craciunescu
+     Product: AI-native insurance agency to compare, buy, and manage coverage. Founded in 2024...
+  🔍 Enriching: Rulebase
+     Founders: 2
+       Kirthi Banothu, Xiaoyu Li
+     Product: we predict stuff. Founded in 2024 by Kirthi Banothu and Xiaoyu Li, attimet has 3...
+  🔍 Enriching: HealthSpark
+     Founders: 2
+       Nithin Parsan, John Yang
+     Product: Interpretable AI for drug discovery. Founded in 2024 by Nithin Parsan and John Y...
+  🔍 Enriching: OpenFunnel
+     Founders: 2
+       Glenn Espinosa, John Espinosa
+     Product: AI-Native Compliance Firm. Founded in 2024 by Glenn Espinosa and John Espinosa, ...
+  🔍 Enriching: Coblocks
+     Founders: 2
+       Thomas Blake, Abhinav Swaminathan
+     Product: Astrix builds better healthcare data products. Founded in 2024 by Thomas Blake a...
+  🔍 Enriching: Getcho
+     Founders: 1
+       Hunter Leath
+     Product: Transform S3 in an unlimited, local file system. Founded in 2024 by Hunter Leath...
+  🔍 Enriching: Candle
+     Founders: 1
+       Aditya Tewari
+     Product: Build AI applications and automations for supply chain operations. Founded in 20...
+  🔍 Enriching: Moonset Health
+     Founders: 1
+       Edward Zhang
+     Product: A new kind of ERP system for factories. Founded in 2024 by Louis de Valliere and...
+  🔍 Enriching: Durate
+     Founders: 2
+       Veronica Prilutskaya, Max Prilutskiy
+     Product: Open-source, AI-powered i18n toolkit for instant localization. Founded in 2024 b...
+  🔍 Enriching: Upshift
+     Founders: 2
+       Prachie Banthia, Gavin Saldanha
+     Product: Voice + video AI interviewer. Founded in 2024 by Prachie Banthia and Gavin Salda...
+  🔍 Enriching: PearAI
+     Founders: 2
+       Landseer Enga, Anam Hira
+     Product: AI-Native Mobile Testing. Founded in 2024 by Landseer Enga and Anam Hira, Revyl ...
+  🔍 Enriching: Symphony
+     Founders: 2
+       Benjamin Paik, Roman Zubenko
+     Product: Bookkeeping, compliance and tax for founders. Founded in 2024 by Benjamin Paik a...
+  🔍 Enriching: telli
+     Founders: 1
+       Ismail Majjad
+     Product: Building AI employees for car dealers, starting with AI receptionists. Founded i...
+  🔍 Enriching: Avora
+     Founders: 1
+       Kevin Schaich
+     Product: Build data pipelines in minutes with AI. Founded in 2024 by Kevin Schaich, Coblo...
+  🔍 Enriching: Galini
+     Founders: 1
+       Stephen Grinich
+     Product: Empowering Physical Therapists to Go Independent. Founded in 2024 by Stephen Gri...
+  ✅ Processed 520/555 companies...
+  🔍 Enriching: Riveter AI
+     Founders: 0
+     Product: AI agents for financial services. Founded in  by Gideon Ebose and Chidi Williams...
+  🔍 Enriching: Zeroframe
+     Founders: 2
+       Aditya Lahiri, Fenil Suchak
+     Product: We monitor your TAM and surface companies when custom triggers fire. Founded in ...
+  🔍 Enriching: Clarus
+     Founders: 2
+       Jack Considine, Mike Considine
+     Product: The reliability platform for last-mile delivery. Founded in 2022 by Jack Considi...
+  🔍 Enriching: Outerport
+     Founders: 2
+       Anthony Humay, Levi Lian
+     Product: Enterprise AI for life sciences. Founded in 2024 by Anthony Humay and Levi Lian,...
+  🔍 Enriching: DreamRP
+     Founders: 2
+       Kevin Bao, Tyler Rich
+     Product: AI for Post-Acute Senior Care (Hospice, Home Health, Skilled Nursing…. Founded i...
+  🔍 Enriching: Conductor
+     Founders: 2
+       Benjamin Liu, Michael Mounajjed
+     Product: Automated physician scheduling. Founded in 2024 by Benjamin Liu and Michael Moun...
+  🔍 Enriching: Syntra
+     Founders: 2
+       Daryl Budiman, Anirudh Ramprasad
+     Product: Pushing the boundaries of AI. Founded in 2024 by Daryl Budiman and Anirudh Rampr...
+  🔍 Enriching: PathPilot
+     Founders: 2
+       Daniel Bessonov, Justin Zhou
+     Product: Agents for dental operations. Founded in 2024 by Daniel Bessonov and Justin Zhou...
+  🔍 Enriching: Bits to Atoms
+     Founders: 1
+       Adam Suskin
+     Product: Cloud workspace for coding agents. Founded in 2024 by Adam Suskin, Upshift has 2...
+  🔍 Enriching: Midship
+     Founders: 1
+       Nang Ang
+     Product: The AI Code Editor For Your Next Project. Founded in 2024 by Nang Ang, PearAI ha...
+  🔍 Enriching: SimCare
+     Founders: 2
+       Towaki Takikawa, Allen Wang
+     Product: Turn diagrams, technical documents, and CAD into structured data. Founded in 202...
+  🔍 Enriching: Merlin AI
+     Founders: 2
+       Shaun Ayrton, Raul Zablah
+     Product: Compliance guardrails-as-a-service for AI applications. Founded in 2024 by Shaun...
+  🔍 Enriching: Freestyle
+     Founders: 2
+       Parth Chopra, Alex Ruber
+     Product: Candle helps couples and friends grow closer daily in just 5 minutes. Founded in...
+  🔍 Enriching: Arva AI
+     Founders: 0
+     Product: LP clarity across private markets. Founded in 2025 by Oliver Wendell-Braly, Clar...
+  🔍 Enriching: Affil.ai
+     Founders: 1
+       Abigail Grills
+     Product: Thousands of AI search agents running in parallel . Founded in 2024 by Abigail G...
+  🔍 Enriching: OrgOrg
+     Founders: 1
+       Phillip Huang
+     Product: Bring your characters to life. Founded in 2024 by Phillip Huang, DreamRP has 2 e...
+  🔍 Enriching: Patched
+     Founders: 2
+       Murtaza Ali, Shobhit Srivastava
+     Product: Voice AI sims for next-gen employee training. Founded in 2024 by Murtaza Ali and...
+  🔍 Enriching: Village Labs
+     Founders: 1
+       Philipp Baumanns
+     Product: AI phone agents that convert. Founded in 2024 by Philipp Baumanns, Seb Hapte-Sel...
+  ✅ Processed 530/555 companies...
+  🔍 Enriching: Mica AI
+     Founders: 1
+       Victor Laguna
+     Product: AI platform helping fintech/bank teams scale efficiently. Founded in 2024 by Vic...
+  ✅ Processed 540/555 companies...
+  🔍 Enriching: Formula Insight
+     Founders: 2
+       Aahel Iyer, Max Maio
+     Product: AI for SOX Testing. Founded in 2024 by Aahel Iyer, Max Maio, and Kieran Taylor, ...
+  🔍 Enriching: Overlap
+     Founders: 1
+       Charlie Holtz
+     Product: Run a team of coding agents on your Mac. Founded in 2024 by Jackson de Campos an...
+  🔍 Enriching: Capitol AI
+     Founders: 2
+       Tiko Bdoyan, Vrishank Saini
+     Product: AI avatars to scale healthcare training. Founded in 2024 by Tiko Bdoyan and Vris...
+  🔍 Enriching: General Analysis
+     Founders: 2
+       John Robison, Shaashwat Sharma
+     Product: Match job seekers to roles at deep technology startups. Founded in 2024 by John ...
+     Founders: 2
+       Rhim Shah, Oli Wales
+     Product: AI Agents to scale AML, KYB and KYC operations. Founded in 2024 by Rhim Shah and...
+     Founders: 1
+       Wayne Crosby
+     Product: Organizational productivity suite for companies. Founded in 2024 by Wayne Crosby...
+     Founders: 2
+       Vivek Olumbe, John Ta
+     Product: AI Affiliate Network For Financial Companies. Founded in 2024 by Vivek Olumbe an...
+     Founders: 2
+       Dudu Lasry, Topaz Turkenitz
+     Product: AI document authoring platform for regulatory professionals in life…. Founded in...
+     Founders: 2
+       Benjamin Swerdlow, Jacob Zwang
+     Product: We run and deploy code your AI wrote. Founded in 2024 by Benjamin Swerdlow and J...
+     Founders: 2
+       Ayantika Dey, Sneha Kumari
+     Product: AI powered ERP for Construction. Founded in 2024 by Ayantika Dey, Sneha Kumari, ...
+     Founders: 1
+       Rohan Sood
+     Product: Agentic workflows for Enterprise IT and Ops teams. Founded in 2024 by Rohan Sood...
+     Founders: 2
+       Achyuta Iyengar, Bharadwaj Swaminathan
+     Product: Build Enterprise-Quality AI Agents in English. Founded in 2023 by Achyuta Iyenga...
+     Founders: 1
+       Shaun Modi
+     Product: Model-agnostic AI for enterprises: governed, embedded, decision-grade. Founded i...
+  ⏸️  Completed 550/555, pausing briefly...
+     Founders: 0
+     Product: Multimodal AI agents for video. Founded in  by Jonathan Baer and Casey Traina, O...
+     Founders: 2
+       Roger Cawdette, Turja Chowdhury
+     Product: Helping America's businesses become employee owned. Founded in 2023 by Roger Caw...
+  ✅ Processed 550/555 companies...
+     Founders: 2
+       Ayush Jain, Aniketh Kolla
+     Product: Real-time AI audits of medical charts and charges. Founded in 2024 by Ayush Jain...
+     Founders: 2
+       Stefan Raghavan, Will Tong
+     Product: Help Institutional Investors manage, track & query their Excel models. Founded i...
+     Founders: 1
+       Rez Havaei
+     Product: Automated AI Safety and Red Teaming Tools. Founded in 2024 by Rez Havaei, Genera...
+
+💾 Enriched dataset saved to test_dataset_enriched.json
+
+📊 Enrichment stats:
+   Companies with founders: 542/555 (97.7%)
+   Companies with product info: 555/555 (100.0%)
+   Companies with YC batch dates: 555/555 (100.0%)

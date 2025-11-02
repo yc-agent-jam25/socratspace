@@ -1,0 +1,18 @@
+[
+  {
+    "name": "Example Company 1",
+    "batch": "W25",
+    "description": "Sample company that got into Winter 2025"
+  },
+  {
+    "name": "Example Company 2",
+    "batch": "W25",
+    "description": "Another sample company"
+  },
+  {
+    "name": "Example Company 3",
+    "batch": "F25",
+    "description": "Sample company that got into Fall 2025"
+  }
+]
+

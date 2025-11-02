@@ -1,0 +1,34 @@
+{
+  "generated_at": "2025-11-02T13:06:14.910125",
+  "metrics": {
+    "total": 1,
+    "correct": 0,
+    "accuracy": 0.0,
+    "results": [
+      {
+        "company_name": "Cranston AI",
+        "yc_batch": "F25",
+        "expected_label": "successful",
+        "decision": "SKIP",
+        "is_correct": false,
+        "analysis_result": {
+          "decision": "SKIP",
+          "error": "Orchestrator not available"
+        }
+      }
+    ]
+  },
+  "detailed_results": [
+    {
+      "company_name": "Cranston AI",
+      "yc_batch": "F25",
+      "expected_label": "successful",
+      "decision": "SKIP",
+      "is_correct": false,
+      "analysis_result": {
+        "decision": "SKIP",
+        "error": "Orchestrator not available"
+      }
+    }
+  ]
+}
