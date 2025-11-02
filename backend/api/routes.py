@@ -8,11 +8,8 @@ from pydantic import BaseModel
 from typing import Dict, Any, Optional
 import logging
 
-# Note: Import will work when running from backend/ directory or with proper PYTHONPATH
-try:
-    from services.crew_orchestrator import VCCouncilOrchestrator
-except ImportError:
-    from backend.services.crew_orchestrator import VCCouncilOrchestrator
+# Import works from backend/ directory (Railway setup)
+from services.crew_orchestrator import VCCouncilOrchestrator
 
 logger = logging.getLogger(__name__)
 

@@ -9,7 +9,7 @@ This application uses **Metorial's MCP (Model Context Protocol)** platform to gi
 **Model Context Protocol (MCP)** is a standard for connecting LLMs to external tools and data sources. Think of it as a plugin system for AI agents.
 
 **Metorial** is a hosted platform that:
-- Deploys MCP servers (like HackerNews, GitHub, Apify, Exa)
+- Deploys MCP servers (like HackerNews, GitHub, Exa, Google Calendar)
 - Provides an SDK to call them
 - Handles authentication, scaling, and rate limiting
 
@@ -24,10 +24,9 @@ This application uses **Metorial's MCP (Model Context Protocol)** platform to gi
                    │ Uses tools during tasks
                    │
 ┌──────────────────▼──────────────────────────────────┐
-│         CrewAI Tool Wrappers (4 tools)              │
+│         CrewAI Tool Wrappers (3 tools)              │
 │   - HackerNewsSearchTool                            │
 │   - GitHubAnalyzerTool                              │
-│   - ApifyScraperTool                                │
 │   - ExaSearchTool                                   │
 └──────────────────┬──────────────────────────────────┘
                    │
@@ -56,8 +55,8 @@ This application uses **Metorial's MCP (Model Context Protocol)** platform to gi
 │         External Services                           │
 │  - HackerNews API                                   │
 │  - GitHub API                                       │
-│  - Apify (web scraping)                             │
 │  - Exa (search engine)                              │
+│  - Google Calendar API                              │
 └─────────────────────────────────────────────────────┘
 ```
 
@@ -84,8 +83,8 @@ self.openai_client = AsyncOpenAI(api_key=settings.openai_api_key)
 self.deployment_ids = {
     "hackernews": settings.mcp_hackernews_id,  # svd_0mhh9nkzweERz8yndQOSXO
     "github": settings.mcp_github_id,
-    "apify": settings.mcp_apify_id,
     "exa": settings.mcp_exa_id,
+    "gcalendar": settings.mcp_gcalendar_id,
 }
 
 # Call MCP with natural language
@@ -153,11 +152,7 @@ class HackerNewsSearchTool(BaseTool):
    - Tools: `get_repository`, `search_repositories`, `get_user`
    - Purpose: Analyze founder GitHub profiles
 
-3. **Apify MCP** (`svd_0mhh9wgz0d3EkqJwI4dWls`)
-   - Tools: Web scraping actors
-   - Purpose: Scrape competitor websites, pricing pages
-
-4. **Exa MCP** (`svd_0mhcakg7680J7ENuiEWKAq`)
+3. **Exa MCP** (`svd_0mhcakg7680J7ENuiEWKAq`)
    - Tools: Neural search engine
    - Purpose: Search for company information, market research
 
@@ -172,8 +167,8 @@ METORIAL_BASE_URL=https://api.metorial.com/v1
 # MCP Deployment IDs (from Metorial dashboard)
 MCP_HACKERNEWS_ID=svd_0mhh9nkzweERz8yndQOSXO
 MCP_GITHUB_ID=svd_0mhh9vs9o6XLezyEVO8SFP
-MCP_APIFY_ID=svd_0mhh9wgz0d3EkqJwI4dWls
 MCP_EXA_ID=svd_0mhcakg7680J7ENuiEWKAq
+MCP_GCALENDAR_ID=svd_xxx
 
 # OpenAI (used by Metorial SDK to interpret requests)
 OPENAI_API_KEY=sk-xxx
@@ -187,8 +182,8 @@ class Settings(BaseSettings):
 
     mcp_hackernews_id: str
     mcp_github_id: str
-    mcp_apify_id: str
     mcp_exa_id: Optional[str] = None
+    mcp_gcalendar_id: Optional[str] = None
 
     openai_api_key: str
 
@@ -316,7 +311,7 @@ Red Flags: Several comments mention "too early for AI in finance"
 ### ✅ Benefits of This Architecture
 
 1. **No API Integration Code**
-   - Don't need to learn HackerNews API, GitHub API, Apify API, etc.
+   - Don't need to learn HackerNews API, GitHub API, Exa API, etc.
    - Metorial handles authentication, rate limits, pagination
 
 2. **Natural Language Interface**
@@ -397,8 +392,8 @@ class Settings(BaseSettings):
 self.deployment_ids = {
     "hackernews": settings.mcp_hackernews_id,
     "github": settings.mcp_github_id,
-    "apify": settings.mcp_apify_id,
     "exa": settings.mcp_exa_id,
+    "gcalendar": settings.mcp_gcalendar_id,
     "linkedin": settings.mcp_linkedin_id,  # ← Add this
 }
 ```
