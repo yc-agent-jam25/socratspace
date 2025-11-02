@@ -1,10 +1,9 @@
+rootDirectory = "backend"
+
 [build]
 builder = "NIXPACKS"
 buildCommand = "pip install -r requirements.txt"
 watchPatterns = ["backend/**"]
-
-[service]
-rootDirectory = "backend"
 
 [deploy]
 startCommand = "uvicorn main:app --host 0.0.0.0 --port $PORT"
