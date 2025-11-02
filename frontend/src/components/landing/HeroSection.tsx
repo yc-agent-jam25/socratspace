@@ -4,10 +4,11 @@
  */
 
 import React from 'react';
-import { Box, Typography, Button, Container, Stack, Chip } from '@mui/material';
+import { Box, Typography, Button, Container, Stack } from '@mui/material';
 import { keyframes } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import Logo from './Logo';
 
 interface HeroSectionProps {
   onGetStarted: () => void;
@@ -75,24 +76,22 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
 
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1 }}>
         <Box sx={{ textAlign: 'center', maxWidth: 900, mx: 'auto' }}>
-          {/* Badge */}
+          {/* Logo */}
           <Box
             sx={{
-              display: 'inline-flex',
-              mb: 2,
+              display: 'flex',
+              justifyContent: 'center',
+              mb: 0,
               animation: 'fadeInUp 0.6s ease-out',
             }}
           >
-            <Chip
-              label="🧠 AI-Powered Investment Intelligence"
+            <Logo 
+              size={280}
               sx={{
-                background: 'rgba(139, 92, 246, 0.15)',
-                border: '1px solid rgba(139, 92, 246, 0.3)',
-                color: '#a78bfa',
-                fontWeight: 600,
-                fontSize: '0.875rem',
-                px: 1,
-                backdropFilter: 'blur(10px)',
+                '@media (max-width: 600px)': {
+                  width: 200,
+                  height: 200,
+                },
               }}
             />
           </Box>
@@ -104,7 +103,8 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
               fontWeight: 900,
               lineHeight: 1,
-              mb: 0.5,
+              mt: -3,
+              mb: 3,
               background: 'linear-gradient(135deg, #ffffff 0%, #a78bfa 50%, #ffffff 100%)',
               backgroundClip: 'text',
               WebkitBackgroundClip: 'text',
@@ -228,9 +228,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
             }}
           >
             {[
-              { value: '<5min', label: 'Analysis Time' },
+              { value: '<15min', label: 'Analysis Time' },
               { value: '100%', label: 'Transparent' },
-              { value: '5', label: 'Discussion Rounds' },
+              { value: '4', label: 'Deliberation Rounds' },
             ].map((stat, index) => (
               <Box
                 key={index}

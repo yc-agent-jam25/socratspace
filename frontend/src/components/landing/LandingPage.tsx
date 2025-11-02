@@ -1,13 +1,14 @@
 /**
  * Landing Page Component
- * Complete landing experience with hero, features, and how it works
+ * Complete landing experience with hero, features, results, and architecture
  */
 
 import React from 'react';
 import { Box } from '@mui/material';
 import HeroSection from './HeroSection';
 import FeaturesSection from './FeaturesSection';
-import HowItWorksSection from './HowItWorksSection';
+import ResultsSection from './ResultsSection';
+import SystemArchitectureSection from './SystemArchitectureSection';
 import CTASection from './CTASection';
 
 interface LandingPageProps {
@@ -19,7 +20,8 @@ const LandingPage: React.FC<LandingPageProps> = ({ onGetStarted }) => {
     <Box>
       <HeroSection onGetStarted={onGetStarted} />
       <FeaturesSection />
-      <HowItWorksSection />
+      <ResultsSection />
+      <SystemArchitectureSection />
       <CTASection onGetStarted={onGetStarted} />
     </Box>
   );

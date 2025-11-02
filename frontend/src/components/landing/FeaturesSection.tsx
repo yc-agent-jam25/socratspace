@@ -30,8 +30,8 @@ const features: Feature[] = [
   },
   {
     icon: <SpeedIcon sx={{ fontSize: 40 }} />,
-    title: '5-Minute Analysis',
-    description: 'Get comprehensive investment insights faster than a traditional partner meeting. From input to decision in minutes.',
+    title: 'Fast Analysis',
+    description: 'Get comprehensive investment insights in less than 20 minutes. From input to decision faster than traditional partner meetings.',
     color: '#10b981',
   },
   {
