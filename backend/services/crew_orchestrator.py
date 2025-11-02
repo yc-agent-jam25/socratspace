@@ -97,6 +97,9 @@ class VCCouncilOrchestrator:
         Round 4: Financial Discussion (Tasks 13-16, fresh start)
         Round 5: Final Decision (Task 17, sees all 16 tasks)
         """
+        # Get the current event loop for thread-safe async callbacks
+        loop = asyncio.get_running_loop()
+
         try:
             logger.info(f"Starting 17-task analysis for {company_data['company_name']}")
 
@@ -232,15 +235,20 @@ class VCCouncilOrchestrator:
 
             logger.info(f"Created {len(all_tasks)} sequential tasks")
 
-            # Create crew with step callback for SSE broadcasting
+            # Create crew with thread-safe step callback for SSE broadcasting
+            def step_callback_sync(step_output):
+                """Thread-safe wrapper for async step callback"""
+                asyncio.run_coroutine_threadsafe(
+                    self._step_callback(session_id, step_output),
+                    loop
+                )
+
             crew = Crew(
                 agents=list(agents.values()),
                 tasks=all_tasks,
                 process=Process.sequential,  # Run tasks in order
                 verbose=True,
-                step_callback=lambda step_output: asyncio.create_task(
-                    self._step_callback(session_id, step_output)
-                )
+                step_callback=step_callback_sync
             )
 
             logger.info("Starting 17-task sequential debate...")
@@ -257,6 +265,45 @@ class VCCouncilOrchestrator:
                 inputs=company_data
             )
 
+            # Capture individual task outputs
+            task_outputs = []
+            task_labels = [
+                "Task 1: Market Researcher",
+                "Task 2: Bull - Market",
+                "Task 3: Bear - Market",
+                "Task 4: Risk Assessor - Market",
+                "Task 5: Founder Evaluator",
+                "Task 6: Bull - Team",
+                "Task 7: Bear - Team",
+                "Task 8: Risk Assessor - Team",
+                "Task 9: Product Critic",
+                "Task 10: Bull - Product",
+                "Task 11: Bear - Product",
+                "Task 12: Market Researcher - PMF",
+                "Task 13: Financial Analyst",
+                "Task 14: Bull - Financial",
+                "Task 15: Bear - Financial",
+                "Task 16: Risk Assessor - Financial",
+                "Task 17: Lead Partner Decision"
+            ]
+
+            for i, task in enumerate(all_tasks):
+                try:
+                    output = str(task.output) if hasattr(task, 'output') and task.output else "No output"
+                    task_outputs.append({
+                        "task_number": i + 1,
+                        "task_label": task_labels[i],
+                        "agent": task.agent.role if hasattr(task, 'agent') else "Unknown",
+                        "output": output[:2000]  # Limit to first 2000 chars
+                    })
+                except Exception as e:
+                    logger.error(f"Error capturing task {i+1} output: {e}")
+                    task_outputs.append({
+                        "task_number": i + 1,
+                        "task_label": task_labels[i],
+                        "error": str(e)
+                    })
+
             # Parse and store result
             logger.info(f"Crew completed. Result type: {type(result)}")
 
@@ -270,6 +317,7 @@ class VCCouncilOrchestrator:
 
             self.sessions[session_id]["status"] = "completed"
             self.sessions[session_id]["result"] = decision
+            self.sessions[session_id]["task_outputs"] = task_outputs  # Store individual task outputs
             self.sessions[session_id]["completed_at"] = datetime.now().isoformat()
 
             # Broadcast final decision via SSE
@@ -348,6 +396,7 @@ class VCCouncilOrchestrator:
             "status": session["status"],
             "company_data": session["company_data"],
             "result": session.get("result"),
+            "task_outputs": session.get("task_outputs", []),  # Individual task outputs
             "error": session.get("error"),
             "message": session.get("message"),
             "completed_at": session.get("completed_at"),
