@@ -11,20 +11,20 @@ Architecture: Independent Round Contexts
 """
 
 from crewai import Crew, Process, Task
-from backend.agents.definitions import create_all_agents
-from backend.api.sse import sse_manager
-from backend.config import settings
+from agents.definitions import create_all_agents
+from api.sse import sse_manager
+from config import settings
 
 # Task imports - your friend is working on these
 # Will be available once task functions are created
 try:
-    from backend.tasks.research_tasks import (
+    from tasks.research_tasks import (
         create_market_researcher_task,
         create_founder_evaluator_task,
         create_product_critic_task,
         create_financial_analyst_task
     )
-    from backend.tasks.debate_tasks import (
+    from tasks.debate_tasks import (
         create_bull_market_task,
         create_bear_market_task,
         create_bull_team_task,
@@ -34,7 +34,7 @@ try:
         create_bull_financial_task,
         create_bear_financial_task
     )
-    from backend.tasks.decision_tasks import (
+    from tasks.decision_tasks import (
         create_risk_market_task,
         create_risk_team_task,
         create_risk_financial_task,

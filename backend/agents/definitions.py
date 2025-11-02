@@ -3,7 +3,7 @@ CrewAI Agent Definitions for the VC Council investment analysis system.
 """
 
 from crewai import Agent
-from backend.agents.prompts import (
+from agents.prompts import (
     MARKET_RESEARCHER_PROMPT,
     FOUNDER_EVALUATOR_PROMPT,
     PRODUCT_CRITIC_PROMPT,
@@ -13,10 +13,10 @@ from backend.agents.prompts import (
     BEAR_AGENT_PROMPT,
     LEAD_PARTNER_PROMPT
 )
-from backend.tools.github_tool import GitHubAnalyzerTool
-from backend.tools.hackernews_tool import HackerNewsSearchTool
-from backend.tools.exa_tool import ExaSearchTool
-from backend.tools.gcalendar_tool import GoogleCalendarTool
+from tools.github_tool import GitHubAnalyzerTool
+from tools.hackernews_tool import HackerNewsSearchTool
+from tools.exa_tool import ExaSearchTool
+from tools.gcalendar_tool import GoogleCalendarTool
 
 # ========== RESEARCH AGENTS (Phase 1) ==========
 

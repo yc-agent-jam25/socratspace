@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import StreamingResponse
 from config import settings
 from api.routes import router
-from backend.api.sse import sse_manager  # IMPORTANT: Use same import path as orchestrator
+from api.sse import sse_manager  # IMPORTANT: Use same import path as orchestrator
 from api.sse_test import create_test_sse_endpoint, generate_mock_events
 import logging
 
