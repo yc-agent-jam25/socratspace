@@ -35,7 +35,7 @@ def create_market_researcher() -> Agent:
         role='Market Research Specialist',
         goal='Research and analyze market size, growth, competitive landscape, and sentiment',
         backstory=MARKET_RESEARCHER_PROMPT,
-        tools=[ApifyScraperTool(), HackerNewsSearchTool()],
+        tools=[HackerNewsSearchTool()],  # Apify temporarily disabled for OAuth-free testing
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -56,7 +56,7 @@ def create_founder_evaluator() -> Agent:
         role='Founder Evaluator',
         goal='Assess founder background, technical skills, and execution ability',
         backstory=FOUNDER_EVALUATOR_PROMPT,
-        tools=[GitHubAnalyzerTool(), ApifyScraperTool()],
+        tools=[GitHubAnalyzerTool()],  # Apify temporarily disabled for OAuth-free testing
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -77,7 +77,7 @@ def create_product_critic() -> Agent:
         role='Product Critic',
         goal='Evaluate product defensibility, moat strength, and competitive threats',
         backstory=PRODUCT_CRITIC_PROMPT,
-        tools=[ApifyScraperTool()],
+        tools=[],  # Apify temporarily disabled for OAuth-free testing
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -119,7 +119,7 @@ def create_risk_assessor() -> Agent:
         role='Risk Assessor',
         goal='Identify catastrophic failure modes, regulatory risks, and red flags',
         backstory=RISK_ASSESSOR_PROMPT,
-        tools=[HackerNewsSearchTool(), ApifyScraperTool()],
+        tools=[HackerNewsSearchTool()],  # Apify temporarily disabled for OAuth-free testing
         verbose=True,
         allow_delegation=False,
         max_iter=5
@@ -141,7 +141,7 @@ def create_bull_agent() -> Agent:
         goal='Build the strongest case FOR investing with compelling evidence',
         backstory=BULL_AGENT_PROMPT,
         tools=[
-            ApifyScraperTool(),
+            # ApifyScraperTool(),  # Temporarily disabled for OAuth-free testing
             HackerNewsSearchTool(),
             GitHubAnalyzerTool(),
             ExaSearchTool()
@@ -166,7 +166,7 @@ def create_bear_agent() -> Agent:
         goal='Build the strongest case AGAINST investing with rigorous evidence',
         backstory=BEAR_AGENT_PROMPT,
         tools=[
-            ApifyScraperTool(),
+            # ApifyScraperTool(),  # Temporarily disabled for OAuth-free testing
             HackerNewsSearchTool(),
             GitHubAnalyzerTool(),
             ExaSearchTool()

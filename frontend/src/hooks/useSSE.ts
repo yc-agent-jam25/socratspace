@@ -5,6 +5,7 @@
 
 import { useEffect, useState, useRef, useCallback } from 'react';
 import type { Phase, AgentMessage, Decision } from '../lib/types';
+import { normalizeAgentName } from '../lib/agentUtils';
 
 interface UseSSEReturn {
   phase: Phase;
@@ -94,12 +95,18 @@ export const useSSE = (sessionId: string | null, enabled: boolean = true): UseSS
               break;
             
             case 'agent_message':
+              // Debug: Log raw agent name from backend
+              console.log('[SSE DEBUG] Raw agent name from backend:', sseMessage.data.agent);
+
               const agentMessage: AgentMessage = {
-                agent: sseMessage.data.agent,
+                agent: normalizeAgentName(sseMessage.data.agent), // Normalize backend role names to frontend IDs
                 message: sseMessage.data.message,
                 message_type: sseMessage.data.message_type || 'info',
                 timestamp: sseMessage.data.timestamp || Date.now(),
               };
+
+              // Debug: Log normalized agent name
+              console.log('[SSE DEBUG] Normalized to:', agentMessage.agent);
               setMessages((prev) => {
                 // Avoid duplicates by checking timestamp + agent + message hash
                 const exists = prev.some(

@@ -16,6 +16,8 @@ import {
   Tooltip,
 } from '@mui/material';
 import { keyframes } from '@mui/system';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import type { AgentMessage, Agent } from '../../lib/types';
 import SearchIcon from '@mui/icons-material/Search';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -74,6 +76,7 @@ const LiveActivityFeed: React.FC<LiveActivityFeedProps> = ({
   };
 
   const getAgent = (agentId: string): Agent | undefined => {
+    // Agent names are already normalized in useSSE hook
     return agents.find(a => a.id === agentId);
   };
 
@@ -363,16 +366,66 @@ const LiveActivityFeed: React.FC<LiveActivityFeedProps> = ({
                       </Box>
 
                       {/* Message text */}
-                      <Typography
-                        variant="body2"
+                      <Box
                         sx={{
                           color: 'text.primary',
-                          lineHeight: 1.6,
-                          whiteSpace: 'pre-wrap',
+                          '& p': { margin: '0.5rem 0', lineHeight: 1.6, fontSize: '0.875rem' },
+                          '& p:first-of-type': { marginTop: 0 },
+                          '& p:last-of-type': { marginBottom: 0 },
+                          '& ul, & ol': { margin: '0.5rem 0', paddingLeft: '1.5rem' },
+                          '& li': { marginBottom: '0.25rem', lineHeight: 1.6 },
+                          '& strong': { fontWeight: 600 },
+                          '& em': { fontStyle: 'italic' },
+                          '& code': {
+                            backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                            padding: '2px 6px',
+                            borderRadius: 1,
+                            fontSize: '0.8125rem',
+                            fontFamily: 'monospace'
+                          },
+                          '& pre': {
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            padding: '1rem',
+                            borderRadius: 1,
+                            overflow: 'auto',
+                            margin: '0.5rem 0'
+                          },
+                          '& h1, & h2, & h3, & h4, & h5, & h6': {
+                            fontWeight: 600,
+                            margin: '0.75rem 0 0.5rem 0',
+                            lineHeight: 1.4
+                          },
+                          '& h1': { fontSize: '1.25rem' },
+                          '& h2': { fontSize: '1.1rem' },
+                          '& h3': { fontSize: '1rem' },
+                          '& h4, & h5, & h6': { fontSize: '0.875rem' },
+                          '& blockquote': {
+                            borderLeft: '4px solid',
+                            borderColor: agent.color,
+                            paddingLeft: '1rem',
+                            margin: '0.5rem 0',
+                            fontStyle: 'italic',
+                            opacity: 0.8
+                          },
+                          '& table': {
+                            borderCollapse: 'collapse',
+                            width: '100%',
+                            margin: '0.5rem 0',
+                            fontSize: '0.8125rem'
+                          },
+                          '& th, & td': {
+                            border: '1px solid rgba(255, 255, 255, 0.1)',
+                            padding: '0.5rem',
+                            textAlign: 'left'
+                          },
+                          '& th': {
+                            backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                            fontWeight: 600
+                          }
                         }}
                       >
-                        {message.message}
-                      </Typography>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.message}</ReactMarkdown>
+                      </Box>
                     </Box>
                   </Box>
                 </Box>

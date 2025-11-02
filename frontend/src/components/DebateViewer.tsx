@@ -42,6 +42,8 @@ interface DebateViewerProps {
 }
 
 const agents: Agent[] = [
+  { id: 'system', name: 'System', color: '#6b7280' }, // System messages from orchestrator
+  { id: 'unknown', name: '⚠️ Unknown Agent', color: '#dc2626' }, // Debug: backend failed to extract agent
   { id: 'market_researcher', name: 'Market Researcher', color: '#3b82f6' },
   { id: 'founder_evaluator', name: 'Founder Evaluator', color: '#10b981' },
   { id: 'product_critic', name: 'Product Critic', color: '#f59e0b' },

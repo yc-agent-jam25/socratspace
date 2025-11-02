@@ -5,6 +5,8 @@
 
 import React, { useState } from 'react';
 import { Box, Typography, Collapse, IconButton, Stepper, Step, StepLabel, StepContent, Chip } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import PendingIcon from '@mui/icons-material/Pending';
@@ -233,17 +235,46 @@ const AgentReasoningCard: React.FC<AgentReasoningCardProps> = ({
                   {message.message_type || 'Analysis'}
                 </StepLabel>
                 <StepContent>
-                  <Typography
-                    variant="body2"
+                  <Box
                     sx={{
                       color: 'text.primary',
-                      fontSize: '0.875rem',
-                      lineHeight: 1.6,
                       mb: 1,
+                      '& p': { margin: '0.5rem 0', lineHeight: 1.6, fontSize: '0.875rem' },
+                      '& p:first-of-type': { marginTop: 0 },
+                      '& p:last-of-type': { marginBottom: 0 },
+                      '& ul, & ol': { margin: '0.5rem 0', paddingLeft: '1.5rem', fontSize: '0.875rem' },
+                      '& li': { marginBottom: '0.25rem', lineHeight: 1.6 },
+                      '& strong': { fontWeight: 600 },
+                      '& code': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.1)',
+                        padding: '2px 4px',
+                        borderRadius: 0.5,
+                        fontSize: '0.8125rem'
+                      },
+                      '& h1, & h2, & h3': {
+                        fontSize: '0.875rem',
+                        fontWeight: 600,
+                        margin: '0.5rem 0',
+                      },
+                      '& table': {
+                        borderCollapse: 'collapse',
+                        width: '100%',
+                        margin: '0.5rem 0',
+                        fontSize: '0.8125rem'
+                      },
+                      '& th, & td': {
+                        border: '1px solid rgba(255, 255, 255, 0.1)',
+                        padding: '0.5rem',
+                        textAlign: 'left'
+                      },
+                      '& th': {
+                        backgroundColor: 'rgba(255, 255, 255, 0.05)',
+                        fontWeight: 600
+                      }
                     }}
                   >
-                    {message.message}
-                  </Typography>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.message}</ReactMarkdown>
+                  </Box>
                   <Typography
                     variant="caption"
                     sx={{

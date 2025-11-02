@@ -17,6 +17,8 @@ import {
   IconButton,
   Box
 } from '@mui/material';
+import ReactMarkdown from 'react-markdown';
+import remarkGfm from 'remark-gfm';
 import CloseIcon from '@mui/icons-material/Close';
 import type { Agent, AgentMessage } from '../lib/types';
 
@@ -88,20 +90,73 @@ const AgentMessageList: React.FC<AgentMessageListProps> = ({ agent, messages, op
                   }
                 }}
               >
-                <Typography 
-                  variant="caption" 
+                <Typography
+                  variant="caption"
                   color="text.secondary"
                   sx={{ mb: 1, fontWeight: 500 }}
                 >
                   {formatTimestamp(message.timestamp)}
                 </Typography>
-                <ListItemText
-                  primary={message.message}
-                  primaryTypographyProps={{
-                    variant: 'body2',
-                    sx: { whiteSpace: 'pre-wrap', lineHeight: 1.6 }
+                <Box
+                  sx={{
+                    width: '100%',
+                    '& p': { margin: '0.5rem 0', lineHeight: 1.6, fontSize: '0.875rem' },
+                    '& p:first-of-type': { marginTop: 0 },
+                    '& p:last-of-type': { marginBottom: 0 },
+                    '& ul, & ol': { margin: '0.5rem 0', paddingLeft: '1.5rem' },
+                    '& li': { marginBottom: '0.25rem', lineHeight: 1.6 },
+                    '& strong': { fontWeight: 600 },
+                    '& em': { fontStyle: 'italic' },
+                    '& code': {
+                      backgroundColor: 'grey.100',
+                      padding: '2px 6px',
+                      borderRadius: 1,
+                      fontSize: '0.8125rem',
+                      fontFamily: 'monospace'
+                    },
+                    '& pre': {
+                      backgroundColor: 'grey.100',
+                      padding: '1rem',
+                      borderRadius: 1,
+                      overflow: 'auto',
+                      margin: '0.5rem 0'
+                    },
+                    '& h1, & h2, & h3, & h4, & h5, & h6': {
+                      fontWeight: 600,
+                      margin: '1rem 0 0.5rem 0',
+                      lineHeight: 1.4
+                    },
+                    '& h1': { fontSize: '1.5rem' },
+                    '& h2': { fontSize: '1.25rem' },
+                    '& h3': { fontSize: '1.1rem' },
+                    '& h4, & h5, & h6': { fontSize: '1rem' },
+                    '& blockquote': {
+                      borderLeft: '4px solid',
+                      borderColor: 'grey.300',
+                      paddingLeft: '1rem',
+                      margin: '0.5rem 0',
+                      fontStyle: 'italic',
+                      color: 'text.secondary'
+                    },
+                    '& table': {
+                      borderCollapse: 'collapse',
+                      width: '100%',
+                      margin: '0.5rem 0'
+                    },
+                    '& th, & td': {
+                      border: '1px solid',
+                      borderColor: 'grey.300',
+                      padding: '0.5rem',
+                      textAlign: 'left'
+                    },
+                    '& th': {
+                      backgroundColor: 'grey.100',
+                      fontWeight: 600
+                    }
                   }}
-                />
+                >
+                  <ReactMarkdown remarkPlugins={[remarkGfm]}>{message.message}</ReactMarkdown>
+                </Box>
               </ListItem>
             ))}
           </List>
