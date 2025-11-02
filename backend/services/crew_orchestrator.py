@@ -11,13 +11,47 @@ Architecture: Independent Round Contexts
 """
 
 from crewai import Crew, Process, Task
-# TODO: Import when Michael creates these
-# from backend.agents.definitions import create_all_agents
-# from backend.tasks.debate_tasks import (create task functions)
+from backend.agents.definitions import create_all_agents
+from backend.api.sse import sse_manager
+
+# Task imports - your friend is working on these
+# Will be available once task functions are created
+try:
+    from backend.tasks.research_tasks import (
+        create_market_researcher_task,
+        create_founder_evaluator_task,
+        create_product_critic_task,
+        create_financial_analyst_task
+    )
+    from backend.tasks.debate_tasks import (
+        create_bull_market_task,
+        create_bear_market_task,
+        create_bull_team_task,
+        create_bear_team_task,
+        create_bull_product_task,
+        create_bear_product_task,
+        create_bull_financial_task,
+        create_bear_financial_task
+    )
+    from backend.tasks.decision_tasks import (
+        create_risk_market_task,
+        create_risk_team_task,
+        create_risk_financial_task,
+        create_market_product_task,
+        create_lead_partner_decision_task
+    )
+    TASKS_AVAILABLE = True
+except ImportError as e:
+    logger = logging.getLogger(__name__)
+    logger.warning(f"Task modules not yet available: {e}")
+    TASKS_AVAILABLE = False
+
 import asyncio
 import uuid
 import logging
 import json
+from typing import Optional, Dict, Any
+from datetime import datetime
 
 logger = logging.getLogger(__name__)
 
@@ -66,182 +100,247 @@ class VCCouncilOrchestrator:
         try:
             logger.info(f"Starting 17-task analysis for {company_data['company_name']}")
 
-            # TODO: Uncomment when Michael creates create_all_agents()
-            # agents = create_all_agents()
-            # For now, placeholder
-            agents = {}
+            # Send starting message via SSE
+            await sse_manager.send_phase_change(session_id, "initializing")
+            await sse_manager.send_agent_message(
+                session_id,
+                "system",
+                f"Starting analysis for {company_data.get('company_name', 'Unknown Company')}",
+                "info"
+            )
+
+            # Create all 8 agents
+            logger.info("Creating 8 agents...")
+            agents = create_all_agents()
+            logger.info(f"Agents created: {list(agents.keys())}")
+
+            # Check if tasks are available
+            if not TASKS_AVAILABLE:
+                logger.warning("Task functions not yet available - waiting for friend to complete")
+                await sse_manager.send_error(
+                    session_id,
+                    "Task functions are being implemented. Please wait for completion.",
+                    "TASKS_NOT_READY"
+                )
+                self.sessions[session_id]["status"] = "pending_tasks"
+                self.sessions[session_id]["message"] = "Waiting for task implementations"
+                return
 
             # ==========================================
             # ROUND 1: MARKET DISCUSSION (Tasks 1-4)
             # Independent context - fresh start
             # ==========================================
             logger.info("Starting Round 1: Market Discussion")
+            await sse_manager.send_phase_change(session_id, "market_discussion")
 
             # Task 1: Market Researcher (context=[])
-            # TODO: Uncomment when Michael creates this function
-            # task_1 = create_market_researcher_task(agents, company_data, context=[])
+            task_1 = create_market_researcher_task(agents, company_data, context=[])
 
             # Task 2: Bull Agent (context=[Task 1])
-            # TODO: Uncomment when Michael creates this function
-            # task_2 = create_bull_market_task(agents, company_data, context=[task_1])
+            task_2 = create_bull_market_task(agents, company_data, context=[task_1])
 
             # Task 3: Bear Agent (context=[Tasks 1-2])
-            # TODO: Uncomment when Michael creates this function
-            # task_3 = create_bear_market_task(agents, company_data, context=[task_1, task_2])
+            task_3 = create_bear_market_task(agents, company_data, context=[task_1, task_2])
 
             # Task 4: Risk Assessor (context=[Tasks 1-3])
-            # TODO: Uncomment when Michael creates this function
-            # task_4 = create_risk_market_task(agents, company_data, context=[task_1, task_2, task_3])
+            task_4 = create_risk_market_task(agents, company_data, context=[task_1, task_2, task_3])
 
             # ==========================================
             # ROUND 2: TEAM DISCUSSION (Tasks 5-8)
             # Independent context - FRESH START (no Round 1!)
             # ==========================================
             logger.info("Starting Round 2: Team Discussion (fresh start)")
+            await sse_manager.send_phase_change(session_id, "team_discussion")
 
             # Task 5: Founder Evaluator (context=[])  ← Fresh start!
-            # TODO: Uncomment when Michael creates this function
-            # task_5 = create_founder_evaluator_task(agents, company_data, context=[])
+            task_5 = create_founder_evaluator_task(agents, company_data, context=[])
 
             # Task 6: Bull Agent (context=[Task 5])
-            # TODO: Uncomment when Michael creates this function
-            # task_6 = create_bull_team_task(agents, company_data, context=[task_5])
+            task_6 = create_bull_team_task(agents, company_data, context=[task_5])
 
             # Task 7: Bear Agent (context=[Tasks 5-6])
-            # TODO: Uncomment when Michael creates this function
-            # task_7 = create_bear_team_task(agents, company_data, context=[task_5, task_6])
+            task_7 = create_bear_team_task(agents, company_data, context=[task_5, task_6])
 
             # Task 8: Risk Assessor (context=[Tasks 5-7])
-            # TODO: Uncomment when Michael creates this function
-            # task_8 = create_risk_team_task(agents, company_data, context=[task_5, task_6, task_7])
+            task_8 = create_risk_team_task(agents, company_data, context=[task_5, task_6, task_7])
 
             # ==========================================
             # ROUND 3: PRODUCT DISCUSSION (Tasks 9-12)
             # Independent context - FRESH START (no previous rounds!)
             # ==========================================
             logger.info("Starting Round 3: Product Discussion (fresh start)")
+            await sse_manager.send_phase_change(session_id, "product_discussion")
 
             # Task 9: Product Critic (context=[])  ← Fresh start!
-            # TODO: Uncomment when Michael creates this function
-            # task_9 = create_product_critic_task(agents, company_data, context=[])
+            task_9 = create_product_critic_task(agents, company_data, context=[])
 
             # Task 10: Bull Agent (context=[Task 9])
-            # TODO: Uncomment when Michael creates this function
-            # task_10 = create_bull_product_task(agents, company_data, context=[task_9])
+            task_10 = create_bull_product_task(agents, company_data, context=[task_9])
 
             # Task 11: Bear Agent (context=[Tasks 9-10])
-            # TODO: Uncomment when Michael creates this function
-            # task_11 = create_bear_product_task(agents, company_data, context=[task_9, task_10])
+            task_11 = create_bear_product_task(agents, company_data, context=[task_9, task_10])
 
             # Task 12: Market Researcher (context=[Tasks 9-11])
-            # TODO: Uncomment when Michael creates this function
-            # task_12 = create_market_product_task(agents, company_data, context=[task_9, task_10, task_11])
+            task_12 = create_market_product_task(agents, company_data, context=[task_9, task_10, task_11])
 
             # ==========================================
             # ROUND 4: FINANCIAL DISCUSSION (Tasks 13-16)
             # Independent context - FRESH START (no previous rounds!)
             # ==========================================
             logger.info("Starting Round 4: Financial Discussion (fresh start)")
+            await sse_manager.send_phase_change(session_id, "financial_discussion")
 
             # Task 13: Financial Analyst (context=[])  ← Fresh start!
-            # TODO: Uncomment when Michael creates this function
-            # task_13 = create_financial_analyst_task(agents, company_data, context=[])
+            task_13 = create_financial_analyst_task(agents, company_data, context=[])
 
             # Task 14: Bull Agent (context=[Task 13])
-            # TODO: Uncomment when Michael creates this function
-            # task_14 = create_bull_financial_task(agents, company_data, context=[task_13])
+            task_14 = create_bull_financial_task(agents, company_data, context=[task_13])
 
             # Task 15: Bear Agent (context=[Tasks 13-14])
-            # TODO: Uncomment when Michael creates this function
-            # task_15 = create_bear_financial_task(agents, company_data, context=[task_13, task_14])
+            task_15 = create_bear_financial_task(agents, company_data, context=[task_13, task_14])
 
             # Task 16: Risk Assessor (context=[Tasks 13-15])
-            # TODO: Uncomment when Michael creates this function
-            # task_16 = create_risk_financial_task(agents, company_data, context=[task_13, task_14, task_15])
+            task_16 = create_risk_financial_task(agents, company_data, context=[task_13, task_14, task_15])
 
             # ==========================================
             # ROUND 5: FINAL DECISION (Task 17)
             # Sees EVERYTHING - context=[Tasks 1-16]
             # ==========================================
             logger.info("Starting Round 5: Final Decision (sees all 16 tasks)")
+            await sse_manager.send_phase_change(session_id, "final_decision")
 
             # Task 17: Lead Partner (context=[Tasks 1-16])  ← Full debate history!
-            # TODO: Uncomment when Michael creates this function
-            # task_17 = create_lead_partner_decision_task(
-            #     agents,
-            #     company_data,
-            #     context=[task_1, task_2, task_3, task_4,      # Round 1
-            #              task_5, task_6, task_7, task_8,      # Round 2
-            #              task_9, task_10, task_11, task_12,   # Round 3
-            #              task_13, task_14, task_15, task_16]  # Round 4
-            # )
+            task_17 = create_lead_partner_decision_task(
+                agents,
+                company_data,
+                context=[task_1, task_2, task_3, task_4,      # Round 1
+                         task_5, task_6, task_7, task_8,      # Round 2
+                         task_9, task_10, task_11, task_12,   # Round 3
+                         task_13, task_14, task_15, task_16]  # Round 4
+            )
 
             # ==========================================
             # CREATE CREW AND RUN
             # ==========================================
-            # TODO: Uncomment when Michael creates all 17 task functions
-            # all_tasks = [
-            #     task_1, task_2, task_3, task_4,      # Round 1: Market
-            #     task_5, task_6, task_7, task_8,      # Round 2: Team
-            #     task_9, task_10, task_11, task_12,   # Round 3: Product
-            #     task_13, task_14, task_15, task_16,  # Round 4: Financial
-            #     task_17                              # Round 5: Decision
-            # ]
-            #
-            # crew = Crew(
-            #     agents=list(agents.values()),
-            #     tasks=all_tasks,
-            #     process=Process.sequential,  # Run tasks in order
-            #     verbose=True,
-            #     step_callback=self._step_callback
-            # )
-            #
-            # logger.info("Starting 17-task sequential debate...")
-            #
-            # # Run the crew
-            # result = await asyncio.to_thread(
-            #     crew.kickoff,
-            #     inputs=company_data
-            # )
-            #
-            # # Parse and store result
-            # decision = json.loads(result) if isinstance(result, str) else result
-            #
-            # self.sessions[session_id]["status"] = "completed"
-            # self.sessions[session_id]["result"] = decision
-            #
-            # logger.info(f"Analysis completed: {decision.get('decision', 'UNKNOWN')}")
+            all_tasks = [
+                task_1, task_2, task_3, task_4,      # Round 1: Market
+                task_5, task_6, task_7, task_8,      # Round 2: Team
+                task_9, task_10, task_11, task_12,   # Round 3: Product
+                task_13, task_14, task_15, task_16,  # Round 4: Financial
+                task_17                              # Round 5: Decision
+            ]
 
-            # Temporary placeholder until Michael creates tasks
-            logger.warning("Orchestrator structure ready, waiting for Michael to create task functions")
-            self.sessions[session_id]["status"] = "pending_tasks"
-            self.sessions[session_id]["message"] = "Waiting for Michael to create 17 task functions"
+            logger.info(f"Created {len(all_tasks)} sequential tasks")
+
+            # Create crew with step callback for SSE broadcasting
+            crew = Crew(
+                agents=list(agents.values()),
+                tasks=all_tasks,
+                process=Process.sequential,  # Run tasks in order
+                verbose=True,
+                step_callback=lambda step_output: asyncio.create_task(
+                    self._step_callback(session_id, step_output)
+                )
+            )
+
+            logger.info("Starting 17-task sequential debate...")
+            await sse_manager.send_agent_message(
+                session_id,
+                "system",
+                "Initiating 17-task investment analysis with 8 AI agents",
+                "info"
+            )
+
+            # Run the crew (blocking, so use asyncio.to_thread)
+            result = await asyncio.to_thread(
+                crew.kickoff,
+                inputs=company_data
+            )
+
+            # Parse and store result
+            logger.info(f"Crew completed. Result type: {type(result)}")
+
+            if isinstance(result, str):
+                try:
+                    decision = json.loads(result)
+                except json.JSONDecodeError:
+                    decision = {"decision": "ERROR", "raw_output": result}
+            else:
+                decision = result if isinstance(result, dict) else {"decision": "UNKNOWN", "result": str(result)}
+
+            self.sessions[session_id]["status"] = "completed"
+            self.sessions[session_id]["result"] = decision
+            self.sessions[session_id]["completed_at"] = datetime.now().isoformat()
+
+            # Broadcast final decision via SSE
+            await sse_manager.send_decision(session_id, decision)
+            await sse_manager.send_phase_change(session_id, "completed")
+
+            logger.info(f"Analysis completed: {decision.get('decision', 'UNKNOWN')}")
 
         except Exception as e:
             logger.error(f"Analysis failed: {str(e)}", exc_info=True)
             self.sessions[session_id]["status"] = "failed"
             self.sessions[session_id]["error"] = str(e)
+            self.sessions[session_id]["failed_at"] = datetime.now().isoformat()
 
-    def _step_callback(self, step_output):
+            # Broadcast error via SSE
+            try:
+                await sse_manager.send_error(
+                    session_id,
+                    f"Analysis failed: {str(e)}",
+                    "ANALYSIS_ERROR"
+                )
+                await sse_manager.send_phase_change(session_id, "failed")
+            except Exception as sse_error:
+                logger.error(f"Failed to broadcast error via SSE: {sse_error}")
+
+    async def _step_callback(self, session_id: str, step_output):
         """
-        Callback for each agent step
-        Broadcasts updates to frontend via SSE (Person 3's responsibility)
+        Callback for each agent step during CrewAI execution
+        Broadcasts real-time updates to frontend via SSE
+
+        Args:
+            session_id: Session ID for this analysis
+            step_output: Step output from CrewAI (contains agent and message info)
         """
         try:
             # Extract agent and message from step output
-            agent_name = step_output.get("agent", "unknown")
-            message = step_output.get("output", "")
+            # CrewAI step_output format varies - handle both dict and object
+            if isinstance(step_output, dict):
+                agent_name = step_output.get("agent", "unknown")
+                message = step_output.get("output", "")
+            else:
+                # Handle CrewAI object format
+                agent_name = getattr(step_output, "agent", "unknown")
+                message = getattr(step_output, "output", str(step_output))
 
-            # TODO: Broadcast to frontend via SSE (Person 3 handles this)
-            logger.info(f"[{agent_name}] {message[:100]}...")
+            # Broadcast to frontend via SSE
+            if message:
+                await sse_manager.send_agent_message(
+                    session_id,
+                    agent_name,
+                    message,
+                    "step"
+                )
+                logger.info(f"[{agent_name}] {message[:100]}...")
 
         except Exception as e:
-            logger.error(f"Step callback error: {str(e)}")
+            logger.error(f"Step callback error: {str(e)}", exc_info=True)
 
-    async def get_result(self, session_id: str) -> dict:
-        """Get analysis result by session ID"""
+    async def get_result(self, session_id: str) -> Optional[dict]:
+        """
+        Get analysis result by session ID
+
+        Args:
+            session_id: Session ID to retrieve
+
+        Returns:
+            dict with session data, or None if not found
+        """
         session = self.sessions.get(session_id)
         if not session:
+            logger.warning(f"Session not found: {session_id}")
             return None
 
         return {
@@ -250,5 +349,31 @@ class VCCouncilOrchestrator:
             "company_data": session["company_data"],
             "result": session.get("result"),
             "error": session.get("error"),
-            "message": session.get("message")
+            "message": session.get("message"),
+            "completed_at": session.get("completed_at"),
+            "failed_at": session.get("failed_at")
         }
+
+    def get_session_count(self) -> int:
+        """Get count of active sessions"""
+        return len(self.sessions)
+
+    def clear_session(self, session_id: str) -> bool:
+        """
+        Clear a specific session
+
+        Args:
+            session_id: Session ID to clear
+
+        Returns:
+            True if session was found and cleared, False otherwise
+        """
+        if session_id in self.sessions:
+            del self.sessions[session_id]
+            logger.info(f"Cleared session: {session_id}")
+            return True
+        return False
+
+
+# Global orchestrator instance
+orchestrator = VCCouncilOrchestrator()

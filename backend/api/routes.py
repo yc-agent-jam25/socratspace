@@ -1,13 +1,12 @@
 """
 REST API routes for VC Council
-TODO: Implement API endpoints
+Handles analysis requests and status polling
 """
 
 from fastapi import APIRouter, HTTPException
 from pydantic import BaseModel
 from typing import Dict, Any, Optional
-# TODO: Import when ready
-# from backend.services.crew_orchestrator import VCCouncilOrchestrator
+from backend.services.crew_orchestrator import orchestrator
 import logging
 
 logger = logging.getLogger(__name__)
@@ -33,26 +32,66 @@ async def start_analysis(request: AnalysisRequest):
     """
     Start a new investment analysis
 
-    TODO: Implement to:
-    1. Create VCCouncilOrchestrator()
-    2. Call orchestrator.start_analysis(request.dict())
-    3. Return session_id
+    Args:
+        request: Analysis request with company data
+
+    Returns:
+        AnalysisResponse with session_id for tracking
+
+    Raises:
+        HTTPException: If analysis fails to start
     """
-    # TODO: Implement
-    logger.info(f"TODO: Start analysis for {request.company_name}")
-    return AnalysisResponse(
-        status="TODO",
-        session_id="TODO",
-        message=f"TODO: Analysis for {request.company_name}"
-    )
+    try:
+        logger.info(f"Starting analysis for {request.company_name}")
+
+        # Start analysis via orchestrator
+        session_id = await orchestrator.start_analysis(request.dict())
+
+        return AnalysisResponse(
+            status="started",
+            session_id=session_id,
+            message=f"Analysis started for {request.company_name}. Connect to SSE endpoint /api/sse/{session_id} for real-time updates."
+        )
+
+    except Exception as e:
+        logger.error(f"Failed to start analysis: {e}", exc_info=True)
+        raise HTTPException(status_code=500, detail=f"Failed to start analysis: {str(e)}")
+
 
 @router.get("/analysis/{session_id}")
 async def get_analysis_status(session_id: str):
     """
     Get analysis status and results
 
-    TODO: Implement to call orchestrator.get_result(session_id)
+    Args:
+        session_id: Session ID from start_analysis
+
+    Returns:
+        dict with status, result, and metadata
+
+    Raises:
+        HTTPException: If session not found
     """
-    # TODO: Implement
-    logger.info(f"TODO: Get analysis {session_id}")
-    return {"status": "TODO", "session_id": session_id}
+    logger.info(f"Fetching analysis status for {session_id}")
+
+    result = await orchestrator.get_result(session_id)
+
+    if result is None:
+        raise HTTPException(status_code=404, detail=f"Session {session_id} not found")
+
+    return result
+
+
+@router.get("/health")
+async def health_check():
+    """
+    Health check endpoint for orchestrator
+
+    Returns:
+        dict with health status and active session count
+    """
+    return {
+        "status": "healthy",
+        "service": "vc-council-orchestrator",
+        "active_sessions": orchestrator.get_session_count()
+    }
