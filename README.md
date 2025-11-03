@@ -4,6 +4,13 @@
 
 **Built for:** YC Agent Jam '25 Hackathon
 
+https://socrat.space<img width="468" height="49" alt="image" src="https://github.com/user-attachments/assets/b4c6233d-f4a1-4916-9f5d-81d8d1bff586" />
+benchmark testing :
+https://github.com/yc-agent-jam25/socratspace.git/BenchmarkTesting<img width="468" height="49" alt="image" src="https://github.com/user-attachments/assets/cb0c69ee-3bb0-489c-a070-dffc67bd3f2c" />
+
+
+
+
 ---
 
 ## 📖 Table of Contents
