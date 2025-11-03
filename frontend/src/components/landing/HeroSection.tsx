@@ -4,10 +4,11 @@
  */
 
 import React from 'react';
-import { Box, Typography, Button, Container, Stack } from '@mui/material';
+import { Box, Typography, Button, Container, Stack, Dialog, DialogContent, IconButton } from '@mui/material';
 import { keyframes } from '@mui/system';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
+import CloseIcon from '@mui/icons-material/Close';
 import Logo from './Logo';
 
 interface HeroSectionProps {
@@ -20,6 +21,7 @@ const float = keyframes`
 `;
 
 const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
+  const [isVideoOpen, setIsVideoOpen] = React.useState(false);
   return (
     <Box
       sx={{
@@ -193,6 +195,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
               variant="outlined"
               size="large"
               startIcon={<PlayArrowIcon />}
+              onClick={() => setIsVideoOpen(true)}
               sx={{
                 py: 2,
                 px: 4,
@@ -275,6 +278,53 @@ const HeroSection: React.FC<HeroSectionProps> = ({ onGetStarted }) => {
 
         </Box>
       </Container>
+
+      {/* Demo Video Modal */}
+      <Dialog
+        open={isVideoOpen}
+        onClose={() => setIsVideoOpen(false)}
+        maxWidth="md"
+        fullWidth
+        PaperProps={{
+          sx: { backgroundColor: 'transparent', boxShadow: 'none' }
+        }}
+      >
+        <DialogContent sx={{ position: 'relative', p: 0 }}>
+          <IconButton
+            aria-label="close"
+            onClick={() => setIsVideoOpen(false)}
+            sx={{
+              position: 'absolute',
+              top: 8,
+              right: 8,
+              zIndex: 1,
+              color: 'white',
+              backgroundColor: 'rgba(0,0,0,0.4)',
+              '&:hover': { backgroundColor: 'rgba(0,0,0,0.6)' }
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+          <Box sx={{ position: 'relative', width: '100%', pt: '56.25%' }}>
+            <Box
+              component="iframe"
+              src="https://www.youtube.com/embed/yh56LZlCKQM?autoplay=1"
+              title="Socrat Space Demo"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              sx={{
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                width: '100%',
+                height: '100%',
+                border: 0,
+                borderRadius: 2,
+              }}
+            />
+          </Box>
+        </DialogContent>
+      </Dialog>
     </Box>
   );
 };
